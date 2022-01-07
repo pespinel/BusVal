@@ -30,7 +30,9 @@ struct LinesView: View {
                     Text("Error al obtener las líneas")
                 }
             }.navigationBarTitle("Líneas", displayMode: .large)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear { self.linesStore.fetch() }
     }
 }
 

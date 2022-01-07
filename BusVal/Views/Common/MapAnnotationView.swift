@@ -13,7 +13,7 @@ struct MapAnnotationView: View {
     var body: some View {
         NavigationLink(destination: StopDetailsView(stop: code)) {
             VStack(spacing: 0) {
-                Image(systemSymbol: .mapCircleFill)
+                Image(systemSymbol: .mappinCircleFill)
                 .font(.title)
                 .foregroundColor(.red)
                 Image(systemSymbol: .arrowtriangleDownFill)

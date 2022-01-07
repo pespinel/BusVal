@@ -12,6 +12,8 @@ import SwiftUI
 struct BusValApp: App {
     @AppStorage("firstRun") var firstRun = true
 
+    @State var deeplink: Deeplinker.Deeplink?
+
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
@@ -22,6 +24,15 @@ struct BusValApp: App {
                     OnboardingView()
                 } else {
                     MainView()
+                        .environment(\.deeplink, deeplink)
+                        .onOpenURL { url in
+                            let deeplinker = Deeplinker()
+                            guard let deeplink = deeplinker.manage(url: url) else { return }
+                            self.deeplink = deeplink
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                                self.deeplink = nil
+                            }
+                        }
                 }
             }.environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

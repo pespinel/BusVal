@@ -10,6 +10,7 @@ import MapKit
 import SkeletonUI
 import SwiftUI
 import SWXMLHash
+import WidgetKit
 
 // MARK: VIEWS
 struct StopDetailsView: View {
@@ -155,7 +156,10 @@ extension StopDetailsView {
 
     private var favoriteToolbarButton: some View {
         Button(
-            action: { toggleFavorite() },
+            action: {
+                toggleFavorite()
+                WidgetCenter.shared.reloadAllTimelines()
+            },
             label: {
                 Image(systemSymbol: self.result.isEmpty ? .heart : .heartFill)
                     .renderingMode(.original)
@@ -197,7 +201,10 @@ extension StopDetailsView {
                 self.bannerData.type = .success
                 self.showBanner = true
             } catch {
-                print(error.localizedDescription)
+                self.bannerData.title = "Error"
+                self.bannerData.detail = "No se ha podido guardar la parada en favoritos"
+                self.bannerData.type = .warning
+                self.showBanner = true
             }
         } else {
             self.bannerData.title = "Eliminada de favoritos"

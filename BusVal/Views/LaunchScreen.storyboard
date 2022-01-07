@@ -59,7 +59,7 @@
     <resources>
         <image name="bus" catalog="system" width="128" height="122"/>
         <namedColor name="AccentColor">
-            <color red="0.24993714689999999" green="0.50332587959999997" blue="0.26448634269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.33050381504793852" green="0.67240513909883215" blue="0.35153113126410002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

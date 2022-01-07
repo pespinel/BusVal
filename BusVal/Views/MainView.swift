@@ -18,40 +18,52 @@ struct MainView: View {
 
     @AppStorage("cardID") var cardID = ""
 
+    @State var selectedTab = 0
+
+    @Environment(\.deeplink) var deeplink
+
     @ObservedObject var linesStore = LinesStore()
     @ObservedObject var newsStore = NewsStore()
     @ObservedObject var stopsStore = StopsStore()
     @ObservedObject var cardDetailsStore = CardDetailsStore()
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             LinesView(linesStore: linesStore)
                 .tabItem {
                     Text(Constants.Tabs.names[0])
                     Image(uiImage: Constants.Tabs.icons[0])
                 }
+                .tag(0)
             NewsView(newsStore: newsStore)
                 .tabItem {
                     Text(Constants.Tabs.names[1])
                     Image(uiImage: Constants.Tabs.icons[1])
                 }
+                .tag(1)
             SearchView(linesStore: linesStore, stopsStore: stopsStore)
                 .tabItem {
                     Text(Constants.Tabs.names[3])
                     Image(uiImage: Constants.Tabs.icons[3])
                 }
+                .tag(2)
             CardView(cardDetailsStore: cardDetailsStore)
                 .tabItem {
                     Text("Tarjeta")
                     Image(systemSymbol: .creditcard)
                 }
+                .tag(3)
             FavoritesView()
                 .tabItem {
                     Text(Constants.Tabs.names[4])
                     Image(uiImage: Constants.Tabs.icons[4])
                 }
+                .tag(4)
         }
         .tint(.accentColor)
+        .onChange(of: deeplink, perform: { _ in
+            self.selectedTab = 4
+        })
         .onAppear {
             let apparence = UITabBarAppearance()
             apparence.configureWithOpaqueBackground()

@@ -14,9 +14,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = FavoriteStop()
-        }
+        let newItem = FavoriteStop()
+        newItem.code = "698"
+        newItem.name = "Calle Gondomar 12 esquina Santa Clara"
         do {
             try viewContext.save()
         } catch {
@@ -26,10 +26,10 @@ struct PersistenceController {
         return result
     }()
 
-    let container: NSPersistentContainer
+    let container: CustomPersistenceController
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "BusVal")
+        container = CustomPersistenceController(name: "BusVal")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

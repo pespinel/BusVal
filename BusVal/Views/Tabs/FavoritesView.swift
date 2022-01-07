@@ -11,6 +11,10 @@ import SwiftUI
 // MARK: VIEWS
 struct FavoritesView: View {
     @Environment(\.managedObjectContext) var context
+    @Environment(\.deeplink) var deeplink
+
+    @State var stopCodeDeeplink = ""
+    @State var showDeeplink = false
 
     @FetchRequest(
         entity: FavoriteStop.entity(),
@@ -27,7 +31,18 @@ struct FavoritesView: View {
                 } else {
                     favoritesList
                 }
-            }.navigationBarTitle("Favoritos", displayMode: .large)
+                NavigationLink(destination: StopDetailsView(stop: stopCodeDeeplink), isActive: $showDeeplink) {
+                    EmptyView()
+                }
+            }
+            .navigationBarTitle("Favoritos", displayMode: .large)
+            .onChange(of: deeplink) { _ in
+                guard let deeplink = deeplink else { return }
+                self.stopCodeDeeplink = String(describing: deeplink)
+                    .replacingOccurrences(of: "details(code: \"", with: "")
+                    .replacingOccurrences(of: "\")", with: "")
+                self.showDeeplink = true
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
