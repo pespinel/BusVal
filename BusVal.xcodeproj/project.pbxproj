@@ -222,11 +222,11 @@
 		6E5C7337278597E20077ADAA = {
 			isa = PBXGroup;
 			children = (
-				6E86FA9A278705ED00F0E525 /* BusValWidgetExtension.entitlements */,
-				6E86FA772786126A00F0E525 /* .swiftlint.yml */,
 				6E86FA752786124A00F0E525 /* .gitignore */,
+				6E86FA772786126A00F0E525 /* .swiftlint.yml */,
 				6E5C7342278597E20077ADAA /* BusVal */,
 				6E86FA842786F28800F0E525 /* BusValWidget */,
+				6E9154E32788B21B001A3ECB /* Entitlements */,
 				6E86FA7F2786F28800F0E525 /* Frameworks */,
 				6E5C7341278597E20077ADAA /* Products */,
 			);
@@ -244,7 +244,6 @@
 		6E5C7342278597E20077ADAA /* BusVal */ = {
 			isa = PBXGroup;
 			children = (
-				6E86FA99278705DE00F0E525 /* BusVal.entitlements */,
 				6E5C740B2785A38A0077ADAA /* App */,
 				6E5C7372278598680077ADAA /* Assets */,
 				6E5C73732785988E0077ADAA /* CoreData */,
@@ -278,10 +277,10 @@
 		6E5C73732785988E0077ADAA /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6E5C734C278597E30077ADAA /* PersistenceController.swift */,
 				6E5C73742785989F0077ADAA /* BusVal.xcdatamodeld */,
-				6E5C73762785989F0077ADAA /* FavoriteStop.swift */,
 				6E86FA9B2787062200F0E525 /* CustomPersistenceController.swift */,
+				6E5C73762785989F0077ADAA /* FavoriteStop.swift */,
+				6E5C734C278597E30077ADAA /* PersistenceController.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -472,6 +471,15 @@
 				6E86FA8A2786F28900F0E525 /* Info.plist */,
 			);
 			path = BusValWidget;
+			sourceTree = "<group>";
+		};
+		6E9154E32788B21B001A3ECB /* Entitlements */ = {
+			isa = PBXGroup;
+			children = (
+				6E86FA9A278705ED00F0E525 /* BusValWidgetExtension.entitlements */,
+				6E86FA99278705DE00F0E525 /* BusVal.entitlements */,
+			);
+			path = Entitlements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

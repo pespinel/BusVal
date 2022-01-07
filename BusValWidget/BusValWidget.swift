@@ -5,24 +5,23 @@
 //  Created by Pablo on 6/1/22.
 //
 
-import WidgetKit
-import SwiftUI
 import Intents
 import SFSafeSymbols
+import SwiftUI
 import UIKit
-import SwiftSoup
+import WidgetKit
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
         let entry = SimpleEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
         @FetchRequest(
             entity: FavoriteStop.entity(),
             sortDescriptors: []
@@ -48,7 +47,7 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct BusValWidgetEntryView : View {
+struct BusValWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
 
     @FetchRequest(
@@ -96,7 +95,9 @@ struct BusValWidgetEntryView : View {
                                 HStack {
                                     Image(
                                         systemSymbol: .grid)
-                                        .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
+                                        .foregroundColor(
+                                            Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00))
+                                        )
                                         .imageScale(.small)
                                         .font(.body)
                                         .foregroundColor(Color.accentColor)

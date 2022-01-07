@@ -1,5 +1,6 @@
 included:
   - BusVal
+  - BusValWidget
 
 excluded:
   - .swiftlint.yml
@@ -85,7 +86,7 @@ disabled_rules:
   - object_literal
   - identifier_name
 
-line_length: 120
+line_length: 140
 
 number_separator:
   minimum_length: 5
