@@ -36,10 +36,15 @@ struct FavoritesView: View {
             .navigationBarTitle("Favoritos", displayMode: .large)
             .onChange(of: deeplink) { _ in
                 guard let deeplink = deeplink else { return }
-                self.stopCodeDeeplink = String(describing: deeplink)
+                let strCode = String(describing: deeplink)
                     .replacingOccurrences(of: "details(code: \"", with: "")
                     .replacingOccurrences(of: "\")", with: "")
-                self.showDeeplink = true
+                if strCode.isEmpty {
+                    return
+                } else {
+                    self.stopCodeDeeplink = strCode
+                    self.showDeeplink = true
+                }
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }

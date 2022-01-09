@@ -17,7 +17,7 @@ class Deeplinker {
     func manage(url: URL) -> Deeplink? {
         guard url.scheme == URL.appScheme else { return nil }
         guard url.pathComponents.contains(URL.appDetailsPath) else { return .home }
-        guard let query = url.query else { return nil }
+        guard let query = url.query else { return .details(code: "") }
 
         let components = query.split(separator: ",").flatMap { $0.split(separator: "=") }
         guard let idIndex = components.firstIndex(of: Substring(URL.appCodeQueryName)) else { return nil }
