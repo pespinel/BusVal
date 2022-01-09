@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 // MARK: APP
 @main
@@ -34,7 +35,11 @@ struct BusValApp: App {
                             }
                         }
                 }
-            }.environment(\.managedObjectContext, persistenceController.container.viewContext)
+            }
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .onAppear {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 }

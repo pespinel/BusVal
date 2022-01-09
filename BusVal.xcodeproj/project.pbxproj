@@ -90,6 +90,7 @@
 		6E86FAA2278708D100F0E525 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73D927859A380077ADAA /* Constants.swift */; };
 		6E86FAAE2787094100F0E525 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C737E278599CC0077ADAA /* String.swift */; };
 		6E9154E227884D41001A3ECB /* Deeplinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9154E127884D41001A3ECB /* Deeplinker.swift */; };
+		6E91551927899F35001A3ECB /* Communicator in Frameworks */ = {isa = PBXBuildFile; productRef = 6E91551827899F35001A3ECB /* Communicator */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,16 @@
 				6E86FA8F2786F28900F0E525 /* BusValWidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E91550E2788B3C3001A3ECB /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -202,6 +213,7 @@
 				6E5C740627859EEC0077ADAA /* AlamofireImage in Frameworks */,
 				6E5C740327859E950077ADAA /* SFSafeSymbols in Frameworks */,
 				6E5C73FD27859E240077ADAA /* SkeletonUI in Frameworks */,
+				6E91551927899F35001A3ECB /* Communicator in Frameworks */,
 				6E5C740927859F140077ADAA /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,6 +506,7 @@
 				6E5C733E278597E20077ADAA /* Resources */,
 				6E86FA792786129700F0E525 /* ShellScript */,
 				6E86FA932786F28900F0E525 /* Embed App Extensions */,
+				6E91550E2788B3C3001A3ECB /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -508,6 +521,7 @@
 				6E5C740227859E950077ADAA /* SFSafeSymbols */,
 				6E5C740527859EEC0077ADAA /* AlamofireImage */,
 				6E5C740827859F140077ADAA /* SwiftSoup */,
+				6E91551827899F35001A3ECB /* Communicator */,
 			);
 			productName = BusVal;
 			productReference = 6E5C7340278597E20077ADAA /* BusVal.app */;
@@ -568,6 +582,7 @@
 				6E5C740127859E950077ADAA /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				6E5C740427859EEC0077ADAA /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				6E5C740727859F140077ADAA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */,
 			);
 			productRefGroup = 6E5C7341278597E20077ADAA /* Products */;
 			projectDirPath = "";
@@ -839,7 +854,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BusVal/BusVal.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/BusVal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Preview Content\"";
@@ -872,7 +887,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = BusVal/BusVal.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/BusVal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Preview Content\"";
@@ -904,7 +919,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = BusValWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/BusValWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L5LWYH3VQQ;
@@ -921,6 +937,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pespinel.BusVal.BusValWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -933,7 +950,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = BusValWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Entitlements/BusValWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L5LWYH3VQQ;
@@ -1038,6 +1055,14 @@
 				minimumVersion = 2.3.6;
 			};
 		};
+		6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/KaneCheshire/Communicator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1075,6 +1100,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6E5C740127859E950077ADAA /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
+		};
+		6E91551827899F35001A3ECB /* Communicator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */;
+			productName = Communicator;
 		};
 /* End XCSwiftPackageProductDependency section */
 

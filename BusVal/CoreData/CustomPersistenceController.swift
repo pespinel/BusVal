@@ -8,7 +8,7 @@
 import CoreData
 import UIKit
 
-class CustomPersistenceController: NSPersistentContainer {
+class CustomPersistenceController: NSPersistentCloudKitContainer {
     override class func defaultDirectoryURL() -> URL {
         var storeURL = FileManager.default.containerURL(
             forSecurityApplicationGroupIdentifier: "group.com.pespinel.BusVal"

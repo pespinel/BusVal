@@ -93,7 +93,7 @@ struct MainView_Previews: PreviewProvider {
         let persistenceController = PersistenceController.shared
 
         MainView()
-            .previewDevice("iPhone 12 Pro Max")
+            .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
     }
 }

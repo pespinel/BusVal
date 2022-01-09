@@ -7,6 +7,7 @@
 
 import SkeletonUI
 import SwiftUI
+import WidgetKit
 
 // MARK: VIEWS
 struct FavoritesView: View {
@@ -16,12 +17,9 @@ struct FavoritesView: View {
     @State var stopCodeDeeplink = ""
     @State var showDeeplink = false
 
-    @FetchRequest(
-        entity: FavoriteStop.entity(),
-        sortDescriptors: []
-    )
-
-    var favoriteStops: FetchedResults<FavoriteStop>
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.code)
+    ]) var favoriteStops: FetchedResults<FavoriteStop>
 
     var body: some View {
         NavigationView {
@@ -95,13 +93,14 @@ extension FavoritesView {
 // MARK: METHODS
 extension FavoritesView {
     private func delete(offsets: IndexSet) {
-        offsets.forEach { index in
-            self.context.delete(favoriteStops[index])
-        }
         do {
+            offsets.forEach { index in
+                self.context.delete(favoriteStops[index])
+            }
             try context.save()
+            WidgetCenter.shared.reloadAllTimelines()
         } catch {
-            print("Error saving context")
+            print("Error removing favorite")
         }
     }
 }

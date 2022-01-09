@@ -5,6 +5,7 @@
 //  Created by Pablo on 6/1/22.
 //
 
+import CoreData
 import Intents
 import SFSafeSymbols
 import SwiftUI
@@ -50,11 +51,15 @@ struct SimpleEntry: TimelineEntry {
 struct BusValWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
 
-    @FetchRequest(
-        entity: FavoriteStop.entity(),
-        sortDescriptors: []
-    )
+    static var getFavoriteStopsFetchRequest: NSFetchRequest<FavoriteStop> {
+        let request: NSFetchRequest<FavoriteStop> = FavoriteStop.fetchRequest()
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "code", ascending: false)
+        ]
+        return request
+   }
 
+    @FetchRequest(fetchRequest: getFavoriteStopsFetchRequest)
     var favoriteStops: FetchedResults<FavoriteStop>
 
     var entry: Provider.Entry
@@ -67,34 +72,14 @@ struct BusValWidgetEntryView: View {
         } else {
             switch family {
             case .systemSmall:
-                VStack(alignment: .leading) {
-                    ForEach(0..<2) { index in
-                        Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
-                            HStack {
-                                Image(
-                                    systemSymbol: .grid)
-                                    .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
-                                    .imageScale(.small)
-                                    .font(.body)
-                                    .foregroundColor(Color.accentColor)
-                                VStack(alignment: .leading) {
-                                    Text("Parada \(favoriteStops[index].code)").bold()
-                                        .font(.footnote)
-                                    Text(favoriteStops[index].name)
-                                        .font(.caption)
-                                }
-                                Spacer()
-                            }.padding([.bottom])
-                        }
-                    }
-                }.padding()
+                fatalError("Widget family is not supported")
             case .systemMedium:
-                    VStack(alignment: .leading) {
-                        ForEach(0..<3) { index in
+                VStack(alignment: .leading) {
+                    ForEach(0..<3) { index in
+                        if favoriteStops.indices.contains(index) {
                             Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
                                 HStack {
-                                    Image(
-                                        systemSymbol: .grid)
+                                    Image(systemSymbol: .grid)
                                         .foregroundColor(
                                             Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00))
                                         )
@@ -111,29 +96,36 @@ struct BusValWidgetEntryView: View {
                                 }
                             }
                         }
-                    }.padding()
+                    }
+                    Spacer()
+                }.padding()
             case .systemLarge, .systemExtraLarge:
-                ForEach(favoriteStops) { stop in
-                    Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(stop.code)")!) {
-                        HStack {
-                            Image(
-                                systemSymbol: .grid)
-                                .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
-                                .imageScale(.small)
-                                .font(.body)
-                                .foregroundColor(Color.accentColor)
-                            VStack(alignment: .leading) {
-                                Text("Parada \(stop.code)").bold()
-                                    .font(.footnote)
-                                Text(stop.name)
-                                    .font(.caption)
+                VStack(alignment: .leading) {
+                    ForEach(favoriteStops) { stop in
+                        Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(stop.code)")!) {
+                            HStack {
+                                Image(systemSymbol: .grid)
+                                    .foregroundColor(
+                                        Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00))
+                                    )
+                                    .imageScale(.small)
+                                    .font(.body)
+                                    .foregroundColor(Color.accentColor)
+                                VStack(alignment: .leading) {
+                                    Text("Parada \(stop.code)").bold()
+                                        .font(.footnote)
+                                    Text(stop.name)
+                                        .font(.caption)
+                                        .lineLimit(1)
+                                }
+                                Spacer()
                             }
-                            Spacer()
                         }
                     }
+                    Spacer()
                 }.padding()
             @unknown default:
-                fatalError("Switch family is not supported")
+                fatalError("Widget family is not supported")
             }
         }
     }
@@ -149,37 +141,30 @@ struct BusValWidget: Widget {
             BusValWidgetEntryView(entry: entry)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        .configurationDisplayName("BusValWidget")
+        .supportedFamilies([.systemMedium, .systemLarge, .systemExtraLarge])
+        .configurationDisplayName("Favoritos")
         .description("Accede de forma rápida a tus paradas favoritas")
     }
 }
 
 #if DEBUG
-struct BusValWidgetSmall_Previews: PreviewProvider {
-    static var previews: some View {
-        BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
-
 struct BusValWidgetMedium_Previews: PreviewProvider {
     static var previews: some View {
-        BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        let context = PersistenceController.shared
+        return BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            .previewDevice("iPhone 13 Pro")
+            .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
 
 struct BusValWidgetLarge_Previews: PreviewProvider {
     static var previews: some View {
-        BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        let context = PersistenceController.shared
+        return BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            .previewDevice("iPhone 13 Pro")
+            .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
-    }
-}
-
-struct BusValWidgetExtraLarge_Previews: PreviewProvider {
-    static var previews: some View {
-        BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
     }
 }
 #endif

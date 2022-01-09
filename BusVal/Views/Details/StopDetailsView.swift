@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+import CoreData
 import MapKit
 import SkeletonUI
 import SwiftUI
@@ -27,6 +28,16 @@ struct StopDetailsView: View {
     @ObservedObject var stopTimesStore = StopTimesStore()
 
     @FetchRequest var result: FetchedResults<FavoriteStop>
+
+    init(stop: String) {
+        self.stop = stop
+        self._result = FetchRequest<FavoriteStop>(
+            entity: FavoriteStop.entity(),
+            sortDescriptors: [],
+            predicate: NSPredicate(format: "code == %@", stop)
+        )
+    }
+
     var body: some View {
         VStack {
             progressBar
@@ -158,7 +169,6 @@ extension StopDetailsView {
         Button(
             action: {
                 toggleFavorite()
-                WidgetCenter.shared.reloadAllTimelines()
             },
             label: {
                 Image(systemSymbol: self.result.isEmpty ? .heart : .heartFill)
@@ -177,42 +187,37 @@ extension StopDetailsView {
 
 // MARK: METHODS
 extension StopDetailsView {
-    init(stop: String) {
-        self.stop = stop
-        var predicate: NSPredicate?
-        predicate = NSPredicate(format: "code == %@", stop)
-        self._result = FetchRequest(
-            entity: FavoriteStop.entity(),
-            sortDescriptors: [],
-            predicate: predicate
-        )
-    }
-
     private func toggleFavorite() {
         if self.result.isEmpty {
-            let newFavoriteStop = FavoriteStop(context: self.context)
-            newFavoriteStop.id = UUID()
-            newFavoriteStop.code = self.stopDetailsStore.stopDetails.code.description
-            newFavoriteStop.name = self.stopDetailsStore.stopDetails.name.description
             do {
+                let newFavoriteStop = FavoriteStop(context: self.context)
+                newFavoriteStop.stopID = UUID()
+                newFavoriteStop.code = self.stopDetailsStore.stopDetails.code.description
+                newFavoriteStop.name = self.stopDetailsStore.stopDetails.name.description
                 try self.context.save()
                 self.bannerData.title = "Guardada en favoritos"
                 self.bannerData.detail = "Puedes ver tus paradas favoritas desde la pestaña 'Favoritos'"
                 self.bannerData.type = .success
-                self.showBanner = true
             } catch {
                 self.bannerData.title = "Error"
                 self.bannerData.detail = "No se ha podido guardar la parada en favoritos"
                 self.bannerData.type = .warning
-                self.showBanner = true
             }
         } else {
-            self.bannerData.title = "Eliminada de favoritos"
-            self.bannerData.detail = "Puedes añadir otras paradas a favoritos desde la vista de detalles de parada"
-            self.bannerData.type = .error
-            self.showBanner = true
-            self.context.delete(self.result[0])
+            do {
+                context.delete(result.first!)
+                try self.context.save()
+                self.bannerData.title = "Eliminada de favoritos"
+                self.bannerData.detail = "Puedes añadir otras paradas a favoritos desde la vista de detalles de parada"
+                self.bannerData.type = .error
+            } catch {
+                self.bannerData.title = "Error"
+                self.bannerData.detail = "No se ha podido guardar la parada en favoritos"
+                self.bannerData.type = .warning
+            }
         }
+        self.showBanner = true
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private func openInMaps() {

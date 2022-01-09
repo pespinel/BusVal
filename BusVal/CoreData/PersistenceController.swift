@@ -14,9 +14,9 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        let newItem = FavoriteStop()
-        newItem.code = "698"
-        newItem.name = "Calle Gondomar 12 esquina Santa Clara"
+        let stop = FavoriteStop()
+        stop.code = "698"
+        stop.name = "Calle Gondomar 12 esquina Santa Clara"
         do {
             try viewContext.save()
         } catch {

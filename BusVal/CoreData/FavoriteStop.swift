@@ -17,7 +17,7 @@ extension FavoriteStop: Identifiable {
         return NSFetchRequest<FavoriteStop>(entityName: "FavoriteStop")
     }
 
-    @NSManaged public var id: UUID
+    @NSManaged public var stopID: UUID
     @NSManaged public var name: String
     @NSManaged public var code: String
 }
