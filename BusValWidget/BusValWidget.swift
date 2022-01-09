@@ -13,37 +13,23 @@ import UIKit
 import WidgetKit
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+    func placeholder(in context: Context) -> Entry {
+        Entry(date: Date(), configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> Void) {
+        let entry = Entry(date: Date(), configuration: configuration)
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        @FetchRequest(
-            entity: FavoriteStop.entity(),
-            sortDescriptors: []
-        )
-        var favoriteStops: FetchedResults<FavoriteStop>
-
-        var entries: [SimpleEntry] = []
-
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let entry = Entry(date: Date(), configuration: configuration)
+        let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct Entry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
 }
@@ -54,7 +40,7 @@ struct BusValWidgetEntryView: View {
     static var getFavoriteStopsFetchRequest: NSFetchRequest<FavoriteStop> {
         let request: NSFetchRequest<FavoriteStop> = FavoriteStop.fetchRequest()
         request.sortDescriptors = [
-            NSSortDescriptor(key: "code", ascending: false)
+            NSSortDescriptor(key: "code", ascending: true, selector: #selector(NSString.localizedStandardCompare))
         ]
         return request
    }
@@ -75,7 +61,7 @@ struct BusValWidgetEntryView: View {
                 fatalError("Widget family is not supported")
             case .systemMedium:
                 VStack(alignment: .leading) {
-                    ForEach(0..<3) { index in
+                    ForEach(0..<4) { index in
                         if favoriteStops.indices.contains(index) {
                             Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
                                 HStack {
@@ -91,9 +77,10 @@ struct BusValWidgetEntryView: View {
                                             .font(.footnote)
                                         Text(favoriteStops[index].name)
                                             .font(.caption)
+                                            .lineLimit(1)
                                     }
                                     Spacer()
-                                }
+                                }.padding(0.5)
                             }
                         }
                     }
@@ -119,7 +106,7 @@ struct BusValWidgetEntryView: View {
                                         .lineLimit(1)
                                 }
                                 Spacer()
-                            }
+                            }.padding(0.5)
                         }
                     }
                     Spacer()
@@ -151,7 +138,7 @@ struct BusValWidget: Widget {
 struct BusValWidgetMedium_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
@@ -161,10 +148,20 @@ struct BusValWidgetMedium_Previews: PreviewProvider {
 struct BusValWidgetLarge_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
+    }
+}
+
+struct BusValWidgetExtraLarge_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistenceController.shared
+        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+            .previewDevice("iPhone 13 Pro")
+            .environment(\.managedObjectContext, context.container.viewContext)
+            .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
     }
 }
 #endif
