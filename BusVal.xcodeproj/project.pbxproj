@@ -90,7 +90,7 @@
 		6E86FAA2278708D100F0E525 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73D927859A380077ADAA /* Constants.swift */; };
 		6E86FAAE2787094100F0E525 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C737E278599CC0077ADAA /* String.swift */; };
 		6E9154E227884D41001A3ECB /* Deeplinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9154E127884D41001A3ECB /* Deeplinker.swift */; };
-		6E91551927899F35001A3ECB /* Communicator in Frameworks */ = {isa = PBXBuildFile; productRef = 6E91551827899F35001A3ECB /* Communicator */; };
+		6E941341278C89FD005D939C /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6E941340278C89FD005D939C /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,11 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E5C740027859E710077ADAA /* SWXMLHash in Frameworks */,
+				6E941341278C89FD005D939C /* MarkdownUI in Frameworks */,
 				6E5C73FA27859DE20077ADAA /* Alamofire in Frameworks */,
 				6E5C740627859EEC0077ADAA /* AlamofireImage in Frameworks */,
 				6E5C740327859E950077ADAA /* SFSafeSymbols in Frameworks */,
 				6E5C73FD27859E240077ADAA /* SkeletonUI in Frameworks */,
-				6E91551927899F35001A3ECB /* Communicator in Frameworks */,
 				6E5C740927859F140077ADAA /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,8 +379,8 @@
 				6E5C73CE27859A380077ADAA /* Common */,
 				6E5C73CA27859A380077ADAA /* Details */,
 				6E5C73C527859A380077ADAA /* Developer */,
-				6E8113602785F9D500EE5BB4 /* LaunchScreen.storyboard */,
-				6E5C73D427859A380077ADAA /* MainView.swift */,
+				6E941346278C924B005D939C /* Launch */,
+				6E941347278C9259005D939C /* Main */,
 				6E5C73D527859A380077ADAA /* Onboarding */,
 				6E5C73BE27859A380077ADAA /* Tabs */,
 				6E5C73C727859A380077ADAA /* UIKit */,
@@ -494,6 +494,22 @@
 			path = Entitlements;
 			sourceTree = "<group>";
 		};
+		6E941346278C924B005D939C /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				6E8113602785F9D500EE5BB4 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		6E941347278C9259005D939C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				6E5C73D427859A380077ADAA /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -521,7 +537,7 @@
 				6E5C740227859E950077ADAA /* SFSafeSymbols */,
 				6E5C740527859EEC0077ADAA /* AlamofireImage */,
 				6E5C740827859F140077ADAA /* SwiftSoup */,
-				6E91551827899F35001A3ECB /* Communicator */,
+				6E941340278C89FD005D939C /* MarkdownUI */,
 			);
 			productName = BusVal;
 			productReference = 6E5C7340278597E20077ADAA /* BusVal.app */;
@@ -582,7 +598,7 @@
 				6E5C740127859E950077ADAA /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				6E5C740427859EEC0077ADAA /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				6E5C740727859F140077ADAA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
-				6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */,
+				6E94133F278C89FD005D939C /* XCRemoteSwiftPackageReference "MarkdownUI" */,
 			);
 			productRefGroup = 6E5C7341278597E20077ADAA /* Products */;
 			projectDirPath = "";
@@ -1055,12 +1071,12 @@
 				minimumVersion = 2.3.6;
 			};
 		};
-		6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */ = {
+		6E94133F278C89FD005D939C /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/KaneCheshire/Communicator";
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
+				minimumVersion = 0.5.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1101,10 +1117,10 @@
 			package = 6E5C740127859E950077ADAA /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
 		};
-		6E91551827899F35001A3ECB /* Communicator */ = {
+		6E941340278C89FD005D939C /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6E91551727899F35001A3ECB /* XCRemoteSwiftPackageReference "Communicator" */;
-			productName = Communicator;
+			package = 6E94133F278C89FD005D939C /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

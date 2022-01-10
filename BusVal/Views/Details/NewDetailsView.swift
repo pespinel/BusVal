@@ -39,7 +39,7 @@ extension NewDetailsView {
         VStack(alignment: .leading) {
             Text(self.new.title!.components(separatedBy: "(")[0].lowercased().capitalizingFirstLetter())
                 .bold()
-                .font(.title2)
+                .font(.title3)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(Color.accentColor)
                 .padding()

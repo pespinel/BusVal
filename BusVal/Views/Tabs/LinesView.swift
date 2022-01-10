@@ -49,7 +49,7 @@ extension LinesView {
                 NavigationLink(destination: LineDetailsView(line: _line.line)) {
                     HStack {
                         Image(systemName: LineHelper().getImage(line: _line.line))
-                            .font(.largeTitle)
+                            .imageScale(.large)
                             .padding(.trailing)
                             .foregroundColor(Color(LineHelper().getColor(line: _line.line, scheme: colorScheme)))
                         VStack(alignment: .leading) {

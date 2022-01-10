@@ -88,12 +88,6 @@ extension CardView {
         }
     }
 
-    private var loadingIndicator: some View {
-        ProgressView()
-            .scaleEffect(2, anchor: .center)
-            .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
-    }
-
     private var movementsList: some View {
         SkeletonList(with: cardDetailsStore.cardMovements, quantity: 10) { loading, movement in
             VStack(alignment: .leading) {
@@ -163,7 +157,8 @@ extension CardView {
             VStack {
                 if self.cardDetailsStore.loading {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(2, anchor: .center)
+                        .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
                 } else {
                     TextField("Número de tarjeta de auvasa", text: $inputText)
                         .foregroundColor(colorScheme == .light ? .black : .white)
@@ -192,6 +187,7 @@ extension CardView {
 // MARK: METHODS
 extension CardView {
     private func checkInputCard() {
+        if inputText.isEmpty { return }
         // Wait for async method fetch
         DispatchQueue.main.async {
             self.cardDetailsStore.loading = true

@@ -29,7 +29,9 @@ struct NewsView: View {
                     refreshNewsToolbarButton
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear { self.newsStore.fetch() }
     }
 }
 
@@ -42,7 +44,7 @@ extension NewsView {
                     NavigationLink(destination: NewDetailsView(new: _new)) {
                         HStack(alignment: .center) {
                             Image(systemSymbol: .book)
-                                .font(.largeTitle)
+                                .imageScale(.large)
                                 .foregroundColor(.accentColor)
                                 .padding(.trailing)
                             VStack(alignment: .leading) {

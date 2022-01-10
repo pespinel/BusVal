@@ -46,10 +46,7 @@ struct StopDetailsView: View {
                 if stopTimesStore.error != nil {
                     Text("Error consultando los tiempos de la parada")
                 } else {
-                    detailsList.frame(
-                        width: UIScreen.main.bounds.width,
-                        alignment: .center
-                    )
+                    detailsList
                 }
             }
         }
@@ -128,8 +125,8 @@ extension StopDetailsView {
             }.frame(
                 minWidth: UIScreen.main.bounds.width,
                 maxWidth: UIScreen.main.bounds.width,
-                minHeight: UIScreen.main.bounds.width / 2,
-                maxHeight: UIScreen.main.bounds.width / 2,
+                minHeight: UIScreen.main.bounds.height / 3,
+                maxHeight: UIScreen.main.bounds.height / 3,
                 alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/
             )
         }

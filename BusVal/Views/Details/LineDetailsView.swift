@@ -116,14 +116,14 @@ extension LineDetailsView {
                             HStack {
                                 Image(systemSymbol: .grid)
                                     .padding(.trailing)
-                                    .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
+                                    .foregroundColor(Color.accentColor)
                                 Text("Parada \(_lineDetails.code)")
                                     .bold()
                                     .multilineTextAlignment(.leading)
                             }
                             HStack {
                                 Image(systemSymbol: .safariFill)
-                                    .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
+                                    .foregroundColor(Color.accentColor)
                                     .padding(.trailing)
                                 Text(_lineDetails.stop).multilineTextAlignment(.leading)
                             }

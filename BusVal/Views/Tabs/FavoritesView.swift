@@ -75,7 +75,6 @@ extension FavoritesView {
                     HStack {
                         Image(
                             systemSymbol: .grid)
-                            .foregroundColor(Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00)))
                             .imageScale(.large)
                             .font(.body)
                             .padding(.trailing)
@@ -89,9 +88,7 @@ extension FavoritesView {
             }.onDelete(perform: delete)
         }
         .listStyle(InsetListStyle())
-        .toolbar {
-            EditButton()
-        }
+        .toolbar { EditButton() }
     }
 }
 

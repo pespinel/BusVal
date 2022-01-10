@@ -6,10 +6,8 @@
 //
 
 import CoreData
-import Intents
 import SFSafeSymbols
 import SwiftUI
-import UIKit
 import WidgetKit
 
 // MARK: PROVIDER
@@ -30,7 +28,7 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-// MARK: TIMELINE
+// MARK: ENTRY
 struct Entry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
@@ -98,18 +96,15 @@ extension BusValWidgetEntryView {
     }
 
     private var smallView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 1) {
             ForEach(0..<4) { index in
                 if favoriteStops.indices.contains(index) {
                     Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
                         HStack {
                             Image(systemSymbol: .grid)
-                                .foregroundColor(
-                                    Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00))
-                                )
-                                .imageScale(.small)
+                                .foregroundColor(Color("AccentColor"))
+                                .imageScale(.medium)
                                 .font(.body)
-                                .foregroundColor(Color.accentColor)
                             VStack(alignment: .leading) {
                                 Text("Parada \(favoriteStops[index].code)").bold()
                                     .font(.footnote)
@@ -118,7 +113,7 @@ extension BusValWidgetEntryView {
                                     .lineLimit(1)
                             }
                             Spacer()
-                        }.padding(0.5)
+                        }
                     }
                 }
             }
@@ -127,32 +122,32 @@ extension BusValWidgetEntryView {
     }
 
     private var largeView: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 1) {
             HStack {
-                Image(systemSymbol: .staroflifeFill)
-                    .foregroundColor(.accentColor)
-                Text("Favoritos")
+                Image(systemSymbol: .staroflifeCircleFill)
+                    .foregroundColor(Color("AccentColor"))
+                Text("Paradas favoritas")
                     .font(.headline)
-            }
-            ForEach(favoriteStops) { stop in
-                Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(stop.code)")!) {
-                    HStack {
-                        Image(systemSymbol: .grid)
-                            .foregroundColor(
-                                Color(UIColor(red: 0.15, green: 0.68, blue: 0.38, alpha: 1.00))
-                            )
-                            .imageScale(.small)
-                            .font(.body)
-                            .foregroundColor(Color.accentColor)
-                        VStack(alignment: .leading) {
-                            Text("Parada \(stop.code)").bold()
-                                .font(.footnote)
-                            Text(stop.name)
-                                .font(.caption)
-                                .lineLimit(1)
+            }.padding([.top, .bottom], 10)
+            Divider().padding(.bottom, 5)
+            ForEach(0..<9) { index in
+                if favoriteStops.indices.contains(index) {
+                    Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
+                        HStack {
+                            Image(systemSymbol: .grid)
+                                .foregroundColor(Color("AccentColor"))
+                                .imageScale(.medium)
+                                .font(.body)
+                            VStack(alignment: .leading) {
+                                Text("Parada \(favoriteStops[index].code)").bold()
+                                    .font(.footnote)
+                                Text(favoriteStops[index].name)
+                                    .font(.caption)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                    }.padding(0.5)
+                    }
                 }
             }
             Spacer()

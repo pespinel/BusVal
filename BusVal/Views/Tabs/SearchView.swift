@@ -37,7 +37,12 @@ struct SearchView: View {
                     toolBarPicker
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            self.linesStore.fetch()
+            self.stopsStore.fetch()
+        }
     }
 }
 
@@ -51,7 +56,7 @@ extension SearchView {
                 NavigationLink(destination: LineDetailsView(line: _line.line)) {
                     HStack {
                         Image(systemName: LineHelper().getImage(line: _line.line))
-                            .font(.largeTitle)
+                            .imageScale(.large)
                             .padding(.trailing)
                             .foregroundColor(Color(LineHelper().getColor(line: _line.line, scheme: colorScheme)))
                         VStack(alignment: .leading) {
@@ -84,7 +89,7 @@ extension SearchView {
                 NavigationLink(destination: StopDetailsView(stop: _stop.code)) {
                     HStack {
                         Image(systemSymbol: .grid)
-                            .font(.largeTitle)
+                            .imageScale(.large)
                             .padding(.trailing)
                             .foregroundColor(Color.accentColor)
                         VStack(alignment: .leading) {
