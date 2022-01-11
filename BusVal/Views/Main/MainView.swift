@@ -43,14 +43,14 @@ struct MainView: View {
                 .tag(1)
             SearchView(linesStore: linesStore, stopsStore: stopsStore)
                 .tabItem {
-                    Text(Constants.Tabs.names[3])
-                    Image(uiImage: Constants.Tabs.icons[3])
+                    Text(Constants.Tabs.names[2])
+                    Image(uiImage: Constants.Tabs.icons[2])
                 }
                 .tag(2)
             CardView(cardDetailsStore: cardDetailsStore)
                 .tabItem {
-                    Text("Tarjeta")
-                    Image(systemSymbol: .creditcard)
+                    Text(Constants.Tabs.names[3])
+                    Image(uiImage: Constants.Tabs.icons[3])
                 }
                 .tag(3)
             FavoritesView()

@@ -59,10 +59,12 @@ extension FavoritesView {
                 .font(.title2)
                 .padding()
             Text("Añade tus paradas favoritas desde la vista de detalles de parada usando el icono:")
+                .multilineTextAlignment(.center)
                 .font(.body)
                 .padding()
-            Image(systemSymbol: .heartSquare)
+            Image(systemSymbol: .heart)
                 .renderingMode(.original)
+                .imageScale(.large)
                 .padding()
             Spacer()
         }
@@ -111,8 +113,10 @@ extension FavoritesView {
 #if DEBUG
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
+        let persistenceController = PersistenceController.shared
         TabView {
             FavoritesView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .tabItem {
                     Image(systemSymbol: .listDash)
                     Text("Preview")

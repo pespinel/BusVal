@@ -6,15 +6,90 @@
 //
 
 import Alamofire
-import AlamofireImage
 import Foundation
 import SwiftSoup
 import SwiftUI
 import SWXMLHash
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length
 struct Wrapper {
     static let shared = Wrapper()
+
+    // MARK: ENDPOINTS
+    enum Endpoint {
+        case stops, stop, stopTime, lines, line, schedule, news, newImage, card
+
+        func getPath(id: String? = nil) -> String {
+            switch self {
+            case .stops:
+                return "http://auvasa.es/dataapp/Paradas.xml"
+            case .stop:
+                return "http://auvasa.es/rssparada.asp?codigo=\(id!)"
+            case .stopTime:
+                return "http://www.auvasa.es/parada.asp?codigo=\(id!)"
+            case .lines:
+                return "http://auvasa.es/dataapp/Lineas.xml"
+            case .line:
+                return "http://auvasa.es/rsstrayectos.asp?codigo=\(id!)"
+            case .schedule:
+                return "http://auvasa.es/dataapp/Horarios.xml"
+            case .news:
+                return "http://auvasa.es/rss.asp"
+            case .newImage:
+                return "http://www.auvasa.es/images/news/\(id!).jpg"
+            case .card:
+                return "http://2.139.171.116:3506/rsstarjeta.asp?codigo=\(id!)"
+            }
+        }
+    }
+
+    // MARK: RESPONSES
+    enum CardDetailsReponse {
+        case success(CardBalance, [CardMovement])
+        case failure(APIError)
+    }
+
+    enum StopTimeResponse {
+        case success([[String]])
+        case failure(APIError)
+    }
+
+    enum LineSchedulesResponse {
+        case success(LineSchedule)
+        case failure(APIError)
+    }
+
+    enum StopDetailsResponse {
+        case success(StopDetails)
+        case failure(APIError)
+    }
+
+    enum StopsResponse {
+        case success([Stop])
+        case failure(APIError)
+    }
+
+    enum LineDetailsResponse {
+        case success([LineDetails])
+        case failure(APIError)
+    }
+
+    enum LinesResponse {
+        case success([Line])
+        case failure(APIError)
+    }
+
+    enum NewsResponse {
+        case success([New])
+        case failure(APIError)
+    }
+
+    enum APIError: Error {
+        case noResponse
+        case invalidParam (error: Error)
+        case xmlDecodingError(error: Error)
+        case networkError(error: Error)
+    }
 
     // MARK: NEWS METHODS
     static func getNews(_ completion: @escaping (NewsResponse) -> Void) {
@@ -43,18 +118,6 @@ struct Wrapper {
                     completion(NewsResponse.success(news))
                 case let .failure(error):
                     completion(NewsResponse.failure(APIError.networkError(error: error)))
-                }
-            }
-    }
-
-    static func getNewImage(_ imagePath: String?, completion: @escaping (_ data: UIImage) -> Void) {
-        AF.request(self.Endpoint.newImage.getPath(id: imagePath))
-            .responseImage { response in
-                switch response.result {
-                case .success(let image):
-                    completion(UIImage(data: response.data!, scale: image.scale / 1.2)!)
-                case .failure:
-                    completion(Image(systemSymbol: .newspaperFill))
                 }
             }
     }
@@ -320,83 +383,5 @@ struct Wrapper {
                     completion(CardDetailsReponse.failure(APIError.networkError(error: error)))
                 }
             }
-    }
-}
-
-extension Wrapper {
-    // MARK: ENDPOINTS
-    enum Endpoint {
-        case stops, stop, stopTime, lines, line, schedule, news, newImage, card
-
-        func getPath(id: String? = nil) -> String {
-            switch self {
-            case .stops:
-                return "http://auvasa.es/dataapp/Paradas.xml"
-            case .stop:
-                return "http://auvasa.es/rssparada.asp?codigo=\(id!)"
-            case .stopTime:
-                return "http://www.auvasa.es/parada.asp?codigo=\(id!)"
-            case .lines:
-                return "http://auvasa.es/dataapp/Lineas.xml"
-            case .line:
-                return "http://auvasa.es/rsstrayectos.asp?codigo=\(id!)"
-            case .schedule:
-                return "http://auvasa.es/dataapp/Horarios.xml"
-            case .news:
-                return "http://auvasa.es/rss.asp"
-            case .newImage:
-                return "http://www.auvasa.es/images/news/\(id!).jpg"
-            case .card:
-                return "http://2.139.171.116:3506/rsstarjeta.asp?codigo=\(id!)"
-            }
-        }
-    }
-
-    // MARK: RESPONSES
-    enum CardDetailsReponse {
-        case success(CardBalance, [CardMovement])
-        case failure(APIError)
-    }
-
-    enum StopTimeResponse {
-        case success([[String]])
-        case failure(APIError)
-    }
-
-    enum LineSchedulesResponse {
-        case success(LineSchedule)
-        case failure(APIError)
-    }
-
-    enum StopDetailsResponse {
-        case success(StopDetails)
-        case failure(APIError)
-    }
-
-    enum StopsResponse {
-        case success([Stop])
-        case failure(APIError)
-    }
-
-    enum LineDetailsResponse {
-        case success([LineDetails])
-        case failure(APIError)
-    }
-
-    enum LinesResponse {
-        case success([Line])
-        case failure(APIError)
-    }
-
-    enum NewsResponse {
-        case success([New])
-        case failure(APIError)
-    }
-
-    enum APIError: Error {
-        case noResponse
-        case invalidParam (error: Error)
-        case xmlDecodingError(error: Error)
-        case networkError(error: Error)
     }
 }

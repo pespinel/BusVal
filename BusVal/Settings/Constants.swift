@@ -13,12 +13,12 @@ import SwiftUI
 
 struct Constants {
     struct Tabs {
-        static let names = ["Líneas", "Noticias", "Mapa", "Buscar", "Favoritos"]
+        static let names = ["Líneas", "Noticias", "Buscar", "Tarjeta", "Favoritos"]
         static let icons = [
             UIImage(systemSymbol: .bus),
             UIImage(systemSymbol: .newspaper),
-            UIImage(systemSymbol: .map),
             UIImage(systemSymbol: .docTextMagnifyingglass),
+            UIImage(systemSymbol: .creditcard),
             UIImage(systemSymbol: .staroflife)
         ]
     }

@@ -38,7 +38,7 @@ struct NewsView: View {
 // MARK: COMPONENTS
 extension NewsView {
     private var newsList: some View {
-        SkeletonList(with: newsStore.news, quantity: 10) { loading, new in
+        SkeletonList(with: newsStore.news, quantity: 5) { loading, new in
             VStack {
                 if let _new = new {
                     NavigationLink(destination: NewDetailsView(new: _new)) {
