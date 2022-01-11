@@ -30,12 +30,6 @@ struct NewDetailsView: View {
 extension NewDetailsView {
     private var newReader: some View {
         VStack(alignment: .leading) {
-            Text(self.new.title!.components(separatedBy: "(")[0].lowercased().capitalizingFirstLetter())
-                .bold()
-                .font(.title3)
-                .multilineTextAlignment(.leading)
-                .foregroundColor(Color.accentColor)
-                .padding()
             if let _image = new.image {
                 KFImage(URL(string: Wrapper.Endpoint.newImage.getPath(id: _image))!)
                     .resizable()
@@ -45,9 +39,15 @@ extension NewDetailsView {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
+            Text(self.new.title!.components(separatedBy: "(")[0].lowercased().capitalizingFirstLetter())
+                .bold()
+                .font(.title3)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(Color.accentColor)
+                .padding()
             Text(self.new.description!.replacingOccurrences(of: "<BR>", with: "\n"))
                 .multilineTextAlignment(.leading)
-                .padding()
+                .padding([.leading, .trailing, .bottom])
         }
     }
 
@@ -68,19 +68,19 @@ struct NewDetailsView_Previews: PreviewProvider {
         title: "New title ()",
         date: "01/01/2021",
         description: """
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
-            <BR>Very long New description Very long New description
+        Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
+        <BR>Very long New description Very long New description
         """,
         link: "https://google.com",
         image: "imagen10"

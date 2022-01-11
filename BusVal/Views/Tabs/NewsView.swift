@@ -5,6 +5,7 @@
 //  Created by Pablo on 03/03/2021.
 //
 
+import Kingfisher
 import SkeletonUI
 import SwiftUI
 import SWXMLHash
@@ -42,15 +43,23 @@ extension NewsView {
                 if let _new = new {
                     NavigationLink(destination: NewDetailsView(new: _new)) {
                         HStack(alignment: .center) {
-                            Image(systemSymbol: .book)
-                                .imageScale(.large)
-                                .foregroundColor(.accentColor)
-                                .padding(.trailing)
+                            if let _image = _new.image {
+                                KFImage(URL(string: Wrapper.Endpoint.newImage.getPath(id: _image))!)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 30, height: 30, alignment: .center)
+                                    .cornerRadius(10)
+                                    .padding(.trailing)
+                            } else {
+                                Image(systemSymbol: .newspaperFill)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .padding(.trailing)
+                            }
                             VStack(alignment: .leading) {
-                                Text(_new.title)
-                                    .textCase(.uppercase)
-                                    .font(.headline)
-                                    .accessibility(addTraits: .isHeader)
+                                Text(_new.title!.lowercased().capitalizingFirstLetter())
+                                    .bold()
                                     .lineLimit(2)
                                 Text(_new.date).font(.body)
                             }
