@@ -5,6 +5,7 @@
 //  Created by Pablo on 5/1/22.
 //
 
+import Firebase
 import SwiftUI
 import UIKit
 import WidgetKit
@@ -13,6 +14,7 @@ import WidgetKit
 class AppDelegate: NSObject, UIApplicationDelegate {
     // swiftlint:disable line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [ UIApplication.LaunchOptionsKey: Any ]? = nil) -> Bool {
+        FirebaseApp.configure()
         Thread.sleep(forTimeInterval: 1)
         return true
     }
@@ -22,6 +24,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct BusValApp: App {
     @AppStorage("firstRun") var firstRun = true
+    @AppStorage("uid") var uid = String()
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
@@ -51,6 +54,10 @@ struct BusValApp: App {
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .onAppear {
                 WidgetCenter.shared.reloadAllTimelines()
+                Auth.auth().signInAnonymously { authResult, _ in
+                    guard let user = authResult?.user else { return }
+                    self.uid = user.uid
+                }
             }
         }
     }

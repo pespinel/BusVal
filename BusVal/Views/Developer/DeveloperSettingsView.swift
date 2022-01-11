@@ -5,6 +5,7 @@
 //  Created by Pablo on 30/12/21.
 //
 
+import Firebase
 import SwiftUI
 
 // MARK: VIEW
@@ -71,6 +72,10 @@ extension DeveloperSettingsView {
             }
             Section(header: Text("Core data")) {
                 dataRow
+            }
+            Section(header: Text("Firebase")) {
+                crashRow
+                logOutRow
             }
         }.listStyle(.automatic)
         .navigationBarTitle("Developer Settings")
@@ -181,6 +186,40 @@ extension DeveloperSettingsView {
                 }
             } label: {
                 Image(systemSymbol: .trashFill)
+                    .font(.title2)
+                    .padding()
+            }
+        }
+    }
+
+    private var crashRow: some View {
+        HStack {
+            Text("Crash the app")
+                .font(.body)
+                .padding()
+            Spacer()
+            Button {
+                fatalError("Developer crash test")
+            } label: {
+                Image(systemSymbol: .lockShieldFill)
+                    .font(.title2)
+                    .padding()
+            }
+        }
+    }
+
+    private var logOutRow: some View {
+        HStack {
+            Text("Log out")
+                .font(.body)
+                .padding()
+            Spacer()
+            Button {
+                do {
+                    try Firebase.Auth.auth().signOut()
+                } catch {}
+            } label: {
+                Image(systemSymbol: .flameFill)
                     .font(.title2)
                     .padding()
             }
