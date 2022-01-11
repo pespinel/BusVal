@@ -1,8 +1,7 @@
 //
-//  BusValWidget.swift
-//  BusValWidget
+//  BusValWidgetView.swift
 //
-//  Created by Pablo on 6/1/22.
+//  Created by Pablo on 11/1/22.
 //
 
 import CoreData
@@ -10,49 +9,8 @@ import SFSafeSymbols
 import SwiftUI
 import WidgetKit
 
-// MARK: PROVIDER
-struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> Entry {
-        Entry(date: Date(), configuration: ConfigurationIntent())
-    }
-
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> Void) {
-        let entry = Entry(date: Date(), configuration: configuration)
-        completion(entry)
-    }
-
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        let entry = Entry(date: Date(), configuration: configuration)
-        let timeline = Timeline(entries: [entry], policy: .atEnd)
-        completion(timeline)
-    }
-}
-
-// MARK: ENTRY
-struct Entry: TimelineEntry {
-    let date: Date
-    let configuration: ConfigurationIntent
-}
-
-// MARK: MAIN
-@main
-struct BusValWidget: Widget {
-    let kind: String = "BusValWidget"
-    let persistenceController = PersistenceController.shared
-
-    var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            BusValWidgetEntryView(entry: entry)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
-        .configurationDisplayName("Favoritos")
-        .description("Accede de forma rápida a tus paradas favoritas")
-    }
-}
-
-// MARK: ENTRYVIEW
-struct BusValWidgetEntryView: View {
+// MARK: VIEW
+struct BusValWidgetView: View {
     @Environment(\.widgetFamily) var family
 
     static var getFavoriteStopsFetchRequest: NSFetchRequest<FavoriteStop> {
@@ -88,7 +46,7 @@ struct BusValWidgetEntryView: View {
 }
 
 // MARK: COMPONENTS
-extension BusValWidgetEntryView {
+extension BusValWidgetView {
     private var emptyView: some View {
         Text("Aún no has añadido ninguna parada favorita")
             .font(.body)
@@ -160,7 +118,7 @@ extension BusValWidgetEntryView {
 struct BusValWidgetSmall_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemSmall))
@@ -170,7 +128,7 @@ struct BusValWidgetSmall_Previews: PreviewProvider {
 struct BusValWidgetMedium_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
@@ -180,7 +138,7 @@ struct BusValWidgetMedium_Previews: PreviewProvider {
 struct BusValWidgetLarge_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
@@ -190,7 +148,7 @@ struct BusValWidgetLarge_Previews: PreviewProvider {
 struct BusValWidgetExtraLarge_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetEntryView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
+        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
             .previewDevice("iPhone 13 Pro")
             .environment(\.managedObjectContext, context.container.viewContext)
             .previewContext(WidgetPreviewContext(family: .systemExtraLarge))

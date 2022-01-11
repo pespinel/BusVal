@@ -5,7 +5,6 @@
 //  Created by Pablo on 29/02/2021.
 //
 
-import Alamofire
 import SkeletonUI
 import SwiftUI
 import SWXMLHash
