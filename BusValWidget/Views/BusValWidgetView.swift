@@ -11,8 +11,6 @@ import WidgetKit
 
 // MARK: VIEW
 struct BusValWidgetView: View {
-    @Environment(\.widgetFamily) var family
-
     static var getFavoriteStopsFetchRequest: NSFetchRequest<FavoriteStop> {
         let request: NSFetchRequest<FavoriteStop> = FavoriteStop.fetchRequest()
         request.sortDescriptors = [
@@ -31,7 +29,7 @@ struct BusValWidgetView: View {
         if favoriteStops.isEmpty {
             emptyView
         } else {
-            switch family {
+            switch entry.family {
             case .systemSmall:
                 smallView.widgetURL(URL(string: "busval://www.auvasa.es/details"))
             case .systemMedium:
@@ -115,43 +113,23 @@ extension BusValWidgetView {
 
 // MARK: PREVIEWS
 #if DEBUG
-struct BusValWidgetSmall_Previews: PreviewProvider {
+struct BusValWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared
-        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewDevice("iPhone 13 Pro")
-            .environment(\.managedObjectContext, context.container.viewContext)
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
-    }
-}
-
-struct BusValWidgetMedium_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = PersistenceController.shared
-        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewDevice("iPhone 13 Pro")
-            .environment(\.managedObjectContext, context.container.viewContext)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-    }
-}
-
-struct BusValWidgetLarge_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = PersistenceController.shared
-        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewDevice("iPhone 13 Pro")
-            .environment(\.managedObjectContext, context.container.viewContext)
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
-    }
-}
-
-struct BusValWidgetExtraLarge_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = PersistenceController.shared
-        return BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent()))
-            .previewDevice("iPhone 13 Pro")
-            .environment(\.managedObjectContext, context.container.viewContext)
-            .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+        return Group {
+            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemSmall))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .environment(\.managedObjectContext, context.container.viewContext)
+            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .environment(\.managedObjectContext, context.container.viewContext)
+            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemLarge))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+                .environment(\.managedObjectContext, context.container.viewContext)
+            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemExtraLarge))
+                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+                .environment(\.managedObjectContext, context.container.viewContext)
+        }
     }
 }
 #endif
