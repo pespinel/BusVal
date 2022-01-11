@@ -160,10 +160,12 @@ extension CardView {
                         .scaleEffect(2, anchor: .center)
                         .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
                 } else {
-                    TextField("Número de tarjeta de auvasa", text: $inputText)
-                        .foregroundColor(colorScheme == .light ? .black : .white)
-                        .keyboardType(.decimalPad)
-                        .padding()
+                    Form {
+                        TextField("Número de tarjeta de auvasa", text: $inputText)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
+                            .keyboardType(.decimalPad)
+                            .padding()
+                    }
                     Spacer()
                     Text("GUARDAR")
                         .font(.headline)
@@ -178,8 +180,7 @@ extension CardView {
                             checkInputCard()
                         }
                 }
-            }
-            .navigationTitle("Añadir tarjeta")
+            }.navigationTitle("Añadir tarjeta")
         }.banner(data: self.$errorCardBanner, show: self.$showCardErrorBanner)
     }
 }
