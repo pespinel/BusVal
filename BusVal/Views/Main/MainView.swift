@@ -28,37 +28,17 @@ struct MainView: View {
     @ObservedObject var cardDetailsStore = CardDetailsStore()
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        UIKitTabView(selection: $selectedTab) {
             LinesView(linesStore: linesStore)
-                .tabItem {
-                    Text(Constants.Tabs.names[0])
-                    Image(uiImage: Constants.Tabs.icons[0])
-                }
-                .tag(0)
+                .tabItem(Constants.Tabs.names[0], image: Constants.Tabs.icons[0])
             NewsView(newsStore: newsStore)
-                .tabItem {
-                    Text(Constants.Tabs.names[1])
-                    Image(uiImage: Constants.Tabs.icons[1])
-                }
-                .tag(1)
+                .tabItem(Constants.Tabs.names[1], image: Constants.Tabs.icons[1])
             SearchView(linesStore: linesStore, stopsStore: stopsStore)
-                .tabItem {
-                    Text(Constants.Tabs.names[2])
-                    Image(uiImage: Constants.Tabs.icons[2])
-                }
-                .tag(2)
+                .tabItem(Constants.Tabs.names[2], image: Constants.Tabs.icons[2])
             CardView(cardDetailsStore: cardDetailsStore)
-                .tabItem {
-                    Text(Constants.Tabs.names[3])
-                    Image(uiImage: Constants.Tabs.icons[3])
-                }
-                .tag(3)
+                .tabItem(Constants.Tabs.names[3], image: Constants.Tabs.icons[3])
             FavoritesView()
-                .tabItem {
-                    Text(Constants.Tabs.names[4])
-                    Image(uiImage: Constants.Tabs.icons[4])
-                }
-                .tag(4)
+                .tabItem(Constants.Tabs.names[4], image: Constants.Tabs.icons[4])
         }
         .tint(.accentColor)
         .onChange(of: deeplink, perform: { _ in

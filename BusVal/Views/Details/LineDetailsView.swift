@@ -30,6 +30,7 @@ struct LineDetailsView: View {
         .onAppear {
             self.lineDetailsStore.fetch(line: line)
             self.lineScheduleStore.fetch(line: line)
+            registerScreen(view: "LineDetailsView")
         }
         .navigationBarTitle("Línea \(line)")
         .toolbar {
@@ -139,7 +140,7 @@ extension LineDetailsView {
                         .multiline(lines: 2, scales: [1: 0.5])
                         .animation(type: .pulse())
                 }
-        }.listStyle(InsetListStyle())
+        }.listStyle(PlainListStyle())
     }
 
     private var scheduleSheetToolbarButton: some View {

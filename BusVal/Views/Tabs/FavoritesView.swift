@@ -46,7 +46,11 @@ struct FavoritesView: View {
                     self.showDeeplink = true
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            registerScreen(view: "FavoritesView")
+        }
     }
 }
 
@@ -89,7 +93,7 @@ extension FavoritesView {
                 }.padding([.top, .bottom])
             }.onDelete(perform: delete)
         }
-        .listStyle(InsetListStyle())
+        .listStyle(PlainListStyle())
         .toolbar { EditButton() }
     }
 }

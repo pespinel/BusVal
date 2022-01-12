@@ -31,7 +31,10 @@ struct NewsView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear { self.newsStore.fetch() }
+        .onAppear {
+            self.newsStore.fetch()
+            registerScreen(view: "NewsView")
+        }
     }
 }
 
@@ -74,7 +77,7 @@ extension NewsView {
                         .animation(type: .pulse())
                 }
             }
-        }.listStyle(InsetListStyle())
+        }.listStyle(PlainListStyle())
     }
 
     private var emptyNewsList: some View {

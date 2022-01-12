@@ -18,6 +18,9 @@ struct NewDetailsView: View {
             newReader
         }
         .navigationBarTitle(Text(new.date), displayMode: .inline)
+        .onAppear {
+            registerScreen(view: "NewDetailsView")
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 refreshToolbarButton

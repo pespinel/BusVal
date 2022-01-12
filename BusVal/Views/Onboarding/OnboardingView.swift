@@ -33,6 +33,8 @@ struct OnboardingView: View {
             }
             .padding(.bottom, 50)
             .padding([.trailing, .leading], 30)
+        }.onAppear {
+            registerScreen(view: "OnboardingView")
         }
     }
 }

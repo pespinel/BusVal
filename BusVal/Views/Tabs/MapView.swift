@@ -37,7 +37,11 @@ struct MapView: View {
             }
             .navigationBarTitle("Mapa", displayMode: .large)
             .navigationBarHidden(true)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            registerScreen(view: "MapView")
+        }
         .task {
             if locationHelper.locationManager?.location == nil {
                 locationHelper.checkLocationStatus()

@@ -27,6 +27,9 @@ struct DeveloperSettingsView: View {
             NavigationView {
                 developerList
             }
+            .onAppear {
+                registerScreen(view: "DeveloperSettingsView")
+            }
             .banner(
                 data: .constant(BannerModifier.BannerData(
                     title: "Title",

@@ -28,8 +28,12 @@ struct CardView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 if cardID.isEmpty {
+                    Spacer()
                     emptyCardRow
-                    addCardButton
+                        .sheet(isPresented: $showAddCardSheet) {
+                            addCardSheet
+                        }
+                    Spacer()
                 } else {
                     balanceRow
                     movementsList
@@ -52,6 +56,7 @@ struct CardView: View {
             if !cardID.isEmpty {
                 cardDetailsStore.fetch(card: cardID)
             }
+            registerScreen(view: "CardView")
         }
     }
 }
@@ -59,32 +64,31 @@ struct CardView: View {
 // MARK: COMPONENTS
 extension CardView {
     private var emptyCardRow: some View {
-        HStack {
-            Spacer()
-            Text("Todavía no has añadido ninguna tarjeta")
+        VStack {
+            HStack {
+                Spacer()
+                Text("Todavía no has añadido ninguna tarjeta")
+                    .padding()
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Button {
+                    self.showAddCardSheet = true
+                } label: {
+                    Text("Añadir tarjeta")
+                    Image(systemSymbol: .creditcard)
+                        .font(.title2)
+                }
+                .sheet(isPresented: $showAddCardSheet) {
+                    addCardSheet
+                }
                 .padding()
-            Spacer()
-        }
-    }
-
-    private var addCardButton: some View {
-        HStack {
-            Spacer()
-            Button {
-                self.showAddCardSheet = true
-            } label: {
-                Text("Añadir tarjeta")
-                Image(systemSymbol: .creditcard)
-                    .font(.title2)
+                .foregroundColor(.white)
+                .background(Color.accentColor)
+                .cornerRadius(10)
+                Spacer()
             }
-            .sheet(isPresented: $showAddCardSheet) {
-                addCardSheet
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.accentColor)
-            .cornerRadius(10)
-            Spacer()
         }
     }
 
@@ -92,11 +96,10 @@ extension CardView {
         SkeletonList(with: cardDetailsStore.cardMovements, quantity: 10) { loading, movement in
             VStack(alignment: .leading) {
                 HStack {
-                    VStack {
-                        Image(systemSymbol: movement?.type == "7" ? .arrowDown : .arrowUp)
-                            .font(.title)
-                            .foregroundColor(movement?.type == "7" ? .red : .green)
-                    }
+                    Image(systemSymbol: movement?.type == "7" ? .arrowDown : .arrowUp)
+                        .padding(.trailing)
+                        .imageScale(.large)
+                        .foregroundColor(movement?.type == "7" ? .red : .green)
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemSymbol: .purchased)
@@ -119,12 +122,13 @@ extension CardView {
                     }
                 }
             }
+            .padding([.top, .bottom])
             .skeleton(with: loading)
             .shape(type: .rectangle)
             .appearance(type: .solid(color: .gray))
             .multiline(lines: 3, scales: [1: 0.5])
             .animation(type: .pulse())
-        }.listStyle(InsetListStyle())
+        }.listStyle(PlainListStyle())
     }
 
     private var balanceRow: some View {
@@ -162,12 +166,14 @@ extension CardView {
                 } else {
                     Form {
                         TextField("Número de tarjeta de auvasa", text: $inputText)
+                            .modifier(TextFieldClearButton(text: $inputText))
                             .foregroundColor(colorScheme == .light ? .black : .white)
                             .keyboardType(.decimalPad)
                             .padding()
                     }
                     Spacer()
                     Text("GUARDAR")
+                        .disabled(self.inputText.isEmpty)
                         .font(.headline)
                         .frame(height: 55)
                         .frame(width: UIScreen.main.bounds.width - 20)
@@ -188,7 +194,6 @@ extension CardView {
 // MARK: METHODS
 extension CardView {
     private func checkInputCard() {
-        if inputText.isEmpty { return }
         // Wait for async method fetch
         DispatchQueue.main.async {
             self.cardDetailsStore.loading = true
@@ -214,12 +219,7 @@ extension CardView {
 struct BusCardView_Previews: PreviewProvider {
     static var previews: some View {
         let cardDetailsStore = CardDetailsStore()
-        let cardID = "1100464058"
 
-        CardView(cardDetailsStore: cardDetailsStore).onAppear {
-            if !cardID.isEmpty {
-                cardDetailsStore.fetch(card: cardID)
-            }
-        }
+        CardView(cardDetailsStore: cardDetailsStore)
     }
 }

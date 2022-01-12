@@ -5,6 +5,7 @@
 //  Created by Pablo on 29/02/2021.
 //
 
+import Firebase
 import SkeletonUI
 import SwiftUI
 import SWXMLHash
@@ -31,7 +32,10 @@ struct LinesView: View {
             }.navigationBarTitle("Líneas", displayMode: .large)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onAppear { self.linesStore.fetch() }
+        .onAppear {
+            self.linesStore.fetch()
+            registerScreen(view: "LinesView")
+        }
     }
 }
 
@@ -65,7 +69,7 @@ extension LinesView {
                     .multiline(lines: 2, scales: [1: 0.5])
                     .animation(type: .pulse())
             }
-        }.listStyle(InsetListStyle())
+        }.listStyle(PlainListStyle())
     }
 
     private var picker: some View {

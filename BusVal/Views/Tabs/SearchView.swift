@@ -22,8 +22,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                UIKitSearchBar(text: $searchText)
-                    .edgesIgnoringSafeArea(.bottom)
+                UIKitSearchBar(text: $searchText).edgesIgnoringSafeArea(.bottom)
                 if selectedTab == 0 {
                     linesList
                 } else if selectedTab == 1 {
@@ -41,6 +40,7 @@ struct SearchView: View {
         .onAppear {
             self.linesStore.fetch()
             self.stopsStore.fetch()
+            registerScreen(view: "SearchView")
         }
     }
 }
@@ -49,7 +49,9 @@ struct SearchView: View {
 extension SearchView {
     private var linesList: some View {
         SkeletonList(with: linesStore.lines.filter {
-            self.searchText.isEmpty ? true : $0.friendlyName.contains(self.searchText)
+            self.searchText.isEmpty ? true : $0.friendlyName.lowercased().folding(
+                options: .diacriticInsensitive, locale: .current
+            ).contains(self.searchText.lowercased().folding(options: .diacriticInsensitive, locale: .current))
         }, quantity: 20) { loading, line in
             if let _line = line {
                 NavigationLink(destination: LineDetailsView(line: _line.line)) {
@@ -73,8 +75,7 @@ extension SearchView {
                     .animation(type: .pulse())
             }
         }
-        .listStyle(InsetListStyle())
-        .edgesIgnoringSafeArea(.top)
+        .listStyle(PlainListStyle())
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.endEditing()
         })
@@ -82,7 +83,9 @@ extension SearchView {
 
     private var stopsList: some View {
         SkeletonList(with: stopsStore.stops.filter {
-            self.searchText.isEmpty ? true : $0.friendlyName.contains(self.searchText)
+            self.searchText.isEmpty ? true : $0.friendlyName.lowercased().folding(
+                options: .diacriticInsensitive, locale: .current
+            ).contains(self.searchText.folding(options: .diacriticInsensitive, locale: .current).lowercased())
         }, quantity: 20) { loading, stop in
             if let _stop = stop {
                 NavigationLink(destination: StopDetailsView(stop: _stop.code)) {
@@ -106,8 +109,7 @@ extension SearchView {
                     .animation(type: .pulse())
             }
         }
-        .listStyle(InsetListStyle())
-        .edgesIgnoringSafeArea(.top)
+        .listStyle(PlainListStyle())
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.endEditing()
         })
