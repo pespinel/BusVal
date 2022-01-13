@@ -82,9 +82,6 @@ extension CardView {
                     Image(systemSymbol: .creditcard)
                         .font(.title2)
                 }
-                .sheet(isPresented: $showAddCardSheet) {
-                    addCardSheet
-                }
                 .padding()
                 .foregroundColor(.white)
                 .background(Color.accentColor)
