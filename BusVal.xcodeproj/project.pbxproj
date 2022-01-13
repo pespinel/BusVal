@@ -667,7 +667,6 @@
 				6E5C740727859F140077ADAA /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				6E94134E278CE8FD005D939C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				6E941369278D8C75005D939C /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				6E94137B278DE058005D939C /* XCRemoteSwiftPackageReference "GoogleMobileAds-SPM" */,
 			);
 			productRefGroup = 6E5C7341278597E20077ADAA /* Products */;
 			projectDirPath = "";
@@ -1176,14 +1175,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 7.1.2;
-			};
-		};
-		6E94137B278DE058005D939C /* XCRemoteSwiftPackageReference "GoogleMobileAds-SPM" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Koze/GoogleMobileAds-SPM";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
