@@ -186,7 +186,8 @@ struct Wrapper {
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"].element?.text == "1" {
+                    let journeys = xml["dataroot"]["Trayectos"].all
+                    for element in journeys where element["OrdenTrayecto"].element?.text == "1" {
                         data.append(
                             LineDetails(
                                 order: element["Orden"].element!.text,
@@ -219,7 +220,8 @@ struct Wrapper {
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"].element?.text == "2" {
+                    let journeys = xml["dataroot"]["Trayectos"].all
+                    for element in journeys where element["OrdenTrayecto"].element?.text == "2" {
                         data.append(LineDetails(
                             order: element["Orden"].element!.text,
                             line: element["Línea"].element!.text,

@@ -12,12 +12,20 @@ struct Provider: IntentTimelineProvider {
         Entry(date: Date(), configuration: ConfigurationIntent(), family: context.family)
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Entry) -> Void) {
+    func getSnapshot(
+        for configuration: ConfigurationIntent,
+        in context: Context,
+        completion: @escaping (Entry) -> Void
+    ) {
         let entry = Entry(date: Date(), configuration: configuration, family: context.family)
         completion(entry)
     }
 
-    func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
+    func getTimeline(
+        for configuration: ConfigurationIntent,
+        in context: Context,
+        completion: @escaping (Timeline<Entry>) -> Void
+    ) {
         let entry = Entry(date: Date(), configuration: configuration, family: context.family)
         let timeline = Timeline(entries: [entry], policy: .atEnd)
         completion(timeline)

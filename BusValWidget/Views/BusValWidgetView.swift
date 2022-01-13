@@ -57,7 +57,9 @@ extension BusValWidgetView {
         VStack(alignment: .leading, spacing: 1) {
             ForEach(0 ..< 4) { index in
                 if favoriteStops.indices.contains(index) {
-                    Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
+                    Link(
+                        destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!
+                    ) {
                         HStack {
                             Image(systemSymbol: .grid)
                                 .foregroundColor(Color("AccentColor"))
@@ -90,7 +92,9 @@ extension BusValWidgetView {
             Divider().padding(.bottom, 5)
             ForEach(0 ..< 9) { index in
                 if favoriteStops.indices.contains(index) {
-                    Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
+                    Link(
+                        destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!
+                    ) {
                         HStack {
                             Image(systemSymbol: .grid)
                                 .foregroundColor(Color("AccentColor"))
@@ -120,16 +124,40 @@ extension BusValWidgetView {
         static var previews: some View {
             let context = PersistenceController.shared
             return Group {
-                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemSmall))
+                BusValWidgetView(
+                    entry: Entry(
+                        date: Date(),
+                        configuration: ConfigurationIntent(),
+                        family: .systemSmall
+                    )
+                )
                     .previewContext(WidgetPreviewContext(family: .systemSmall))
                     .environment(\.managedObjectContext, context.container.viewContext)
-                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemMedium))
+                BusValWidgetView(
+                    entry: Entry(
+                        date: Date(),
+                        configuration: ConfigurationIntent(),
+                        family: .systemMedium
+                    )
+                )
                     .previewContext(WidgetPreviewContext(family: .systemMedium))
                     .environment(\.managedObjectContext, context.container.viewContext)
-                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemLarge))
+                BusValWidgetView(
+                    entry: Entry(
+                        date: Date(),
+                        configuration: ConfigurationIntent(),
+                        family: .systemLarge
+                    )
+                )
                     .previewContext(WidgetPreviewContext(family: .systemLarge))
                     .environment(\.managedObjectContext, context.container.viewContext)
-                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemExtraLarge))
+                BusValWidgetView(
+                    entry: Entry(
+                        date: Date(),
+                        configuration: ConfigurationIntent(),
+                        family: .systemExtraLarge
+                    )
+                )
                     .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
                     .environment(\.managedObjectContext, context.container.viewContext)
             }

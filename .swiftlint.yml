@@ -86,7 +86,7 @@ disabled_rules:
   - object_literal
   - identifier_name
 
-line_length: 140
+line_length: 120
 
 number_separator:
   minimum_length: 5
