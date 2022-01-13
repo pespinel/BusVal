@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E5C7344278597E20077ADAA /* BusValApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C7343278597E20077ADAA /* BusValApp.swift */; };
-		6E5C7348278597E30077ADAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E5C7347278597E30077ADAA /* Assets.xcassets */; };
-		6E5C734B278597E30077ADAA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E5C734A278597E30077ADAA /* Preview Assets.xcassets */; };
+		6E5C7348278597E30077ADAA /* main.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E5C7347278597E30077ADAA /* main.xcassets */; };
 		6E5C734D278597E30077ADAA /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C734C278597E30077ADAA /* PersistenceController.swift */; };
 		6E5C73772785989F0077ADAA /* BusVal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73742785989F0077ADAA /* BusVal.xcdatamodeld */; };
 		6E5C73782785989F0077ADAA /* FavoriteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73762785989F0077ADAA /* FavoriteStop.swift */; };
@@ -139,8 +138,7 @@
 /* Begin PBXFileReference section */
 		6E5C7340278597E20077ADAA /* BusVal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusVal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5C7343278597E20077ADAA /* BusValApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusValApp.swift; sourceTree = "<group>"; };
-		6E5C7347278597E30077ADAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6E5C734A278597E30077ADAA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6E5C7347278597E30077ADAA /* main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = main.xcassets; sourceTree = "<group>"; };
 		6E5C734C278597E30077ADAA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		6E5C73752785989F0077ADAA /* BusVal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BusVal.xcdatamodel; sourceTree = "<group>"; };
 		6E5C73762785989F0077ADAA /* FavoriteStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteStop.swift; sourceTree = "<group>"; };
@@ -280,7 +278,6 @@
 				6E5C7379278599CC0077ADAA /* Extensions */,
 				6E5C738A278599E30077ADAA /* Helpers */,
 				6E5C7391278599FA0077ADAA /* Models */,
-				6E5C7349278597E30077ADAA /* Preview Content */,
 				6E5C73BA27859A080077ADAA /* Services */,
 				6E5C73D827859A380077ADAA /* Settings */,
 				6E5C73BD27859A380077ADAA /* Views */,
@@ -288,18 +285,10 @@
 			path = BusVal;
 			sourceTree = "<group>";
 		};
-		6E5C7349278597E30077ADAA /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6E5C734A278597E30077ADAA /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
 		6E5C7372278598680077ADAA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				6E5C7347278597E30077ADAA /* Assets.xcassets */,
+				6E5C7347278597E30077ADAA /* main.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -686,8 +675,7 @@
 				6E86FA782786126A00F0E525 /* .swiftlint.yml in Resources */,
 				6E86FA762786124A00F0E525 /* .gitignore in Resources */,
 				6E8113612785F9D500EE5BB4 /* LaunchScreen.storyboard in Resources */,
-				6E5C734B278597E30077ADAA /* Preview Assets.xcassets in Resources */,
-				6E5C7348278597E30077ADAA /* Assets.xcassets in Resources */,
+				6E5C7348278597E30077ADAA /* main.xcassets in Resources */,
 				6E94134D278CE1F6005D939C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -969,7 +957,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Assets\"";
 				DEVELOPMENT_TEAM = L5LWYH3VQQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1003,7 +991,7 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements/BusVal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BusVal/Assets\"";
 				DEVELOPMENT_TEAM = L5LWYH3VQQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
