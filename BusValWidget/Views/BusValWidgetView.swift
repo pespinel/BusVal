@@ -131,8 +131,8 @@ extension BusValWidgetView {
                         family: .systemSmall
                     )
                 )
-                    .previewContext(WidgetPreviewContext(family: .systemSmall))
-                    .environment(\.managedObjectContext, context.container.viewContext)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+                .environment(\.managedObjectContext, context.container.viewContext)
                 BusValWidgetView(
                     entry: Entry(
                         date: Date(),
@@ -140,8 +140,8 @@ extension BusValWidgetView {
                         family: .systemMedium
                     )
                 )
-                    .previewContext(WidgetPreviewContext(family: .systemMedium))
-                    .environment(\.managedObjectContext, context.container.viewContext)
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .environment(\.managedObjectContext, context.container.viewContext)
                 BusValWidgetView(
                     entry: Entry(
                         date: Date(),
@@ -149,8 +149,8 @@ extension BusValWidgetView {
                         family: .systemLarge
                     )
                 )
-                    .previewContext(WidgetPreviewContext(family: .systemLarge))
-                    .environment(\.managedObjectContext, context.container.viewContext)
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+                .environment(\.managedObjectContext, context.container.viewContext)
                 BusValWidgetView(
                     entry: Entry(
                         date: Date(),
@@ -158,8 +158,8 @@ extension BusValWidgetView {
                         family: .systemExtraLarge
                     )
                 )
-                    .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
-                    .environment(\.managedObjectContext, context.container.viewContext)
+                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+                .environment(\.managedObjectContext, context.container.viewContext)
             }
         }
     }

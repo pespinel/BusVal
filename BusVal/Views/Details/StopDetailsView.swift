@@ -144,7 +144,7 @@ extension StopDetailsView {
                 maxWidth: UIScreen.main.bounds.width,
                 minHeight: UIScreen.main.bounds.height / 3,
                 maxHeight: UIScreen.main.bounds.height / 3,
-                alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/
+                alignment: Alignment.center
             )
         }
     }

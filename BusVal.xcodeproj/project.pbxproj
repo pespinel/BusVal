@@ -576,6 +576,7 @@
 				6E86FA932786F28900F0E525 /* Embed App Extensions */,
 				6E91550E2788B3C3001A3ECB /* Embed Watch Content */,
 				6E86FA792786129700F0E525 /* Swiftlint */,
+				6E8C32862790BE6400366D4C /* Swiftformat */,
 				6E941365278CEBDC005D939C /* Crashlytics */,
 			);
 			buildRules = (
@@ -708,6 +709,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		6E8C32862790BE6400366D4C /* Swiftformat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftformat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftformat >/dev/null; then\n  swiftformat . --lint --lenient --verbose --disable trailingCommas --swiftversion 5.5\nelse\n  echo \"warning: swifformat not installed\"\nfi\n";
 		};
 		6E941365278CEBDC005D939C /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
