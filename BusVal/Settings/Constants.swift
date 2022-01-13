@@ -12,7 +12,7 @@ import SFSafeSymbols
 import SwiftUI
 
 struct Constants {
-    struct Tabs {
+    enum Tabs {
         static let names = ["Líneas", "Noticias", "Buscar", "Tarjeta", "Favoritos"]
         static let icons = [
             UIImage(systemSymbol: .bus),
@@ -23,12 +23,12 @@ struct Constants {
         ]
     }
 
-    struct SearchTabs {
+    enum SearchTabs {
         static let names = ["Líneas", "Paradas"]
     }
 
-    struct Lines {
-        struct Segments {
+    enum Lines {
+        enum Segments {
             static let names = ["#", "B", "P", "M", "F", "C", "H", "U"]
             static let images = [
                 "number.square.fill",
@@ -43,11 +43,11 @@ struct Constants {
         }
     }
 
-    struct LineDetailsTabs {
+    enum LineDetailsTabs {
         static let names = ["Ida", "Vuelta"]
     }
 
-    struct Location {
+    enum Location {
         static let start = CLLocationCoordinate2D(latitude: 41.65518, longitude: -4.72372)
         static let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         static let zoomedSpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)

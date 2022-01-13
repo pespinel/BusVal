@@ -9,9 +9,44 @@ import SwiftUI
 import UIKit
 
 final class LineHelper {
-    fileprivate func getNumericLineColor(line: String, scheme: ColorScheme) -> UIColor {
+    // MARK: Internal
+
+    func getColor(line: String?, scheme: ColorScheme) -> UIColor {
+        if line != nil {
+            if line!.rangeOfCharacter(from: CharacterSet(charactersIn: "BCFHMPU")) != nil {
+                return getNumericLineColor(line: line!, scheme: scheme)
+            } else {
+                return getAlphabeticLineColor(line: line!)
+            }
+        }
+        return UIColor(Color.accentColor)
+    }
+
+    func getImage(line: String?) -> String {
+        if line != nil {
+            if line!.rangeOfCharacter(from: CharacterSet(charactersIn: "BCFHMPU")) != nil {
+                return "\(line![0].lowercased()).square.fill"
+            } else {
+                return "\(line!).square.fill"
+            }
+        }
+        return "o.square.fill"
+    }
+
+    func getDetails(tab: Int, store: LineDetailsStore) -> [LineDetails] {
+        if tab == 0 {
+            return store.lineDetails
+        } else {
+            return store.lineReturnDetails
+        }
+    }
+
+    // MARK: Private
+
+    private func getNumericLineColor(line: String, scheme: ColorScheme) -> UIColor {
         switch line {
-        case "C1", "C2":
+        case "C1",
+             "C2":
             return UIColor(red: 140 / 255, green: 140 / 255, blue: 132 / 255, alpha: 1.0)
         case "H":
             return UIColor(red: 228 / 255, green: 47 / 255, blue: 47 / 255, alpha: 1.0)
@@ -35,7 +70,7 @@ final class LineHelper {
     }
 
     // swiftlint:disable cyclomatic_complexity function_body_length
-    fileprivate func getAlphabeticLineColor(line: String) -> UIColor {
+    private func getAlphabeticLineColor(line: String) -> UIColor {
         switch line {
         case "1":
             return UIColor(red: 39 / 255, green: 174 / 255, blue: 96 / 255, alpha: 1.0)
@@ -79,36 +114,6 @@ final class LineHelper {
             return UIColor(red: 53 / 255, green: 113 / 255, blue: 89 / 255, alpha: 1.0)
         default:
             return UIColor(Color.accentColor)
-        }
-    }
-
-    func getColor(line: String?, scheme: ColorScheme) -> UIColor {
-        if line != nil {
-            if line!.rangeOfCharacter(from: CharacterSet(charactersIn: "BCFHMPU")) != nil {
-                return getNumericLineColor(line: line!, scheme: scheme)
-            } else {
-                return getAlphabeticLineColor(line: line!)
-            }
-        }
-        return UIColor(Color.accentColor)
-    }
-
-    func getImage(line: String?) -> String {
-        if line != nil {
-            if line!.rangeOfCharacter(from: CharacterSet(charactersIn: "BCFHMPU")) != nil {
-                return "\(line![0].lowercased()).square.fill"
-            } else {
-                return "\(line!).square.fill"
-            }
-        }
-        return "o.square.fill"
-    }
-
-    func getDetails(tab: Int, store: LineDetailsStore) -> [LineDetails] {
-        if tab == 0 {
-            return store.lineDetails
-        } else {
-            return store.lineReturnDetails
         }
     }
 }

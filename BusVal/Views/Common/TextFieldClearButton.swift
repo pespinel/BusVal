@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - TextFieldClearButton
+
 struct TextFieldClearButton: ViewModifier {
     @Binding var text: String
 

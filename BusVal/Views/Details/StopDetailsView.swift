@@ -13,30 +13,35 @@ import SwiftUI
 import SWXMLHash
 import WidgetKit
 
-// MARK: VIEWS
+// MARK: - StopDetailsView
+
 struct StopDetailsView: View {
+    // MARK: Lifecycle
+
+    init(stop: String) {
+        self.stop = stop
+        _result = FetchRequest<FavoriteStop>(
+            entity: FavoriteStop.entity(),
+            sortDescriptors: [],
+            predicate: NSPredicate(format: "code == %@", stop)
+        )
+    }
+
+    // MARK: Internal
+
     var stop: String
 
     @Environment(\.managedObjectContext) var context
 
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     @State var showBanner = false
-    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(title: "", detail: "", type: .success)
+    @State var bannerData: BannerModifier.BannerData = .init(title: "", detail: "", type: .success)
     @State var progress: Float = 0.0
 
     @ObservedObject var stopDetailsStore = StopDetailsStore()
     @ObservedObject var stopTimesStore = StopTimesStore()
 
     @FetchRequest var result: FetchedResults<FavoriteStop>
-
-    init(stop: String) {
-        self.stop = stop
-        self._result = FetchRequest<FavoriteStop>(
-            entity: FavoriteStop.entity(),
-            sortDescriptors: [],
-            predicate: NSPredicate(format: "code == %@", stop)
-        )
-    }
 
     var body: some View {
         VStack {
@@ -70,20 +75,26 @@ struct StopDetailsView: View {
     }
 }
 
+// MARK: - StopTimeView
+
 private struct StopTimeView: View {
-    var stopTime: String
-    var timeColor: Color
+    // MARK: Lifecycle
 
     init(stopTime: Int) {
         self.stopTime = String(stopTime)
         if stopTime >= 5 {
-            self.timeColor = Color.green
-        } else if stopTime < 5 && stopTime > 1 {
-            self.timeColor = Color.orange
+            timeColor = Color.green
+        } else if stopTime < 5, stopTime > 1 {
+            timeColor = Color.orange
         } else {
-            self.timeColor = Color.red
+            timeColor = Color.red
         }
     }
+
+    // MARK: Internal
+
+    var stopTime: String
+    var timeColor: Color
 
     var body: some View {
         ZStack {
@@ -96,7 +107,8 @@ private struct StopTimeView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension StopDetailsView {
     private var progressBar: some View {
         ProgressView(value: progress, total: 30)
@@ -120,9 +132,13 @@ extension StopDetailsView {
                 ),
                 span: Constants.Location.zoomedSpan
             )
-            Map(coordinateRegion: .constant(region), showsUserLocation: false,
-                userTrackingMode: .constant(.none), annotationItems: self.stopDetailsStore.checkpoints) { item in
-                    MapMarker(coordinate: item.coordinate)
+            Map(
+                coordinateRegion: .constant(region),
+                showsUserLocation: false,
+                userTrackingMode: .constant(.none),
+                annotationItems: self.stopDetailsStore.checkpoints
+            ) { item in
+                MapMarker(coordinate: item.coordinate)
             }.frame(
                 minWidth: UIScreen.main.bounds.width,
                 maxWidth: UIScreen.main.bounds.width,
@@ -183,38 +199,39 @@ extension StopDetailsView {
     }
 }
 
-// MARK: METHODS
+// MARK: Methods
+
 extension StopDetailsView {
     private func toggleFavorite() {
-        if self.result.isEmpty {
+        if result.isEmpty {
             do {
-                let newFavoriteStop = FavoriteStop(context: self.context)
+                let newFavoriteStop = FavoriteStop(context: context)
                 newFavoriteStop.stopID = UUID()
-                newFavoriteStop.code = self.stopDetailsStore.stopDetails.code.description
-                newFavoriteStop.name = self.stopDetailsStore.stopDetails.name.description
-                try self.context.save()
-                self.bannerData.title = "Guardada en favoritos"
-                self.bannerData.detail = "Puedes ver tus paradas favoritas desde la pestaña 'Favoritos'"
-                self.bannerData.type = .success
+                newFavoriteStop.code = stopDetailsStore.stopDetails.code.description
+                newFavoriteStop.name = stopDetailsStore.stopDetails.name.description
+                try context.save()
+                bannerData.title = "Guardada en favoritos"
+                bannerData.detail = "Puedes ver tus paradas favoritas desde la pestaña 'Favoritos'"
+                bannerData.type = .success
             } catch {
-                self.bannerData.title = "Error"
-                self.bannerData.detail = "No se ha podido guardar la parada en favoritos"
-                self.bannerData.type = .warning
+                bannerData.title = "Error"
+                bannerData.detail = "No se ha podido guardar la parada en favoritos"
+                bannerData.type = .warning
             }
         } else {
             do {
                 context.delete(result.first!)
-                try self.context.save()
-                self.bannerData.title = "Eliminada de favoritos"
-                self.bannerData.detail = "Puedes añadir otras paradas a favoritos desde la vista de detalles de parada"
-                self.bannerData.type = .error
+                try context.save()
+                bannerData.title = "Eliminada de favoritos"
+                bannerData.detail = "Puedes añadir otras paradas a favoritos desde la vista de detalles de parada"
+                bannerData.type = .error
             } catch {
-                self.bannerData.title = "Error"
-                self.bannerData.detail = "No se ha podido guardar la parada en favoritos"
-                self.bannerData.type = .warning
+                bannerData.title = "Error"
+                bannerData.detail = "No se ha podido guardar la parada en favoritos"
+                bannerData.type = .warning
             }
         }
-        self.showBanner = true
+        showBanner = true
         WidgetCenter.shared.reloadAllTimelines()
     }
 
@@ -228,22 +245,22 @@ extension StopDetailsView {
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct StopDetailsView_Previews: PreviewProvider {
-    static let stop = "1181"
+// MARK: - StopDetailsView_Previews
 
-    static var previews: some View {
-        return
+#if DEBUG
+    struct StopDetailsView_Previews: PreviewProvider {
+        static let stop = "1181"
+
+        static var previews: some View {
             TabView {
                 NavigationView {
                     StopDetailsView(stop: stop)
-                    .navigationBarTitle("Parada \(stop)", displayMode: .inline)
+                        .navigationBarTitle("Parada \(stop)", displayMode: .inline)
                 }.tabItem {
                     Image(systemSymbol: .listDash)
                     Text("Preview")
                 }
             }
+        }
     }
-}
 #endif

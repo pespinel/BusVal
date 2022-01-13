@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - ProgressBarView
+
 struct ProgressBarView: View {
     @Binding var value: Float
 
@@ -18,7 +20,7 @@ struct ProgressBarView: View {
                     .foregroundColor(Color(UIColor.systemTeal))
                 Rectangle()
                     .frame(
-                        width: min(CGFloat(self.value) * geometry.size.width, geometry.size.width),
+                        width: min(Double(self.value) * geometry.size.width, geometry.size.width),
                         height: geometry.size.height
                     )
                     .foregroundColor(Color(UIColor.systemBlue))
@@ -29,14 +31,14 @@ struct ProgressBarView: View {
 }
 
 #if DEBUG
-struct ProgressBarView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            VStack {
-                ProgressBarView(value: .constant(80))
-                    .frame(width: UIScreen.main.bounds.width, height: 20)
-            }.padding()
+    struct ProgressBarView_Previews: PreviewProvider {
+        static var previews: some View {
+            NavigationView {
+                VStack {
+                    ProgressBarView(value: .constant(80))
+                        .frame(width: UIScreen.main.bounds.width, height: 20)
+                }.padding()
+            }
         }
     }
-}
 #endif

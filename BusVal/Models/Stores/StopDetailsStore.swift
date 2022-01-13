@@ -16,11 +16,11 @@ class StopDetailsStore: ObservableObject {
     @Published var error: Wrapper.APIError?
 
     func fetch(stop: String) {
-        if self.checkpoints.isEmpty {
+        if checkpoints.isEmpty {
             DispatchQueue.main.async {
                 Wrapper.getStopDetails(stop) { stopDetailsResponse in
                     switch stopDetailsResponse {
-                    case .success(let data):
+                    case let .success(data):
                         self.stopDetails = data
                         self.checkpoints.append(
                             Checkpoint(
@@ -33,7 +33,7 @@ class StopDetailsStore: ObservableObject {
                                 stop: nil
                             )
                         )
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-// MARK: VIEWS
+// MARK: - OnboardingView
+
 struct OnboardingView: View {
     @AppStorage("firstRun") var firstRun = true
 
@@ -38,6 +39,8 @@ struct OnboardingView: View {
         }
     }
 }
+
+// MARK: - OnboardingSectionView
 
 struct OnboardingSectionView: View {
     var title: String
@@ -76,10 +79,11 @@ struct OnboardingSectionView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: - Components
+
 extension OnboardingView {
     private var bottomButton: some View {
-        Text(state == 0 ? "EMPEZAR" : state == 4 ? "ENTENDIDO" : "SIGUIENTE" )
+        Text(state == 0 ? "EMPEZAR" : state == 4 ? "ENTENDIDO" : "SIGUIENTE")
             .font(.headline)
             .frame(height: 55)
             .frame(maxWidth: .infinity)
@@ -129,7 +133,8 @@ extension OnboardingView {
     }
 }
 
-// MARK: METHODS
+// MARK: - Methods
+
 extension OnboardingView {
     func nextSlide() {
         if state == 4 {
@@ -141,7 +146,8 @@ extension OnboardingView {
     }
 }
 
-// MARK: PREVIEW
+// MARK: - OnboardingView_Previews
+
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {

@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-// MARK: VIEW
+// MARK: - DeviceShakeView
+
 struct DeviceShakeView: ViewModifier {
     let action: () -> Void
 

@@ -8,7 +8,8 @@
 import Firebase
 import SwiftUI
 
-// MARK: VIEW
+// MARK: - DeveloperSettingsView
+
 struct DeveloperSettingsView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) var dismiss
@@ -58,7 +59,8 @@ struct DeveloperSettingsView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension DeveloperSettingsView {
     private var developerList: some View {
         List {
@@ -81,8 +83,8 @@ extension DeveloperSettingsView {
                 logOutRow
             }
         }.listStyle(.automatic)
-        .navigationBarTitle("Developer Settings")
-        .edgesIgnoringSafeArea(.bottom)
+            .navigationBarTitle("Developer Settings")
+            .edgesIgnoringSafeArea(.bottom)
     }
 
     private var activityIndicator: some View {
@@ -230,11 +232,12 @@ extension DeveloperSettingsView {
     }
 }
 
-// MARK: METHODS
+// MARK: Methods
+
 extension DeveloperSettingsView {
     init() {
         let predicate = NSPredicate(value: true)
-        self._result = FetchRequest(
+        _result = FetchRequest(
             entity: FavoriteStop.entity(),
             sortDescriptors: [],
             predicate: predicate
@@ -248,7 +251,8 @@ extension DeveloperSettingsView {
     }
 }
 
-// MARK: PREVIEW
+// MARK: - DeveloperSettingsView_Previews
+
 struct DeveloperSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         DeveloperSettingsView()

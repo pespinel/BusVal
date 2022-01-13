@@ -24,14 +24,14 @@ final class Checkpoint: NSObject, MKAnnotation, Identifiable {
         self.subtitle = subtitle
         self.coordinate = coordinate
         self.stop = stop
-        self.stopCode = nil
+        stopCode = nil
     }
 
     init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D, stopCode: String?) {
         self.title = title
         self.subtitle = subtitle
         self.coordinate = coordinate
-        self.stop = nil
+        stop = nil
         self.stopCode = stopCode
     }
 }

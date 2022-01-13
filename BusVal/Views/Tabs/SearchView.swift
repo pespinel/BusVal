@@ -9,7 +9,8 @@ import SkeletonUI
 import SwiftUI
 import SWXMLHash
 
-// MARK: VIEWS
+// MARK: - SearchView
+
 struct SearchView: View {
     @Environment(\.colorScheme) var colorScheme
 
@@ -26,7 +27,7 @@ struct SearchView: View {
                 if selectedTab == 0 {
                     linesList
                 } else if selectedTab == 1 {
-                   stopsList
+                    stopsList
                 }
             }
             .navigationBarTitle("Buscar", displayMode: .large)
@@ -45,7 +46,8 @@ struct SearchView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension SearchView {
     private var linesList: some View {
         SkeletonList(with: linesStore.lines.filter {
@@ -117,25 +119,26 @@ extension SearchView {
 
     private var toolBarPicker: some View {
         Picker(selection: $selectedTab, label: Text("Línea/Parada")) {
-            ForEach(0..<Constants.SearchTabs.names.count) { index in
+            ForEach(0 ..< Constants.SearchTabs.names.count) { index in
                 Text(Constants.SearchTabs.names[index])
             }
         }.pickerStyle(SegmentedPickerStyle())
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        let linesStore = LinesStore()
-        let stopsStore = StopsStore()
+// MARK: - SearchView_Previews
 
-        SearchView(linesStore: linesStore, stopsStore: stopsStore)
-            .onAppear {
-                linesStore.fetch()
-                stopsStore.fetch()
-            }
+#if DEBUG
+    struct SearchView_Previews: PreviewProvider {
+        static var previews: some View {
+            let linesStore = LinesStore()
+            let stopsStore = StopsStore()
+
+            SearchView(linesStore: linesStore, stopsStore: stopsStore)
+                .onAppear {
+                    linesStore.fetch()
+                    stopsStore.fetch()
+                }
+        }
     }
-}
 #endif

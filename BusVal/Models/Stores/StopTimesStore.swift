@@ -13,14 +13,16 @@ class StopTimesStore: ObservableObject {
     @Published var error: Wrapper.APIError?
 
     func fetch(stop: String, force: Bool = false) {
-        if force { self.stopTimes.removeAll() }
-        if self.stopTimes.isEmpty {
+        if force {
+            stopTimes.removeAll()
+        }
+        if stopTimes.isEmpty {
             DispatchQueue.main.async {
                 Wrapper.getStopTime(stop) { stopTimeResponse in
                     switch stopTimeResponse {
-                    case .success(let data):
+                    case let .success(data):
                         self.stopTimes = data
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }

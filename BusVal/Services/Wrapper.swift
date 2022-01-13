@@ -13,11 +13,12 @@ import SWXMLHash
 
 // swiftlint:disable type_body_length
 struct Wrapper {
-    static let shared = Wrapper()
-
     // MARK: ENDPOINTS
+
     enum Endpoint {
         case stops, stop, stopTime, lines, line, schedule, news, newImage, card
+
+        // MARK: Internal
 
         func getPath(id: String? = nil) -> String {
             switch self {
@@ -44,6 +45,7 @@ struct Wrapper {
     }
 
     // MARK: RESPONSES
+
     enum CardDetailsReponse {
         case success(CardBalance, [CardMovement])
         case failure(APIError)
@@ -86,16 +88,19 @@ struct Wrapper {
 
     enum APIError: Error {
         case noResponse
-        case invalidParam (error: Error)
+        case invalidParam(error: Error)
         case xmlDecodingError(error: Error)
         case networkError(error: Error)
     }
 
+    static let shared = Wrapper()
+
     // MARK: NEWS METHODS
+
     static func getNews(_ completion: @escaping (NewsResponse) -> Void) {
         var news = [New]()
-        AF.request(self.Endpoint.news.getPath())
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.news.getPath())
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case .success:
@@ -123,10 +128,11 @@ struct Wrapper {
     }
 
     // MARK: LINES METHODS
+
     static func getLines(_ completion: @escaping (LinesResponse) -> Void) {
         var data = [Line]()
-        AF.request(self.Endpoint.lines.getPath())
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.lines.getPath())
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["text/xml"])
             .response { response in
                 switch response.result {
@@ -173,15 +179,14 @@ struct Wrapper {
 
     static func getLineDetails(_ line: String?, completion: @escaping (LineDetailsResponse) -> Void) {
         var data = [LineDetails]()
-        AF.request(self.Endpoint.line.getPath(id: line))
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.line.getPath(id: line))
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["text/xml"])
             .response { response in
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"]
-                        .element?.text == "1" {
+                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"].element?.text == "1" {
                         data.append(
                             LineDetails(
                                 order: element["Orden"].element!.text,
@@ -207,15 +212,14 @@ struct Wrapper {
 
     static func getLineReturnDetails(_ line: String?, completion: @escaping (LineDetailsResponse) -> Void) {
         var data = [LineDetails]()
-        AF.request(self.Endpoint.line.getPath(id: line))
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.line.getPath(id: line))
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["text/xml"])
             .response { response in
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"]
-                        .element?.text == "2" {
+                    for element in xml["dataroot"]["Trayectos"].all where element["OrdenTrayecto"].element?.text == "2" {
                         data.append(LineDetails(
                             order: element["Orden"].element!.text,
                             line: element["Línea"].element!.text,
@@ -227,7 +231,8 @@ struct Wrapper {
                             code: element["Codigo"].element!.text,
                             coordinateX: Double(element["cX"].element!.text)!,
                             coordinateY: Double(element["cY"].element!.text)!,
-                            pos: element["Pos"].element!.text)
+                            pos: element["Pos"].element!.text
+                        )
                         )
                     }
                     completion(LineDetailsResponse.success(data))
@@ -238,10 +243,11 @@ struct Wrapper {
     }
 
     // MARK: STOPS METHODS
+
     static func getStops(_ completion: @escaping (StopsResponse) -> Void) {
         var data = [Stop]()
-        AF.request(self.Endpoint.stops.getPath())
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.stops.getPath())
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["text/xml"])
             .response { response in
                 switch response.result {
@@ -268,8 +274,8 @@ struct Wrapper {
     }
 
     static func getStopDetails(_ id: String?, completion: @escaping (StopDetailsResponse) -> Void) {
-        AF.request(self.Endpoint.stop.getPath(id: id))
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.stop.getPath(id: id))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case .success:
@@ -294,8 +300,8 @@ struct Wrapper {
 
     static func getStopTime(_ id: String?, completion: @escaping (StopTimeResponse) -> Void) {
         var data: [[String]] = []
-        AF.request(self.Endpoint.stopTime.getPath(id: id))
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.stopTime.getPath(id: id))
+            .validate(statusCode: 200 ..< 300)
             .response { response in
                 switch response.result {
                 case .success:
@@ -328,9 +334,10 @@ struct Wrapper {
     }
 
     // MARK: SCHEDULES METHODS
+
     static func getLineSchedule(_ line: String?, completion: @escaping (LineSchedulesResponse) -> Void) {
-        AF.request(self.Endpoint.schedule.getPath())
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.schedule.getPath())
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["text/xml"])
             .response { response in
                 switch response.result {
@@ -353,10 +360,11 @@ struct Wrapper {
     }
 
     // MARK: CARD METHODS
+
     static func getCardDetails(_ card: String?, completion: @escaping (CardDetailsReponse) -> Void) {
         var movements = [CardMovement]()
-        AF.request(self.Endpoint.card.getPath(id: card))
-            .validate(statusCode: 200..<300)
+        AF.request(Endpoint.card.getPath(id: card))
+            .validate(statusCode: 200 ..< 300)
             .validate(contentType: ["application/rss+xml"])
             .response { response in
                 switch response.result {

@@ -9,6 +9,7 @@ import SwiftUI
 import WidgetKit
 
 // MARK: MAIN
+
 @main
 struct BusValWidget: Widget {
     let kind: String = "BusValWidget"

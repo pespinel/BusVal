@@ -24,6 +24,6 @@ extension View {
     }
 
     func onShake(perform action: @escaping () -> Void) -> some View {
-        self.modifier(DeviceShakeView(action: action))
+        modifier(DeviceShakeView(action: action))
     }
 }

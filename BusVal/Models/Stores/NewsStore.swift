@@ -12,13 +12,13 @@ class NewsStore: ObservableObject {
     @Published var error: Wrapper.APIError?
 
     func fetch() {
-        if self.news.isEmpty {
+        if news.isEmpty {
             DispatchQueue.main.async {
                 Wrapper.getNews { newsResponse in
                     switch newsResponse {
-                    case .success(let news):
+                    case let .success(news):
                         self.news = news
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }
@@ -27,6 +27,6 @@ class NewsStore: ObservableObject {
     }
 
     func clean() {
-        self.news.removeAll()
+        news.removeAll()
     }
 }

@@ -10,10 +10,11 @@ import SFSafeSymbols
 import SwiftUI
 import UIKit
 
-// MARK: VIEW
+// MARK: - MainView
+
 struct MainView: View {
     #if DEBUG
-    @State var showDeveloperSettings = false
+        @State var showDeveloperSettings = false
     #endif
 
     @AppStorage("cardID") var cardID = ""
@@ -56,25 +57,26 @@ struct MainView: View {
             }
         }
         #if DEBUG
-        .sheet(isPresented: $showDeveloperSettings) {
-            DeveloperSettingsView()
-        }
-        .onShake {
-            showDeveloperSettings.toggle()
-        }
+            .sheet(isPresented: $showDeveloperSettings) {
+                DeveloperSettingsView()
+            }
+            .onShake {
+                showDeveloperSettings.toggle()
+            }
         #endif
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        let persistenceController = PersistenceController.shared
+// MARK: - MainView_Previews
 
-        MainView()
-            .previewDevice("iPhone 13 Pro")
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+#if DEBUG
+    struct MainView_Previews: PreviewProvider {
+        static var previews: some View {
+            let persistenceController = PersistenceController.shared
+
+            MainView()
+                .previewDevice("iPhone 13 Pro")
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
     }
-}
 #endif

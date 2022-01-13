@@ -9,13 +9,13 @@ import UIKit
 
 extension UIColor {
     static func random() -> UIColor {
-        func random() -> CGFloat { return .random(in: 0...1) }
+        func random() -> Double { .random(in: 0 ... 1) }
 
         return UIColor(red: random(), green: random(), blue: random(), alpha: 1.0)
     }
 
     static func randomPalette() -> UIColor {
-        func random() -> Int { return .random(in: 0..<paletteColors.count) }
+        func random() -> Int { .random(in: 0 ..< paletteColors.count) }
 
         let paletteColors = [
             UIColor(red: 64 / 255, green: 64 / 255, blue: 122 / 255, alpha: 1.0),

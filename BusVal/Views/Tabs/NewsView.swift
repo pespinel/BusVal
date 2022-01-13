@@ -10,7 +10,8 @@ import SkeletonUI
 import SwiftUI
 import SWXMLHash
 
-// MARK: VIEWS
+// MARK: - NewsView
+
 struct NewsView: View {
     @ObservedObject var newsStore: NewsStore
 
@@ -38,7 +39,8 @@ struct NewsView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension NewsView {
     private var newsList: some View {
         SkeletonList(with: newsStore.news, quantity: 5) { loading, new in
@@ -100,21 +102,22 @@ extension NewsView {
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct NewsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let newsStore = NewsStore()
+// MARK: - NewsView_Previews
 
-        TabView {
-            NewsView(newsStore: newsStore)
-                .tabItem {
-                    Image(systemSymbol: .listDash)
-                    Text("Preview")
-                }
-        }.onAppear {
-            newsStore.fetch()
+#if DEBUG
+    struct NewsView_Previews: PreviewProvider {
+        static var previews: some View {
+            let newsStore = NewsStore()
+
+            TabView {
+                NewsView(newsStore: newsStore)
+                    .tabItem {
+                        Image(systemSymbol: .listDash)
+                        Text("Preview")
+                    }
+            }.onAppear {
+                newsStore.fetch()
+            }
         }
     }
-}
 #endif

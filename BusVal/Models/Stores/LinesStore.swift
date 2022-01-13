@@ -12,13 +12,13 @@ class LinesStore: ObservableObject {
     @Published var error: Wrapper.APIError?
 
     func fetch() {
-        if self.lines.isEmpty {
+        if lines.isEmpty {
             DispatchQueue.main.async {
                 Wrapper.getLines { linesResponse in
                     switch linesResponse {
-                    case .success(let data):
+                    case let .success(data):
                         self.lines = data
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }

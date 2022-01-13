@@ -87,6 +87,7 @@
 		6E86FA9F278708AA00F0E525 /* BannerModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73D127859A380077ADAA /* BannerModifier.swift */; };
 		6E86FAA2278708D100F0E525 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73D927859A380077ADAA /* Constants.swift */; };
 		6E86FAAE2787094100F0E525 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C737E278599CC0077ADAA /* String.swift */; };
+		6E8C3280279044BD00366D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C327F279044BD00366D4C /* AppDelegate.swift */; };
 		6E9154E227884D41001A3ECB /* Deeplinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9154E127884D41001A3ECB /* Deeplinker.swift */; };
 		6E94134D278CE1F6005D939C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E94134C278CE1F6005D939C /* GoogleService-Info.plist */; };
 		6E941354278CE8FD005D939C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6E941353278CE8FD005D939C /* FirebaseAuth */; };
@@ -207,6 +208,7 @@
 		6E86FA99278705DE00F0E525 /* BusVal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusVal.entitlements; sourceTree = "<group>"; };
 		6E86FA9A278705ED00F0E525 /* BusValWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BusValWidgetExtension.entitlements; sourceTree = "<group>"; };
 		6E86FA9B2787062200F0E525 /* CustomPersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPersistenceController.swift; sourceTree = "<group>"; };
+		6E8C327F279044BD00366D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E9154E127884D41001A3ECB /* Deeplinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplinker.swift; sourceTree = "<group>"; };
 		6E94134C278CE1F6005D939C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E941370278DD6C2005D939C /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
@@ -479,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				6E5C7343278597E20077ADAA /* BusValApp.swift */,
+				6E8C327F279044BD00366D4C /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -581,9 +584,9 @@
 				6E5C733C278597E20077ADAA /* Sources */,
 				6E5C733D278597E20077ADAA /* Frameworks */,
 				6E5C733E278597E20077ADAA /* Resources */,
-				6E86FA792786129700F0E525 /* ShellScript */,
 				6E86FA932786F28900F0E525 /* Embed App Extensions */,
 				6E91550E2788B3C3001A3ECB /* Embed Watch Content */,
+				6E86FA792786129700F0E525 /* Swiftlint */,
 				6E941365278CEBDC005D939C /* Crashlytics */,
 			);
 			buildRules = (
@@ -701,7 +704,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6E86FA792786129700F0E525 /* ShellScript */ = {
+		6E86FA792786129700F0E525 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -710,6 +713,7 @@
 			);
 			inputPaths = (
 			);
+			name = Swiftlint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -761,6 +765,7 @@
 				6E5C73DE27859A380077ADAA /* CardView.swift in Sources */,
 				6E5C7384278599CC0077ADAA /* UIColor.swift in Sources */,
 				6E5C73DB27859A380077ADAA /* FavoritesView.swift in Sources */,
+				6E8C3280279044BD00366D4C /* AppDelegate.swift in Sources */,
 				6E5C73E827859A380077ADAA /* ProgressBarView.swift in Sources */,
 				6E5C73E727859A380077ADAA /* CornerCardView.swift in Sources */,
 				6E5C7344278597E20077ADAA /* BusValApp.swift in Sources */,

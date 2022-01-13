@@ -9,7 +9,8 @@ import SFSafeSymbols
 import SwiftUI
 import WidgetKit
 
-// MARK: VIEW
+// MARK: - BusValWidgetView
+
 struct BusValWidgetView: View {
     static var getFavoriteStopsFetchRequest: NSFetchRequest<FavoriteStop> {
         let request: NSFetchRequest<FavoriteStop> = FavoriteStop.fetchRequest()
@@ -17,7 +18,7 @@ struct BusValWidgetView: View {
             NSSortDescriptor(key: "code", ascending: true, selector: #selector(NSString.localizedStandardCompare))
         ]
         return request
-   }
+    }
 
     @FetchRequest(fetchRequest: getFavoriteStopsFetchRequest)
     var favoriteStops: FetchedResults<FavoriteStop>
@@ -34,7 +35,7 @@ struct BusValWidgetView: View {
                 smallView.widgetURL(URL(string: "busval://www.auvasa.es/details"))
             case .systemMedium:
                 smallView
-            case .systemLarge, .systemExtraLarge:
+            case .systemExtraLarge, .systemLarge:
                 largeView
             @unknown default:
                 fatalError("Widget family is not supported")
@@ -43,7 +44,8 @@ struct BusValWidgetView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension BusValWidgetView {
     private var emptyView: some View {
         Text("Aún no has añadido ninguna parada favorita")
@@ -53,7 +55,7 @@ extension BusValWidgetView {
 
     private var smallView: some View {
         VStack(alignment: .leading, spacing: 1) {
-            ForEach(0..<4) { index in
+            ForEach(0 ..< 4) { index in
                 if favoriteStops.indices.contains(index) {
                     Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
                         HStack {
@@ -86,7 +88,7 @@ extension BusValWidgetView {
                     .font(.headline)
             }.padding([.top, .bottom], 10)
             Divider().padding(.bottom, 5)
-            ForEach(0..<9) { index in
+            ForEach(0 ..< 9) { index in
                 if favoriteStops.indices.contains(index) {
                     Link(destination: URL(string: "busval://www.auvasa.es/details?code=\(favoriteStops[index].code)")!) {
                         HStack {
@@ -111,25 +113,26 @@ extension BusValWidgetView {
     }
 }
 
-// MARK: PREVIEWS
+// MARK: - BusValWidgetView_Previews
+
 #if DEBUG
-struct BusValWidgetView_Previews: PreviewProvider {
-    static var previews: some View {
-        let context = PersistenceController.shared
-        return Group {
-            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemSmall))
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-                .environment(\.managedObjectContext, context.container.viewContext)
-            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemMedium))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
-                .environment(\.managedObjectContext, context.container.viewContext)
-            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemLarge))
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
-                .environment(\.managedObjectContext, context.container.viewContext)
-            BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemExtraLarge))
-                .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
-                .environment(\.managedObjectContext, context.container.viewContext)
+    struct BusValWidgetView_Previews: PreviewProvider {
+        static var previews: some View {
+            let context = PersistenceController.shared
+            return Group {
+                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemSmall))
+                    .previewContext(WidgetPreviewContext(family: .systemSmall))
+                    .environment(\.managedObjectContext, context.container.viewContext)
+                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemMedium))
+                    .previewContext(WidgetPreviewContext(family: .systemMedium))
+                    .environment(\.managedObjectContext, context.container.viewContext)
+                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemLarge))
+                    .previewContext(WidgetPreviewContext(family: .systemLarge))
+                    .environment(\.managedObjectContext, context.container.viewContext)
+                BusValWidgetView(entry: Entry(date: Date(), configuration: ConfigurationIntent(), family: .systemExtraLarge))
+                    .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+                    .environment(\.managedObjectContext, context.container.viewContext)
+            }
         }
     }
-}
 #endif

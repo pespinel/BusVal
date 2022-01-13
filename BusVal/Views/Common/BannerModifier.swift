@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-// MARK: VIEW
-struct BannerModifier: ViewModifier {
-    @Binding var data: BannerData
-    @Binding var show: Bool
+// MARK: - BannerModifier
 
+struct BannerModifier: ViewModifier {
     struct BannerData {
         var title: String
         var detail: String
@@ -23,6 +21,8 @@ struct BannerModifier: ViewModifier {
         case warning
         case success
         case error
+
+        // MARK: Internal
 
         var tintColor: Color {
             switch self {
@@ -37,6 +37,9 @@ struct BannerModifier: ViewModifier {
             }
         }
     }
+
+    @Binding var data: BannerData
+    @Binding var show: Bool
 
     func body(content: Content) -> some View {
         ZStack {
@@ -77,46 +80,48 @@ struct BannerModifier: ViewModifier {
     }
 }
 
-// MARK: METHODS
+// MARK: Methods
+
 extension View {
     func banner(data: Binding<BannerModifier.BannerData>, show: Binding<Bool>) -> some View {
-        self.modifier(BannerModifier(data: data, show: show))
+        modifier(BannerModifier(data: data, show: show))
     }
 }
 
-// MARK: PREVIEW
+// MARK: - Banner_Previews
+
 #if DEBUG
-struct Banner_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Text("Info")
-                .banner(
-                    data: .constant(BannerModifier.BannerData(
-                        title: "Title",
-                        detail: "Detail",
-                        type: BannerModifier.BannerType.info
-                    )),
-                    show: .constant(true)
-                )
-            Text("Warning")
-                .banner(
-                    data: .constant(BannerModifier.BannerData(
-                        title: "Title",
-                        detail: "Detail",
-                        type: BannerModifier.BannerType.warning
-                    )),
-                    show: .constant(true)
-                )
-            Text("Error")
-                .banner(
-                    data: .constant(BannerModifier.BannerData(
-                        title: "Title",
-                        detail: "Detail",
-                        type: BannerModifier.BannerType.error
-                    )),
-                    show: .constant(true)
-                )
+    struct Banner_Previews: PreviewProvider {
+        static var previews: some View {
+            VStack {
+                Text("Info")
+                    .banner(
+                        data: .constant(BannerModifier.BannerData(
+                            title: "Title",
+                            detail: "Detail",
+                            type: BannerModifier.BannerType.info
+                        )),
+                        show: .constant(true)
+                    )
+                Text("Warning")
+                    .banner(
+                        data: .constant(BannerModifier.BannerData(
+                            title: "Title",
+                            detail: "Detail",
+                            type: BannerModifier.BannerType.warning
+                        )),
+                        show: .constant(true)
+                    )
+                Text("Error")
+                    .banner(
+                        data: .constant(BannerModifier.BannerData(
+                            title: "Title",
+                            detail: "Detail",
+                            type: BannerModifier.BannerType.error
+                        )),
+                        show: .constant(true)
+                    )
+            }
         }
     }
-}
 #endif

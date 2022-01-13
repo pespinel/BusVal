@@ -15,9 +15,9 @@ class LineScheduleStore: ObservableObject {
         DispatchQueue.main.async {
             Wrapper.getLineSchedule(line) { lineScheduleResponse in
                 switch lineScheduleResponse {
-                case .success(let data):
+                case let .success(data):
                     self.lineSchedule = data
-                case .failure(let error):
+                case let .failure(error):
                     self.error = error
                 }
             }

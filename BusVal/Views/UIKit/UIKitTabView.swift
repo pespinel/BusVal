@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct UIKitTabView: View {
-    private let viewControllers: [UIHostingController<AnyView>]
-    private let tabBarItems: [TabBarItem]
+// MARK: - UIKitTabView
 
-    @Binding private var selectedIndex: Int
+struct UIKitTabView: View {
+    // MARK: Lifecycle
 
     init(selection: Binding<Int>, @TabBuilder _ content: () -> [TabBarItem]) {
         _selectedIndex = selection
@@ -24,6 +23,8 @@ struct UIKitTabView: View {
         }
     }
 
+    // MARK: Internal
+
     var body: some View {
         TabBarController(
             controllers: viewControllers,
@@ -31,13 +32,18 @@ struct UIKitTabView: View {
             selectedIndex: $selectedIndex
         ).ignoresSafeArea()
     }
+
+    // MARK: Private
+
+    private let viewControllers: [UIHostingController<AnyView>]
+    private let tabBarItems: [TabBarItem]
+
+    @Binding private var selectedIndex: Int
 }
 
 extension UIKitTabView {
     struct TabBarItem {
-        let view: AnyView
-        let barItem: UITabBarItem
-        let badgeValue: String?
+        // MARK: Lifecycle
 
         init<T>(
             title: String,
@@ -46,10 +52,16 @@ extension UIKitTabView {
             badgeValue: String? = nil,
             content: T
         ) where T: View {
-            self.view = AnyView(content)
-            self.barItem = UITabBarItem(title: title, image: image, selectedImage: selectedImage)
+            view = AnyView(content)
+            barItem = UITabBarItem(title: title, image: image, selectedImage: selectedImage)
             self.badgeValue = badgeValue
         }
+
+        // MARK: Internal
+
+        let view: AnyView
+        let barItem: UITabBarItem
+        let badgeValue: String?
     }
 
     struct TabBarController: UIViewControllerRepresentable {
@@ -67,7 +79,7 @@ extension UIKitTabView {
             return tabBarController
         }
 
-        func updateUIViewController(_ tabBarController: UITabBarController, context: Context) {
+        func updateUIViewController(_ tabBarController: UITabBarController, context _: Context) {
             tabBarController.selectedIndex = selectedIndex
 
             tabBarItems.forEach { tab in
@@ -77,7 +89,9 @@ extension UIKitTabView {
                     return
                 }
 
-                guard controllers.indices.contains(index) else { return }
+                guard controllers.indices.contains(index) else {
+                    return
+                }
                 controllers[index].tabBarItem.badgeValue = tab.badgeValue
             }
         }
@@ -88,12 +102,13 @@ extension UIKitTabView {
     }
 
     class TabBarCoordinator: NSObject, UITabBarControllerDelegate {
-        private static let inlineTitleRect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        private var parent: TabBarController
+        // MARK: Lifecycle
 
         init(_ tabBarController: TabBarController) {
-            self.parent = tabBarController
+            parent = tabBarController
         }
+
+        // MARK: Internal
 
         func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
             guard parent.selectedIndex == tabBarController.selectedIndex else {
@@ -101,7 +116,7 @@ extension UIKitTabView {
                 return
             }
 
-            guard let navigationController = navigationController(in: viewController)  else {
+            guard let navigationController = navigationController(in: viewController) else {
                 scrollToTop(in: viewController)
                 return
             }
@@ -114,19 +129,23 @@ extension UIKitTabView {
             scrollToTop(in: navigationController, selectedIndex: tabBarController.selectedIndex)
         }
 
-        func scrollToTop(in navigationController: UINavigationController, selectedIndex: Int) {
+        func scrollToTop(in navigationController: UINavigationController, selectedIndex _: Int) {
             let views = navigationController.viewControllers // swiftlint:disable:this flatmap_over_map_reduce
                 .map(\.view.subviews)
                 .reduce([], +) // swiftlint:disable:this reduce_into
 
-            guard let scrollView = scrollView(in: views) else { return }
+            guard let scrollView = scrollView(in: views) else {
+                return
+            }
             scrollView.scrollRectToVisible(Self.inlineTitleRect, animated: true)
         }
 
         func scrollToTop(in viewController: UIViewController) {
             let views = viewController.view.subviews
 
-            guard let scrollView = scrollView(in: views) else { return }
+            guard let scrollView = scrollView(in: views) else {
+                return
+            }
             scrollView.scrollRectToVisible(Self.inlineTitleRect, animated: true)
         }
 
@@ -163,11 +182,19 @@ extension UIKitTabView {
 
             return controller
         }
+
+        // MARK: Private
+
+        private static let inlineTitleRect = CGRect(x: 0, y: 0, width: 1, height: 1)
+
+        private var parent: TabBarController
     }
 }
 
+// MARK: - TabBuilder
+
 @resultBuilder
-struct TabBuilder {
+enum TabBuilder {
     static func buildBlock(_ elements: UIKitTabView.TabBarItem...) -> [UIKitTabView.TabBarItem] {
         elements
     }

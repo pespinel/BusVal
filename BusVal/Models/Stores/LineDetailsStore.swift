@@ -14,12 +14,12 @@ class LineDetailsStore: ObservableObject {
     @Published var checkpoints = [Checkpoint]()
     @Published var error: Wrapper.APIError?
 
-    func fetch(line: String, rebound: Bool = false) {
-        if self.lineDetails.isEmpty {
+    func fetch(line: String, rebound _: Bool = false) {
+        if lineDetails.isEmpty {
             DispatchQueue.main.async {
                 Wrapper.getLineReturnDetails(line) { lineReturnDetailsResponse in
                     switch lineReturnDetailsResponse {
-                    case .success(let data):
+                    case let .success(data):
                         self.lineReturnDetails = data
                         for item in data {
                             self.checkpoints.append(
@@ -34,13 +34,13 @@ class LineDetailsStore: ObservableObject {
                                 )
                             )
                         }
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }
                 Wrapper.getLineDetails(line) { lineDetailsResponse in
                     switch lineDetailsResponse {
-                    case .success(let data):
+                    case let .success(data):
                         self.lineDetails = data
                         for item in data {
                             self.checkpoints.append(
@@ -55,7 +55,7 @@ class LineDetailsStore: ObservableObject {
                                 )
                             )
                         }
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                     }
                 }

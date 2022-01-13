@@ -7,8 +7,23 @@
 
 import CoreData
 
-// swiftlint:disable unused_closure_parameter
 struct PersistenceController {
+    // MARK: Lifecycle
+
+    init(inMemory: Bool = false) {
+        container = CustomPersistenceController(name: "BusVal")
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+        }
+        container.loadPersistentStores(completionHandler: { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+    }
+
+    // MARK: Internal
+
     static let shared = PersistenceController()
 
     static var preview: PersistenceController = {
@@ -27,16 +42,4 @@ struct PersistenceController {
     }()
 
     let container: CustomPersistenceController
-
-    init(inMemory: Bool = false) {
-        container = CustomPersistenceController(name: "BusVal")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
-        container.loadPersistentStores(completionHandler: { storeDescription, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-    }
 }

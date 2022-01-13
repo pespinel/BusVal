@@ -10,14 +10,14 @@ import SkeletonUI
 import SwiftUI
 import SWXMLHash
 
-// MARK: VIEWS
+// MARK: - LinesView
+
 struct LinesView: View {
+    // MARK: Internal
+
     @Environment(\.colorScheme) var colorScheme
 
     @ObservedObject var linesStore: LinesStore
-
-    @State var selectedSegment = 0
-    @State private var selectedIndex: Int = 0
 
     var body: some View {
         NavigationView {
@@ -37,9 +37,15 @@ struct LinesView: View {
             registerScreen(view: "LinesView")
         }
     }
+
+    // MARK: Private
+
+    @State private var selectedSegment = 0
+    @State private var selectedIndex: Int = 0
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension LinesView {
     private var linesList: some View {
         SkeletonList(
@@ -74,7 +80,7 @@ extension LinesView {
 
     private var picker: some View {
         Picker(selection: $selectedSegment, label: Text("Tipo de línea")) {
-            ForEach(0..<Constants.Lines.Segments.images.count) { index in
+            ForEach(0 ..< Constants.Lines.Segments.images.count) { index in
                 Image(systemName: Constants.Lines.Segments.images[index])
             }
         }
@@ -83,16 +89,17 @@ extension LinesView {
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct LinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let linesStore = LinesStore()
+// MARK: - LinesView_Previews
 
-        LinesView(linesStore: linesStore)
-            .onAppear {
-                linesStore.fetch()
-            }
+#if DEBUG
+    struct LinesView_Previews: PreviewProvider {
+        static var previews: some View {
+            let linesStore = LinesStore()
+
+            LinesView(linesStore: linesStore)
+                .onAppear {
+                    linesStore.fetch()
+                }
+        }
     }
-}
 #endif

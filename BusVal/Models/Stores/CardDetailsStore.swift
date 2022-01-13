@@ -14,7 +14,7 @@ class CardDetailsStore: ObservableObject {
     @Published var loading = false
 
     func fetch(card: String) {
-        if self.cardMovements.isEmpty || self.cardBalance.balance.isEmpty {
+        if cardMovements.isEmpty || cardBalance.balance.isEmpty {
             DispatchQueue.main.async {
                 self.loading = true
                 Wrapper.getCardDetails(card) { cardDetailsReponse in
@@ -27,7 +27,7 @@ class CardDetailsStore: ObservableObject {
                             self.cardMovements = movements
                         }
                         self.loading = false
-                    case .failure(let error):
+                    case let .failure(error):
                         self.error = error
                         self.loading = false
                     }
@@ -37,7 +37,7 @@ class CardDetailsStore: ObservableObject {
     }
 
     func clean() {
-        self.cardMovements.removeAll()
-        self.cardBalance = CardBalance(balance: "")
+        cardMovements.removeAll()
+        cardBalance = CardBalance(balance: "")
     }
 }

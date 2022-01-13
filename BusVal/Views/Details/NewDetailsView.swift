@@ -9,7 +9,8 @@ import Alamofire
 import Kingfisher
 import SwiftUI
 
-// MARK: VIEW
+// MARK: - NewDetailsView
+
 struct NewDetailsView: View {
     let new: New
 
@@ -29,7 +30,8 @@ struct NewDetailsView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension NewDetailsView {
     private var newReader: some View {
         VStack(alignment: .leading) {
@@ -64,35 +66,36 @@ extension NewDetailsView {
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct NewDetailsView_Previews: PreviewProvider {
-    static let new = New(
-        title: "New title ()",
-        date: "01/01/2021",
-        description: """
-        Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        <BR>Very long New description Very long New description
-        """,
-        link: "https://google.com",
-        image: "imagen10"
-    )
+// MARK: - NewDetailsView_Previews
 
-    static var previews: some View {
-        NavigationView {
-            NewDetailsView(new: new)
+#if DEBUG
+    struct NewDetailsView_Previews: PreviewProvider {
+        static let new = New(
+            title: "New title ()",
+            date: "01/01/2021",
+            description: """
+            Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            <BR>Very long New description Very long New description
+            """,
+            link: "https://google.com",
+            image: "imagen10"
+        )
+
+        static var previews: some View {
+            NavigationView {
+                NewDetailsView(new: new)
+            }
         }
     }
-}
 #endif

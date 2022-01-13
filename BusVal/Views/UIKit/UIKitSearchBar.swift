@@ -8,22 +8,26 @@
 import SwiftUI
 
 struct UIKitSearchBar: UIViewRepresentable {
-    @Binding var text: String
-
     class Coordinator: NSObject, UISearchBarDelegate {
-        @Binding var text: String
+        // MARK: Lifecycle
 
         init(text: Binding<String>) {
             _text = text
         }
 
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // MARK: Internal
+
+        @Binding var text: String
+
+        func searchBar(_: UISearchBar, textDidChange searchText: String) {
             text = searchText
         }
     }
 
+    @Binding var text: String
+
     func makeCoordinator() -> UIKitSearchBar.Coordinator {
-        return Coordinator(text: $text)
+        Coordinator(text: $text)
     }
 
     func makeUIView(context: UIViewRepresentableContext<UIKitSearchBar>) -> UISearchBar {
@@ -33,7 +37,7 @@ struct UIKitSearchBar: UIViewRepresentable {
         return searchBar
     }
 
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<UIKitSearchBar>) {
+    func updateUIView(_ uiView: UISearchBar, context _: UIViewRepresentableContext<UIKitSearchBar>) {
         uiView.text = text
     }
 }

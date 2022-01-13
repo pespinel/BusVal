@@ -10,17 +10,8 @@ import SwiftUI
 import UIKit
 import WidgetKit
 
-// MARK: UIKIT LIFECYCLE
-class AppDelegate: NSObject, UIApplicationDelegate {
-    // swiftlint:disable line_length
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [ UIApplication.LaunchOptionsKey: Any ]? = nil) -> Bool {
-        FirebaseApp.configure()
-        Thread.sleep(forTimeInterval: 1)
-        return true
-    }
-}
+// MARK: - BusValApp
 
-// MARK: APP
 @main
 struct BusValApp: App {
     @AppStorage("firstRun") var firstRun = true
@@ -43,7 +34,9 @@ struct BusValApp: App {
                         .environment(\.deeplink, deeplink)
                         .onOpenURL { url in
                             let deeplinker = Deeplinker()
-                            guard let deeplink = deeplinker.manage(url: url) else { return }
+                            guard let deeplink = deeplinker.manage(url: url) else {
+                                return
+                            }
                             self.deeplink = deeplink
                             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
                                 self.deeplink = nil
@@ -55,7 +48,9 @@ struct BusValApp: App {
             .onAppear {
                 WidgetCenter.shared.reloadAllTimelines()
                 Auth.auth().signInAnonymously { authResult, _ in
-                    guard let user = authResult?.user else { return }
+                    guard let user = authResult?.user else {
+                        return
+                    }
                     self.uid = user.uid
                 }
             }
@@ -64,6 +59,7 @@ struct BusValApp: App {
 }
 
 // MARK: COMPONENTS
+
 extension BusValApp {
     private var gradient: some View {
         RadialGradient(

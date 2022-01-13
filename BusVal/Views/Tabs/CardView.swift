@@ -8,7 +8,8 @@
 import SkeletonUI
 import SwiftUI
 
-// MARK: VIEW
+// MARK: - CardView
+
 struct CardView: View {
     @AppStorage("cardID") var cardID = ""
 
@@ -20,7 +21,7 @@ struct CardView: View {
     @State var inputText = ""
     @State var loading = false
     @State var showCardErrorBanner = false
-    @State var errorCardBanner: BannerModifier.BannerData = BannerModifier.BannerData(
+    @State var errorCardBanner: BannerModifier.BannerData = .init(
         title: "Tarjeta inválida", detail: "Error al guardar la tarjeta", type: .error
     )
 
@@ -61,7 +62,8 @@ struct CardView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension CardView {
     private var emptyCardRow: some View {
         VStack {
@@ -191,7 +193,8 @@ extension CardView {
     }
 }
 
-// MARK: METHODS
+// MARK: Methods
+
 extension CardView {
     private func checkInputCard() {
         // Wait for async method fetch
@@ -205,7 +208,7 @@ extension CardView {
                     self.cardDetailsStore.loading = false
                     cardID = inputText
                     self.showAddCardSheet = false
-                case .failure(let error):
+                case let .failure(error):
                     self.cardDetailsStore.error = error
                     self.cardDetailsStore.loading = false
                     self.showCardErrorBanner = true
@@ -215,8 +218,9 @@ extension CardView {
     }
 }
 
-// MARK: PREVIEW
-struct BusCardView_Previews: PreviewProvider {
+// MARK: - CardView_Previews
+
+struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         let cardDetailsStore = CardDetailsStore()
 

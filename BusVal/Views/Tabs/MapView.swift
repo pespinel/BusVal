@@ -10,20 +10,25 @@ import MapKit
 import SFSafeSymbols
 import SwiftUI
 
-// MARK: VIEWS
-struct MapView: View {
-    @ObservedObject var stopsStore: StopsStore
+// MARK: - MapView
 
-    @StateObject private var locationHelper = LocationHelper()
+struct MapView: View {
+    // MARK: Internal
+
+    @ObservedObject var stopsStore: StopsStore
 
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottom) {
-                Map(coordinateRegion: .constant(locationHelper.region), showsUserLocation: true,
-                    userTrackingMode: .constant(.follow), annotationItems: stopsStore.checkpoints) { item in
-                        MapAnnotation(coordinate: item.coordinate) {
-                            MapAnnotationView(code: item.stop!.code)
-                        }
+                Map(
+                    coordinateRegion: .constant(locationHelper.region),
+                    showsUserLocation: true,
+                    userTrackingMode: .constant(.follow),
+                    annotationItems: stopsStore.checkpoints
+                ) { item in
+                    MapAnnotation(coordinate: item.coordinate) {
+                        MapAnnotationView(code: item.stop!.code)
+                    }
                 }.edgesIgnoringSafeArea(.all)
                 HStack {
                     Spacer()
@@ -48,26 +53,32 @@ struct MapView: View {
             }
         }
     }
+
+    // MARK: Private
+
+    @StateObject private var locationHelper = LocationHelper()
 }
 
-#if DEBUG
-struct BusStopsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let locationHelper = LocationHelper()
-        let stopsStore = StopsStore()
+// MARK: - MapView_Previews
 
-        TabView {
-            MapView(stopsStore: stopsStore)
-                .tabItem {
-                    Image(systemSymbol: .listDash)
-                    Text("Preview")
+#if DEBUG
+    struct MapView_Previews: PreviewProvider {
+        static var previews: some View {
+            let locationHelper = LocationHelper()
+            let stopsStore = StopsStore()
+
+            TabView {
+                MapView(stopsStore: stopsStore)
+                    .tabItem {
+                        Image(systemSymbol: .listDash)
+                        Text("Preview")
+                    }
+            }.onAppear {
+                stopsStore.fetch()
+                if locationHelper.locationManager?.location == nil {
+                    locationHelper.checkLocationStatus()
                 }
-        }.onAppear {
-            stopsStore.fetch()
-            if locationHelper.locationManager?.location == nil {
-                locationHelper.checkLocationStatus()
             }
         }
     }
-}
 #endif

@@ -9,7 +9,8 @@ import SkeletonUI
 import SwiftUI
 import WidgetKit
 
-// MARK: VIEWS
+// MARK: - FavoritesView
+
 struct FavoritesView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.deeplink) var deeplink
@@ -35,7 +36,9 @@ struct FavoritesView: View {
             }
             .navigationBarTitle("Favoritos", displayMode: .large)
             .onChange(of: deeplink) { _ in
-                guard let deeplink = deeplink else { return }
+                guard let deeplink = deeplink else {
+                    return
+                }
                 let strCode = String(describing: deeplink)
                     .replacingOccurrences(of: "details(code: \"", with: "")
                     .replacingOccurrences(of: "\")", with: "")
@@ -54,7 +57,8 @@ struct FavoritesView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension FavoritesView {
     private var emptyFavorites: some View {
         VStack {
@@ -98,7 +102,8 @@ extension FavoritesView {
     }
 }
 
-// MARK: METHODS
+// MARK: Methods
+
 extension FavoritesView {
     private func delete(offsets: IndexSet) {
         do {
@@ -113,19 +118,20 @@ extension FavoritesView {
     }
 }
 
-// MARK: PREVIEW
+// MARK: - FavoritesView_Previews
+
 #if DEBUG
-struct FavoritesView_Previews: PreviewProvider {
-    static var previews: some View {
-        let persistenceController = PersistenceController.shared
-        TabView {
-            FavoritesView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .tabItem {
-                    Image(systemSymbol: .listDash)
-                    Text("Preview")
-                }
+    struct FavoritesView_Previews: PreviewProvider {
+        static var previews: some View {
+            let persistenceController = PersistenceController.shared
+            TabView {
+                FavoritesView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .tabItem {
+                        Image(systemSymbol: .listDash)
+                        Text("Preview")
+                    }
+            }
         }
     }
-}
 #endif

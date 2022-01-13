@@ -11,7 +11,8 @@ import SkeletonUI
 import SwiftUI
 import SWXMLHash
 
-// MARK: VIEWS
+// MARK: - LineDetailsView
+
 struct LineDetailsView: View {
     var line: String
 
@@ -42,14 +43,15 @@ struct LineDetailsView: View {
     }
 }
 
-// MARK: COMPONENTS
+// MARK: Components
+
 extension LineDetailsView {
     private var picker: some View {
         Picker(selection: $selectedTab, label: Text("Ida/Vuelta")) {
             if self.lineDetailsStore.lineReturnDetails.isEmpty {
                 Text("Trayecto").disabled(true)
             } else {
-                ForEach(0..<Constants.LineDetailsTabs.names.count) { index in
+                ForEach(0 ..< Constants.LineDetailsTabs.names.count) { index in
                     Text(Constants.LineDetailsTabs.names[index])
                 }
             }
@@ -86,12 +88,17 @@ extension LineDetailsView {
                 center: Constants.Location.start,
                 span: Constants.Location.span
             )
-            Map(coordinateRegion: .constant(region), showsUserLocation: false,
-                userTrackingMode: .constant(.none), annotationItems: lineDetailsStore.checkpoints) { item in
+            Map(
+                coordinateRegion: .constant(region),
+                showsUserLocation: false,
+                userTrackingMode: .constant(.none),
+                annotationItems: lineDetailsStore.checkpoints
+            ) { item in
                 MapAnnotation(coordinate: item.coordinate) {
                     MapAnnotationView(code: item.stopCode!)
                 }
-            }.edgesIgnoringSafeArea(.bottom)
+            }
+            .edgesIgnoringSafeArea(.bottom)
             .navigationBarTitle("Paradas", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -110,36 +117,37 @@ extension LineDetailsView {
                 tab: self.selectedTab,
                 store: self.lineDetailsStore
             ),
-            quantity: 20) { loading, lineDetails in
-                if let _lineDetails = lineDetails {
-                    NavigationLink(destination: StopDetailsView(stop: _lineDetails.code)) {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Image(systemSymbol: .grid)
-                                    .padding(.trailing)
-                                    .foregroundColor(Color.accentColor)
-                                Text("Parada \(_lineDetails.code)")
-                                    .bold()
-                                    .multilineTextAlignment(.leading)
-                            }
-                            HStack {
-                                Image(systemSymbol: .safariFill)
-                                    .foregroundColor(Color.accentColor)
-                                    .padding(.trailing)
-                                Text(_lineDetails.stop).multilineTextAlignment(.leading)
-                            }
+            quantity: 20
+        ) { loading, lineDetails in
+            if let _lineDetails = lineDetails {
+                NavigationLink(destination: StopDetailsView(stop: _lineDetails.code)) {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image(systemSymbol: .grid)
+                                .padding(.trailing)
+                                .foregroundColor(Color.accentColor)
+                            Text("Parada \(_lineDetails.code)")
+                                .bold()
+                                .multilineTextAlignment(.leading)
                         }
-                        .padding([.top, .bottom])
-                        .buttonStyle(PlainButtonStyle())
+                        HStack {
+                            Image(systemSymbol: .safariFill)
+                                .foregroundColor(Color.accentColor)
+                                .padding(.trailing)
+                            Text(_lineDetails.stop).multilineTextAlignment(.leading)
+                        }
                     }
-                } else {
-                    Spacer()
-                        .skeleton(with: loading)
-                        .shape(type: .rectangle)
-                        .appearance(type: .solid(color: .gray))
-                        .multiline(lines: 2, scales: [1: 0.5])
-                        .animation(type: .pulse())
+                    .padding([.top, .bottom])
+                    .buttonStyle(PlainButtonStyle())
                 }
+            } else {
+                Spacer()
+                    .skeleton(with: loading)
+                    .shape(type: .rectangle)
+                    .appearance(type: .solid(color: .gray))
+                    .multiline(lines: 2, scales: [1: 0.5])
+                    .animation(type: .pulse())
+            }
         }.listStyle(PlainListStyle())
     }
 
@@ -164,15 +172,16 @@ extension LineDetailsView {
     }
 }
 
-// MARK: PREVIEW
-#if DEBUG
-struct LineDetailsView_Previews: PreviewProvider {
-    static let line = "1"
+// MARK: - LineDetailsView_Previews
 
-    static var previews: some View {
-        NavigationView {
-            LineDetailsView(line: line)
+#if DEBUG
+    struct LineDetailsView_Previews: PreviewProvider {
+        static let line = "1"
+
+        static var previews: some View {
+            NavigationView {
+                LineDetailsView(line: line)
+            }
         }
     }
-}
 #endif

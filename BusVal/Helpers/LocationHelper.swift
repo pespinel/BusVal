@@ -8,6 +8,8 @@
 import MapKit
 
 final class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegate {
+    // MARK: Internal
+
     var locationManager: CLLocationManager?
 
     @Published var region = MKCoordinateRegion(center: Constants.Location.start, span: Constants.Location.zoomedSpan)
@@ -24,14 +26,22 @@ final class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegat
     }
 
     func updateLocation() {
-        self.checkLocationStatus()
+        checkLocationStatus()
     }
 
+    func locationManagerDidChangeAuthorization(_: CLLocationManager) {
+        checkLocationAuthorization()
+    }
+
+    // MARK: Private
+
     private func checkLocationAuthorization() {
-        guard let locationManager = locationManager else { return }
+        guard let locationManager = locationManager else {
+            return
+        }
 
         switch locationManager.authorizationStatus {
-        case .notDetermined, .restricted, .denied:
+        case .denied, .notDetermined, .restricted:
             locationManager.requestWhenInUseAuthorization()
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(
@@ -42,8 +52,4 @@ final class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegat
             break
         }
     }
-
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
-    }
- }
+}

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - CornerCardView
+
 struct CornerCardView: View {
     var title: String
     var description: String
@@ -38,10 +40,12 @@ struct CornerCardView: View {
     }
 }
 
+// MARK: - CardView_Previews
+
 #if DEBUG
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CornerCardView(title: "Title", description: "Description")
+    struct CornerCardView_Previews: PreviewProvider {
+        static var previews: some View {
+            CornerCardView(title: "Title", description: "Description")
+        }
     }
-}
 #endif
