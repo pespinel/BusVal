@@ -11,6 +11,9 @@ import SwiftUI
 // MARK: - DeveloperSettingsView
 
 struct DeveloperSettingsView: View {
+    @AppStorage("firstRun") var firstRun = false
+    @AppStorage("cardID") var cardID = ""
+
     @Environment(\.managedObjectContext) var context
     @Environment(\.dismiss) var dismiss
 
@@ -65,7 +68,9 @@ extension DeveloperSettingsView {
     private var developerList: some View {
         List {
             Section(header: Text("App Storage")) {
-                storageRow
+                cleanAllRow
+                onboardingRow
+                cleanCardRow
             }
             Section(header: Text("Banner")) {
                 infoRow
@@ -93,9 +98,9 @@ extension DeveloperSettingsView {
             .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
     }
 
-    private var storageRow: some View {
+    private var cleanAllRow: some View {
         HStack {
-            Text("Clean")
+            Text("Clean all")
                 .font(.body)
                 .padding()
             Spacer()
@@ -110,6 +115,32 @@ extension DeveloperSettingsView {
                     .padding()
             }
         }
+    }
+
+    private var onboardingRow: some View {
+        HStack {
+            Text("First run?")
+                .font(.body)
+                .padding()
+            Spacer()
+            Toggle(isOn: $firstRun) {}.accessibility(identifier: "onboardingToggle")
+        }
+    }
+
+    private var cleanCardRow: some View {
+        HStack {
+            Text("Clean card storage")
+                .font(.body)
+                .padding()
+            Spacer()
+            Button {
+                UserDefaults.standard.removeObject(forKey: "cardID")
+            } label: {
+                Image(systemSymbol: .trashFill)
+                    .font(.title2)
+                    .padding()
+            }
+        }.accessibility(identifier: "cleanCardStorage")
     }
 
     private var infoRow: some View {
@@ -185,15 +216,20 @@ extension DeveloperSettingsView {
             Spacer()
             Button {
                 if !self.result.isEmpty {
-                    for object in self.result {
-                        self.context.delete(object)
+                    do {
+                        for object in self.result {
+                            self.context.delete(object)
+                        }
+                        try context.save()
+                    } catch {
+                        print("Error cleaning core data")
                     }
                 }
             } label: {
                 Image(systemSymbol: .trashFill)
                     .font(.title2)
                     .padding()
-            }
+            }.accessibility(identifier: "cleanCoreData")
         }
     }
 

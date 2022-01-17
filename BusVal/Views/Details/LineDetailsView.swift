@@ -156,7 +156,9 @@ extension LineDetailsView {
             self.showScheduleSheet = true
         } label: {
             Image(systemSymbol: .calendar)
-        }.sheet(isPresented: $showScheduleSheet) {
+        }
+        .accessibility(identifier: "scheduleButton")
+        .sheet(isPresented: $showScheduleSheet) {
             scheduleSheet
         }
     }
@@ -166,7 +168,9 @@ extension LineDetailsView {
             self.showMapSheet = true
         } label: {
             Image(systemSymbol: .map)
-        }.sheet(isPresented: $showMapSheet) {
+        }
+        .accessibility(identifier: "mapButton")
+        .sheet(isPresented: $showMapSheet) {
             mapSheet
         }
     }

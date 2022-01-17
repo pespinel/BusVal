@@ -29,17 +29,35 @@ struct LinesView: View {
                 } else {
                     Text("Error al obtener las líneas")
                 }
-            }.navigationBarTitle("Líneas", displayMode: .large)
+            }
+            .navigationBarTitle("Líneas", displayMode: .large)
+            #if XCTEST
+                .toolbar {
+                    ToolbarItem {
+                        Image(systemSymbol: .rosette)
+                            .accessibility(identifier: "developerSettingsButton")
+                            .onTapGesture {
+                                showDeveloperSettings.toggle()
+                            }
+                    }
+                }
+            #endif
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             self.linesStore.fetch()
             registerScreen(view: "LinesView")
         }
+        #if DEBUG
+            .sheet(isPresented: $showDeveloperSettings) {
+                DeveloperSettingsView()
+            }
+        #endif
     }
 
     // MARK: Private
 
+    @State private var showDeveloperSettings = false
     @State private var selectedSegment = 0
     @State private var selectedIndex: Int = 0
 }
@@ -75,7 +93,9 @@ extension LinesView {
                     .multiline(lines: 2, scales: [1: 0.5])
                     .animation(type: .pulse())
             }
-        }.listStyle(PlainListStyle())
+        }
+        .listStyle(PlainListStyle())
+        .accessibility(identifier: "linesList")
     }
 
     private var picker: some View {
@@ -95,11 +115,15 @@ extension LinesView {
     struct LinesView_Previews: PreviewProvider {
         static var previews: some View {
             let linesStore = LinesStore()
-
-            LinesView(linesStore: linesStore)
-                .onAppear {
-                    linesStore.fetch()
-                }
+            TabView {
+                LinesView(linesStore: linesStore)
+                    .onAppear {
+                        linesStore.fetch()
+                    }.tabItem {
+                        Text("Líneas")
+                        Image(systemSymbol: .bus)
+                    }
+            }
         }
     }
 #endif

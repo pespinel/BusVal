@@ -1,6 +1,7 @@
 included:
   - BusVal
   - BusValWidget
+  - BusValUITests
 
 excluded:
   - .swiftlint.yml

@@ -47,7 +47,7 @@ struct CardView: View {
                         self.cardDetailsStore.clean()
                         self.cardDetailsStore.fetch(card: cardID)
                     } label: {
-                        Image(systemSymbol: .arrowClockwise)
+                        Image(systemSymbol: .arrowClockwise).accessibility(identifier: "refreshCardView")
                     }.disabled(cardID.isEmpty)
                 }
             }
@@ -82,6 +82,7 @@ extension CardView {
                     Image(systemSymbol: .creditcard)
                         .font(.title2)
                 }
+                .accessibility(identifier: "addCardButton")
                 .padding()
                 .foregroundColor(.white)
                 .background(Color.accentColor)
@@ -121,6 +122,7 @@ extension CardView {
                     }
                 }
             }
+            .accessibility(identifier: "cardMovementsList")
             .padding([.top, .bottom])
             .skeleton(with: loading)
             .shape(type: .rectangle)
@@ -165,6 +167,7 @@ extension CardView {
                 } else {
                     Form {
                         TextField("Número de tarjeta de auvasa", text: $inputText)
+                            .accessibility(identifier: "addCardTextField")
                             .modifier(TextFieldClearButton(text: $inputText))
                             .foregroundColor(colorScheme == .light ? .black : .white)
                             .keyboardType(.decimalPad)
@@ -172,6 +175,7 @@ extension CardView {
                     }
                     Spacer()
                     Text("GUARDAR")
+                        .accessibility(identifier: "addCardSaveButton")
                         .disabled(self.inputText.isEmpty)
                         .font(.headline)
                         .frame(height: 55)

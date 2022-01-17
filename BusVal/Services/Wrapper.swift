@@ -11,7 +11,7 @@ import SwiftSoup
 import SwiftUI
 import SWXMLHash
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 struct Wrapper {
     // MARK: ENDPOINTS
 
@@ -283,17 +283,21 @@ struct Wrapper {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
                     let element = xml["rss"]["channel"].children
-                    let data = StopDetails(
-                        title: element[0].element!.text,
-                        name: element[1].element!.text,
-                        code: element[2].element!.text,
-                        coordinateX: Double(element[3].element!.text)!,
-                        coordinateY: Double(element[4].element!.text)!,
-                        corr: element[5].element?.text,
-                        desc: element[5].element!.text,
-                        lang: element[6].element!.text
-                    )
-                    completion(StopDetailsResponse.success(data))
+                    if element[1].element?.text != "NODATAPAR" {
+                        let data = StopDetails(
+                            title: element[0].element!.text,
+                            name: element[1].element!.text,
+                            code: element[2].element!.text,
+                            coordinateX: Double(element[3].element!.text)!,
+                            coordinateY: Double(element[4].element!.text)!,
+                            corr: element[5].element?.text,
+                            desc: element[6].element!.text,
+                            lang: element[7].element!.text
+                        )
+                        completion(StopDetailsResponse.success(data))
+                    } else {
+                        completion(StopDetailsResponse.failure(APIError.noResponse))
+                    }
                 case let .failure(error):
                     completion(StopDetailsResponse.failure(APIError.networkError(error: error)))
                 }

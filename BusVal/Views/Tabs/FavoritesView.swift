@@ -64,9 +64,11 @@ extension FavoritesView {
         VStack {
             Spacer()
             Text("Todavía no tienes paradas favoritas")
+                .accessibility(identifier: "emptyFavoritesListTitle")
                 .font(.title2)
                 .padding()
             Text("Añade tus paradas favoritas desde la vista de detalles de parada usando el icono:")
+                .accessibility(identifier: "emptyFavoritesListDescription")
                 .multilineTextAlignment(.center)
                 .font(.body)
                 .padding()
@@ -74,6 +76,7 @@ extension FavoritesView {
                 .renderingMode(.original)
                 .imageScale(.large)
                 .padding()
+                .accessibility(identifier: "emptyFavoritesListImage")
             Spacer()
         }
     }
@@ -98,6 +101,7 @@ extension FavoritesView {
             }.onDelete(perform: delete)
         }
         .listStyle(PlainListStyle())
+        .accessibility(identifier: "favoritesList")
         .toolbar { EditButton() }
     }
 }

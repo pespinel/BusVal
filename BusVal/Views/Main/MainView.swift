@@ -31,14 +31,19 @@ struct MainView: View {
     var body: some View {
         UIKitTabView(selection: $selectedTab) {
             LinesView(linesStore: linesStore)
+                .accessibility(identifier: "linesTab")
                 .tabItem(Constants.Tabs.names[0], image: Constants.Tabs.icons[0])
             NewsView(newsStore: newsStore)
+                .accessibility(identifier: "newsTab")
                 .tabItem(Constants.Tabs.names[1], image: Constants.Tabs.icons[1])
             SearchView(linesStore: linesStore, stopsStore: stopsStore)
+                .accessibility(identifier: "searchTab")
                 .tabItem(Constants.Tabs.names[2], image: Constants.Tabs.icons[2])
             CardView(cardDetailsStore: cardDetailsStore)
+                .accessibility(identifier: "cardTab")
                 .tabItem(Constants.Tabs.names[3], image: Constants.Tabs.icons[3])
             FavoritesView()
+                .accessibility(identifier: "favoritesTab")
                 .tabItem(Constants.Tabs.names[4], image: Constants.Tabs.icons[4])
         }
         .tint(.accentColor)

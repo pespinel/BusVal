@@ -27,10 +27,12 @@ struct OnboardingView: View {
                     .tag(3)
                 favoritesSection
                     .tag(4)
-            }.tabViewStyle(.page)
+            }
+            .tabViewStyle(.page)
+            .accessibility(identifier: "onboardingView")
             VStack {
                 Spacer()
-                bottomButton
+                bottomButton.accessibility(identifier: "onboardingBottomButton")
             }
             .padding(.bottom, 50)
             .padding([.trailing, .leading], 30)
@@ -55,6 +57,7 @@ struct OnboardingSectionView: View {
                 .scaledToFit()
                 .frame(width: 200, height: 200)
                 .foregroundColor(.white)
+                .accessibility(identifier: "onboardingImage")
             Text(title)
                 .font(.largeTitle)
                 .fontWeight(.semibold)
@@ -66,10 +69,12 @@ struct OnboardingSectionView: View {
                         .foregroundColor(.white),
                     alignment: .bottom
                 )
+                .accessibility(identifier: "onboardingTitle")
             description.map {
                 Text($0)
                     .fontWeight(.medium)
                     .foregroundColor(.white)
+                    .accessibility(identifier: "onboardingDescription")
             }
             Spacer()
             Spacer()
@@ -97,7 +102,7 @@ extension OnboardingView {
     }
 
     private var welcomeSection: some View {
-        OnboardingSectionView(title: "Binvenid@ a BusVal", image: "bus.doubledecker")
+        OnboardingSectionView(title: "Bienvenid@ a BusVal", image: "bus.doubledecker")
     }
 
     private var timesSection: some View {

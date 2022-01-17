@@ -79,7 +79,9 @@ extension NewsView {
                         .animation(type: .pulse())
                 }
             }
-        }.listStyle(PlainListStyle())
+        }
+        .listStyle(PlainListStyle())
+        .accessibility(identifier: "newsList")
     }
 
     private var emptyNewsList: some View {

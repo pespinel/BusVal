@@ -78,6 +78,7 @@ extension SearchView {
             }
         }
         .listStyle(PlainListStyle())
+        .accessibility(identifier: "searchList")
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.endEditing()
         })
