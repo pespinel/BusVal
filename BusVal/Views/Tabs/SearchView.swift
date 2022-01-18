@@ -23,7 +23,9 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                UIKitSearchBar(text: $searchText).edgesIgnoringSafeArea(.bottom)
+                UIKitSearchBar(text: $searchText)
+                    .accessibility(identifier: "searchTextField")
+                    .edgesIgnoringSafeArea(.bottom)
                 if selectedTab == 0 {
                     linesList
                 } else if selectedTab == 1 {
@@ -33,7 +35,7 @@ struct SearchView: View {
             .navigationBarTitle("Buscar", displayMode: .large)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    toolBarPicker
+                    toolBarPicker.accessibility(identifier: "searchPicker")
                 }
             }
         }
@@ -78,7 +80,7 @@ extension SearchView {
             }
         }
         .listStyle(PlainListStyle())
-        .accessibility(identifier: "searchList")
+        .accessibility(identifier: "linesSearchList")
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.endEditing()
         })
@@ -113,6 +115,7 @@ extension SearchView {
             }
         }
         .listStyle(PlainListStyle())
+        .accessibility(identifier: "stopsSearchList")
         .gesture(DragGesture().onChanged { _ in
             UIApplication.shared.endEditing()
         })

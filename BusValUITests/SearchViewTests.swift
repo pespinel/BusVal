@@ -23,10 +23,16 @@ class SearchViewTests: XCTestCase {
     }
 
     func testSearchTabLoads() {
-        let app = XCUIApplication()
-        app.launch()
         app.buttons[search].tap()
         XCTAssertTrue(app.navigationBars[search].exists)
-        XCTAssert(app.tables["searchList"].waitForExistence(timeout: 2))
+        XCTAssert(app.tables["linesSearchList"].waitForExistence(timeout: 2))
+    }
+
+    func testSearchTabPicker() {
+        app.buttons[search].tap()
+        app.segmentedControls["searchPicker"].buttons["Paradas"].tap()
+        XCTAssertTrue(app.tables["stopsSearchList"].waitForExistence(timeout: 2))
+        app.segmentedControls["searchPicker"].buttons["Líneas"].tap()
+        XCTAssertTrue(app.tables["linesSearchList"].waitForExistence(timeout: 2))
     }
 }

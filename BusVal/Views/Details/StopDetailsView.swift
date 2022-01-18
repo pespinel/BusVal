@@ -67,7 +67,7 @@ struct StopDetailsView: View {
             self.stopDetailsStore.fetch(stop: stop)
             self.stopTimesStore.fetch(stop: stop)
             self.timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-            registerScreen(view: "StopDetailsView")
+            registerScreen(view: "StopDetailsView[\(stop)]")
         }
         .onDisappear {
             self.timer.upstream.connect().cancel()

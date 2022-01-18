@@ -11,7 +11,7 @@ import SwiftSoup
 import SwiftUI
 import SWXMLHash
 
-// swiftlint:disable type_body_length file_length
+// swiftlint:disable type_body_length
 struct Wrapper {
     // MARK: ENDPOINTS
 
@@ -282,22 +282,21 @@ struct Wrapper {
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    let element = xml["rss"]["channel"].children
-                    if element[1].element?.text != "NODATAPAR" {
+                    let rootElement = xml["rss"]["channel"]
+                    if rootElement["description"].element?.text != "NODATAPAR" {
                         let data = StopDetails(
-                            title: element[0].element!.text,
-                            name: element[1].element!.text,
-                            code: element[2].element!.text,
-                            coordinateX: Double(element[3].element!.text)!,
-                            coordinateY: Double(element[4].element!.text)!,
-                            corr: element[5].element?.text,
-                            desc: element[6].element!.text,
-                            lang: element[7].element!.text
+                            title: rootElement["title"].element!.text,
+                            name: rootElement["nombreparada"].element!.text,
+                            code: rootElement["codigoparada"].element!.text,
+                            coordinateX: Double(rootElement["ccX"].element!.text)!,
+                            coordinateY: Double(rootElement["ccY"].element!.text)!,
+                            corr: rootElement["correspondenciasparada"].element?.text,
+                            desc: rootElement["description"].element!.text,
+                            lang: rootElement["language"].element!.text
                         )
                         completion(StopDetailsResponse.success(data))
-                    } else {
-                        completion(StopDetailsResponse.failure(APIError.noResponse))
                     }
+                    completion(StopDetailsResponse.failure(APIError.noResponse))
                 case let .failure(error):
                     completion(StopDetailsResponse.failure(APIError.networkError(error: error)))
                 }
@@ -376,23 +375,21 @@ struct Wrapper {
                 switch response.result {
                 case .success:
                     let xml = XMLHash.parse(response.data!)
-                    let description = xml["rss"]["channel"]["description"].element!.text
-                    if description == "NODATA" {
+                    if xml["rss"]["channel"]["description"].element!.text == "NODATA" {
                         completion(CardDetailsReponse.failure(APIError.noResponse))
-                    } else {
-                        let balance = CardBalance(balance: xml["rss"]["channel"]["saldomonedero"].element!.text)
-                        for element in xml["rss"]["channel"]["item"].all {
-                            movements.append(
-                                CardMovement(
-                                    date: element["fecha"].element!.text,
-                                    type: element["tipoop"].element!.text,
-                                    ammount: element["importe"].element!.text,
-                                    balance: element["saldo"].element!.text
-                                )
-                            )
-                        }
-                        completion(CardDetailsReponse.success(balance, movements))
                     }
+                    let balance = CardBalance(balance: xml["rss"]["channel"]["saldomonedero"].element!.text)
+                    for element in xml["rss"]["channel"]["item"].all {
+                        movements.append(
+                            CardMovement(
+                                date: element["fecha"].element!.text,
+                                type: element["tipoop"].element!.text,
+                                ammount: element["importe"].element!.text,
+                                balance: element["saldo"].element!.text
+                            )
+                        )
+                    }
+                    completion(CardDetailsReponse.success(balance, movements))
                 case let .failure(error):
                     completion(CardDetailsReponse.failure(APIError.networkError(error: error)))
                 }
