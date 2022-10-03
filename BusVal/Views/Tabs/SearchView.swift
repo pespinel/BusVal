@@ -123,7 +123,7 @@ extension SearchView {
 
     private var toolBarPicker: some View {
         Picker(selection: $selectedTab, label: Text("Línea/Parada")) {
-            ForEach(0 ..< Constants.SearchTabs.names.count) { index in
+            ForEach(0 ..< Constants.SearchTabs.names.count, id: \.self) { index in
                 Text(Constants.SearchTabs.names[index])
             }
         }.pickerStyle(SegmentedPickerStyle())

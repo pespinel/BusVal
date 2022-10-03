@@ -32,6 +32,11 @@
                BlueprintName = "BusValUITests"
                ReferencedContainer = "container:BusVal.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SuperTest">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

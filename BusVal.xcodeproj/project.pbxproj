@@ -14,6 +14,17 @@
 		6E44BB322791AA5600CAE60D /* XCUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB312791AA5600CAE60D /* XCUIApplication.swift */; };
 		6E44BB3427922DD600CAE60D /* OnboardingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB3327922DD600CAE60D /* OnboardingViewTests.swift */; };
 		6E44BB3E2795C0F200CAE60D /* LineDetailsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB3D2795C0F200CAE60D /* LineDetailsViewTests.swift */; };
+		6E44BB442797423B00CAE60D /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB432797423B00CAE60D /* XCTestCase.swift */; };
+		6E44BB462798BD0E00CAE60D /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB452798BD0E00CAE60D /* Screen.swift */; };
+		6E44BB492798BD4A00CAE60D /* FavoritesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB482798BD4A00CAE60D /* FavoritesScreen.swift */; };
+		6E44BB4E27996E2D00CAE60D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB4D27996E2D00CAE60D /* TabBar.swift */; };
+		6E44BB502799726E00CAE60D /* CardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB4F2799726E00CAE60D /* CardScreen.swift */; };
+		6E44BB522799791100CAE60D /* LinesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB512799791100CAE60D /* LinesScreen.swift */; };
+		6E44BB542799829900CAE60D /* NewsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB532799829900CAE60D /* NewsScreen.swift */; };
+		6E44BB562799AD3900CAE60D /* SearchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB552799AD3900CAE60D /* SearchScreen.swift */; };
+		6E44BB582799BAC100CAE60D /* LineDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB572799BAC100CAE60D /* LineDetailsScreen.swift */; };
+		6E44BB5A2799C11100CAE60D /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB592799C11100CAE60D /* OnboardingScreen.swift */; };
+		6E44BB5D279A11DD00CAE60D /* SuperTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E44BB5C279A11DD00CAE60D /* SuperTest.swift */; };
 		6E5C7344278597E20077ADAA /* BusValApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C7343278597E20077ADAA /* BusValApp.swift */; };
 		6E5C7348278597E30077ADAA /* main.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E5C7347278597E30077ADAA /* main.xcassets */; };
 		6E5C734D278597E30077ADAA /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C734C278597E30077ADAA /* PersistenceController.swift */; };
@@ -158,6 +169,17 @@
 		6E44BB312791AA5600CAE60D /* XCUIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIApplication.swift; sourceTree = "<group>"; };
 		6E44BB3327922DD600CAE60D /* OnboardingViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewTests.swift; sourceTree = "<group>"; };
 		6E44BB3D2795C0F200CAE60D /* LineDetailsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailsViewTests.swift; sourceTree = "<group>"; };
+		6E44BB432797423B00CAE60D /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
+		6E44BB452798BD0E00CAE60D /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		6E44BB482798BD4A00CAE60D /* FavoritesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesScreen.swift; sourceTree = "<group>"; };
+		6E44BB4D27996E2D00CAE60D /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		6E44BB4F2799726E00CAE60D /* CardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardScreen.swift; sourceTree = "<group>"; };
+		6E44BB512799791100CAE60D /* LinesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinesScreen.swift; sourceTree = "<group>"; };
+		6E44BB532799829900CAE60D /* NewsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsScreen.swift; sourceTree = "<group>"; };
+		6E44BB552799AD3900CAE60D /* SearchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScreen.swift; sourceTree = "<group>"; };
+		6E44BB572799BAC100CAE60D /* LineDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineDetailsScreen.swift; sourceTree = "<group>"; };
+		6E44BB592799C11100CAE60D /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		6E44BB5C279A11DD00CAE60D /* SuperTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTest.swift; sourceTree = "<group>"; };
 		6E5C7340278597E20077ADAA /* BusVal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusVal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5C7343278597E20077ADAA /* BusValApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusValApp.swift; sourceTree = "<group>"; };
 		6E5C7347278597E30077ADAA /* main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = main.xcassets; sourceTree = "<group>"; };
@@ -278,6 +300,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E44BB472798BD2B00CAE60D /* Pageobjects */ = {
+			isa = PBXGroup;
+			children = (
+				6E44BB4F2799726E00CAE60D /* CardScreen.swift */,
+				6E44BB482798BD4A00CAE60D /* FavoritesScreen.swift */,
+				6E44BB572799BAC100CAE60D /* LineDetailsScreen.swift */,
+				6E44BB512799791100CAE60D /* LinesScreen.swift */,
+				6E44BB532799829900CAE60D /* NewsScreen.swift */,
+				6E44BB552799AD3900CAE60D /* SearchScreen.swift */,
+				6E44BB592799C11100CAE60D /* OnboardingScreen.swift */,
+			);
+			path = Pageobjects;
+			sourceTree = "<group>";
+		};
+		6E44BB4A27996DD900CAE60D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6E44BB2D2791A66500CAE60D /* CardViewTests.swift */,
+				6E44BB2F2791A67300CAE60D /* FavoritesViewTests.swift */,
+				6E44BB3D2795C0F200CAE60D /* LineDetailsViewTests.swift */,
+				6E8C32BC279192A300366D4C /* LinesViewTests.swift */,
+				6E44BB292791985A00CAE60D /* NewsViewTests.swift */,
+				6E44BB3327922DD600CAE60D /* OnboardingViewTests.swift */,
+				6E44BB2B2791A5FE00CAE60D /* SearchViewTests.swift */,
+				6E44BB5C279A11DD00CAE60D /* SuperTest.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		6E44BB4B27996DEB00CAE60D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6E44BB432797423B00CAE60D /* XCTestCase.swift */,
+				6E44BB312791AA5600CAE60D /* XCUIApplication.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6E44BB4C27996E0000CAE60D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6E44BB452798BD0E00CAE60D /* Screen.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6E44BB5B2799C13600CAE60D /* PageElements */ = {
+			isa = PBXGroup;
+			children = (
+				6E44BB4D27996E2D00CAE60D /* TabBar.swift */,
+			);
+			path = PageElements;
+			sourceTree = "<group>";
+		};
 		6E5C7337278597E20077ADAA = {
 			isa = PBXGroup;
 			children = (
@@ -532,14 +608,11 @@
 		6E8C32BB279192A300366D4C /* BusValUITests */ = {
 			isa = PBXGroup;
 			children = (
-				6E44BB2D2791A66500CAE60D /* CardViewTests.swift */,
-				6E44BB2F2791A67300CAE60D /* FavoritesViewTests.swift */,
-				6E44BB3D2795C0F200CAE60D /* LineDetailsViewTests.swift */,
-				6E8C32BC279192A300366D4C /* LinesViewTests.swift */,
-				6E44BB292791985A00CAE60D /* NewsViewTests.swift */,
-				6E44BB3327922DD600CAE60D /* OnboardingViewTests.swift */,
-				6E44BB2B2791A5FE00CAE60D /* SearchViewTests.swift */,
-				6E44BB312791AA5600CAE60D /* XCUIApplication.swift */,
+				6E44BB4B27996DEB00CAE60D /* Extensions */,
+				6E44BB5B2799C13600CAE60D /* PageElements */,
+				6E44BB472798BD2B00CAE60D /* Pageobjects */,
+				6E44BB4C27996E0000CAE60D /* Protocols */,
+				6E44BB4A27996DD900CAE60D /* Tests */,
 			);
 			path = BusValUITests;
 			sourceTree = "<group>";
@@ -772,6 +845,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		6E86FA792786129700F0E525 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -790,6 +864,7 @@
 		};
 		6E8C32862790BE6400366D4C /* Swiftformat */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -808,6 +883,7 @@
 		};
 		6E941365278CEBDC005D939C /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -922,10 +998,21 @@
 				6E44BB302791A67300CAE60D /* FavoritesViewTests.swift in Sources */,
 				6E44BB3E2795C0F200CAE60D /* LineDetailsViewTests.swift in Sources */,
 				6E44BB322791AA5600CAE60D /* XCUIApplication.swift in Sources */,
+				6E44BB562799AD3900CAE60D /* SearchScreen.swift in Sources */,
+				6E44BB4E27996E2D00CAE60D /* TabBar.swift in Sources */,
+				6E44BB582799BAC100CAE60D /* LineDetailsScreen.swift in Sources */,
+				6E44BB502799726E00CAE60D /* CardScreen.swift in Sources */,
+				6E44BB542799829900CAE60D /* NewsScreen.swift in Sources */,
+				6E44BB492798BD4A00CAE60D /* FavoritesScreen.swift in Sources */,
 				6E8C32BD279192A300366D4C /* LinesViewTests.swift in Sources */,
 				6E44BB2A2791985A00CAE60D /* NewsViewTests.swift in Sources */,
+				6E44BB462798BD0E00CAE60D /* Screen.swift in Sources */,
 				6E44BB2E2791A66500CAE60D /* CardViewTests.swift in Sources */,
 				6E44BB2C2791A5FE00CAE60D /* SearchViewTests.swift in Sources */,
+				6E44BB5D279A11DD00CAE60D /* SuperTest.swift in Sources */,
+				6E44BB5A2799C11100CAE60D /* OnboardingScreen.swift in Sources */,
+				6E44BB522799791100CAE60D /* LinesScreen.swift in Sources */,
+				6E44BB442797423B00CAE60D /* XCTestCase.swift in Sources */,
 				6E44BB3427922DD600CAE60D /* OnboardingViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1025,6 +1112,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BusVal/Settings/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusVal;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1229,6 +1318,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BusVal/Settings/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusVal;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1263,6 +1354,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BusVal/Settings/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BusVal;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

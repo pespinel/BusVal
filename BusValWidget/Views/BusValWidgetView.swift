@@ -37,6 +37,12 @@ struct BusValWidgetView: View {
                 smallView
             case .systemExtraLarge, .systemLarge:
                 largeView
+            case .accessoryCircular:
+                fatalError("Widget family is not supported")
+            case .accessoryRectangular:
+                fatalError("Widget family is not supported")
+            case .accessoryInline:
+                fatalError("Widget family is not supported")
             @unknown default:
                 fatalError("Widget family is not supported")
             }

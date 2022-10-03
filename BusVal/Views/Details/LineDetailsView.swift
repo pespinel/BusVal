@@ -51,7 +51,7 @@ extension LineDetailsView {
             if self.lineDetailsStore.lineReturnDetails.isEmpty {
                 Text("Trayecto").disabled(true)
             } else {
-                ForEach(0 ..< Constants.LineDetailsTabs.names.count) { index in
+                ForEach(0 ..< Constants.LineDetailsTabs.names.count, id: \.self) { index in
                     Text(Constants.LineDetailsTabs.names[index])
                 }
             }

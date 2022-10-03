@@ -100,7 +100,7 @@ extension LinesView {
 
     private var picker: some View {
         Picker(selection: $selectedSegment, label: Text("Tipo de línea")) {
-            ForEach(0 ..< Constants.Lines.Segments.images.count) { index in
+            ForEach(0 ..< Constants.Lines.Segments.images.count, id: \.self) { index in
                 Image(systemName: Constants.Lines.Segments.images[index])
             }
         }
