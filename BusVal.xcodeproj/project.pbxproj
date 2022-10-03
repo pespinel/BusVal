@@ -94,7 +94,7 @@
 		6E86FA892786F28900F0E525 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E86FA882786F28900F0E525 /* Assets.xcassets */; };
 		6E86FA8B2786F28900F0E525 /* BusValWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 6E86FA872786F28800F0E525 /* BusValWidget.intentdefinition */; };
 		6E86FA8C2786F28900F0E525 /* BusValWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 6E86FA872786F28800F0E525 /* BusValWidget.intentdefinition */; };
-		6E86FA8F2786F28900F0E525 /* BusValWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6E86FA7E2786F28800F0E525 /* BusValWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E86FA8F2786F28900F0E525 /* BusValWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6E86FA7E2786F28800F0E525 /* BusValWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6E86FA942786F2C000F0E525 /* BusVal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73742785989F0077ADAA /* BusVal.xcdatamodeld */; };
 		6E86FA952786F2D400F0E525 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C734C278597E30077ADAA /* PersistenceController.swift */; };
 		6E86FA962786F2E000F0E525 /* FavoriteStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C73762785989F0077ADAA /* FavoriteStop.swift */; };
@@ -138,15 +138,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6E86FA932786F28900F0E525 /* Embed App Extensions */ = {
+		6E86FA932786F28900F0E525 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6E86FA8F2786F28900F0E525 /* BusValWidgetExtension.appex in Embed App Extensions */,
+				6E86FA8F2786F28900F0E525 /* BusValWidgetExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6E91550E2788B3C3001A3ECB /* Embed Watch Content */ = {
@@ -694,7 +694,7 @@
 				6E5C733C278597E20077ADAA /* Sources */,
 				6E5C733D278597E20077ADAA /* Frameworks */,
 				6E5C733E278597E20077ADAA /* Resources */,
-				6E86FA932786F28900F0E525 /* Embed App Extensions */,
+				6E86FA932786F28900F0E525 /* Embed Foundation Extensions */,
 				6E91550E2788B3C3001A3ECB /* Embed Watch Content */,
 				6E86FA792786129700F0E525 /* Swiftlint */,
 				6E8C32862790BE6400366D4C /* Swiftformat */,
@@ -768,7 +768,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					6E5C733F278597E20077ADAA = {
 						CreatedOnToolsVersion = 13.0;
