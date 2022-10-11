@@ -377,6 +377,7 @@ struct Wrapper {
                     let xml = XMLHash.parse(response.data!)
                     if xml["rss"]["channel"]["description"].element!.text == "NODATA" {
                         completion(CardDetailsReponse.failure(APIError.noResponse))
+                        return
                     }
                     let balance = CardBalance(balance: xml["rss"]["channel"]["saldomonedero"].element!.text)
                     for element in xml["rss"]["channel"]["item"].all {
