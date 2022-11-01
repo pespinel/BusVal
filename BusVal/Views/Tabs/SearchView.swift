@@ -98,7 +98,7 @@ extension SearchView {
                         Image(systemSymbol: .grid)
                             .imageScale(.large)
                             .padding(.trailing)
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(.accentColor)
                         VStack(alignment: .leading) {
                             Text("Parada: \(_stop.code)").bold()
                             Text(_stop.name).lineLimit(1)

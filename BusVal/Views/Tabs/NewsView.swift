@@ -48,8 +48,8 @@ extension NewsView {
                 if let _new = new {
                     NavigationLink(destination: NewDetailsView(new: _new)) {
                         HStack(alignment: .center) {
-                            if let _image = _new.image {
-                                KFImage(URL(string: Wrapper.Endpoint.newImage.getPath(id: _image))!)
+                            if !_new.image!.isEmpty {
+                                KFImage.url(URL(string: Wrapper.Endpoint.newImage.getPath(id: new!.image))!)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 30, height: 30, alignment: .center)
@@ -59,7 +59,8 @@ extension NewsView {
                                 Image(systemSymbol: .newspaperFill)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .frame(width: 30, height: 30, alignment: .center)
+                                    .foregroundColor(.accentColor)
                                     .padding(.trailing)
                             }
                             VStack(alignment: .leading) {

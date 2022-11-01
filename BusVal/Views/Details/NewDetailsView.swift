@@ -35,12 +35,8 @@ struct NewDetailsView: View {
 extension NewDetailsView {
     private var newReader: some View {
         VStack(alignment: .leading) {
-            if let _image = new.image {
-                KFImage(URL(string: Wrapper.Endpoint.newImage.getPath(id: _image))!)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else {
-                Image(systemSymbol: .newspaperFill)
+            if !new.image!.isEmpty {
+                KFImage(URL(string: Wrapper.Endpoint.newImage.getPath(id: new.image))!)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
             }
@@ -48,7 +44,7 @@ extension NewDetailsView {
                 .bold()
                 .font(.title3)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(Color.accentColor)
+                .foregroundColor(.accentColor)
                 .padding()
             Text(self.new.description!.replacingOccurrences(of: "<BR>", with: "\n"))
                 .multilineTextAlignment(.leading)
@@ -89,7 +85,7 @@ extension NewDetailsView {
             <BR>Very long New description Very long New description
             """,
             link: "https://google.com",
-            image: "imagen10"
+            image: ""
         )
 
         static var previews: some View {

@@ -91,7 +91,7 @@ extension FavoritesView {
                             .imageScale(.large)
                             .font(.body)
                             .padding(.trailing)
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(.accentColor)
                         VStack(alignment: .leading) {
                             Text("Parada \(stop.code)").bold()
                             Text(stop.name)

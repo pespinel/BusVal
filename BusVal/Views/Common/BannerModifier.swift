@@ -29,11 +29,11 @@ struct BannerModifier: ViewModifier {
             case .info:
                 return Color(red: 67 / 255, green: 154 / 255, blue: 215 / 255)
             case .success:
-                return Color.green
+                return .green
             case .warning:
-                return Color.yellow
+                return .yellow
             case .error:
-                return Color.red
+                return .red
             }
         }
     }
@@ -55,7 +55,7 @@ struct BannerModifier: ViewModifier {
                         }
                         Spacer()
                     }
-                    .foregroundColor(Color.white)
+                    .foregroundColor(.white)
                     .padding(12)
                     .background(data.type.tintColor)
                     .cornerRadius(8)

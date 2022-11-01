@@ -63,7 +63,7 @@ struct BusValApp: App {
 extension BusValApp {
     private var gradient: some View {
         RadialGradient(
-            gradient: Gradient(colors: [Color.secondary, Color.accentColor]),
+            gradient: Gradient(colors: [.secondary, .accentColor]),
             center: .topLeading,
             startRadius: 128,
             endRadius: UIScreen.main.bounds.height

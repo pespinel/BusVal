@@ -19,7 +19,7 @@ final class LineHelper {
                 return getAlphabeticLineColor(line: line!)
             }
         }
-        return UIColor(Color.accentColor)
+        return UIColor(.accentColor)
     }
 
     func getImage(line: String?) -> String {
@@ -60,12 +60,12 @@ final class LineHelper {
             return UIColor(red: 228 / 255, green: 100 / 255, blue: 100 / 255, alpha: 1.0)
         case "B1", "B2", "B3", "B4", "B5":
             if scheme == .light {
-                return UIColor(Color.black)
+                return UIColor(.black)
             } else {
                 return UIColor(red: 140 / 255, green: 140 / 255, blue: 132 / 255, alpha: 1.0)
             }
         default:
-            return UIColor(Color.accentColor)
+            return UIColor(.accentColor)
         }
     }
 
@@ -113,7 +113,7 @@ final class LineHelper {
         case "33":
             return UIColor(red: 53 / 255, green: 113 / 255, blue: 89 / 255, alpha: 1.0)
         default:
-            return UIColor(Color.accentColor)
+            return UIColor(.accentColor)
         }
     }
 }

@@ -83,11 +83,11 @@ private struct StopTimeView: View {
     init(stopTime: Int) {
         self.stopTime = String(stopTime)
         if stopTime >= 5 {
-            timeColor = Color.green
+            timeColor = .green
         } else if stopTime < 5, stopTime > 1 {
-            timeColor = Color.orange
+            timeColor = .orange
         } else {
-            timeColor = Color.red
+            timeColor = .red
         }
     }
 
