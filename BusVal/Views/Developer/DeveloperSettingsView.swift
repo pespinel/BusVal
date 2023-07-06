@@ -11,11 +11,17 @@ import SwiftUI
 // MARK: - DeveloperSettingsView
 
 struct DeveloperSettingsView: View {
-    @AppStorage("firstRun") var firstRun = false
-    @AppStorage("cardID") var cardID = ""
+    @AppStorage("firstRun")
+    var firstRun = false
 
-    @Environment(\.managedObjectContext) var context
-    @Environment(\.dismiss) var dismiss
+    @AppStorage("cardID")
+    var cardID = ""
+
+    @Environment(\.managedObjectContext)
+    var context
+
+    @Environment(\.dismiss)
+    var dismiss
 
     @State var showInfo = false
     @State var showWarning = false

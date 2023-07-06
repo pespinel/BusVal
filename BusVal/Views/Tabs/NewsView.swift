@@ -33,7 +33,7 @@ struct NewsView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            self.newsStore.fetch()
+            newsStore.fetch()
             registerScreen(view: "NewsView")
         }
     }

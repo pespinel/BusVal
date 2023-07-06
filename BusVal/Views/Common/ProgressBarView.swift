@@ -20,7 +20,7 @@ struct ProgressBarView: View {
                     .foregroundColor(Color(UIColor.systemTeal))
                 Rectangle()
                     .frame(
-                        width: min(Double(self.value) * geometry.size.width, geometry.size.width),
+                        width: min(Double(value) * geometry.size.width, geometry.size.width),
                         height: geometry.size.height
                     )
                     .foregroundColor(Color(UIColor.systemBlue))

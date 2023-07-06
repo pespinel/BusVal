@@ -17,7 +17,7 @@ struct TextFieldClearButton: ViewModifier {
             content
             if !text.isEmpty {
                 Button(
-                    action: { self.text = "" },
+                    action: { text = "" },
                     label: {
                         Image(systemSymbol: .clearFill)
                             .foregroundColor(Color(UIColor.opaqueSeparator))

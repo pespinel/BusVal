@@ -12,15 +12,17 @@ import WidgetKit
 // MARK: - FavoritesView
 
 struct FavoritesView: View {
-    @Environment(\.managedObjectContext) var context
-    @Environment(\.deeplink) var deeplink
+    @Environment(\.managedObjectContext)
+    var context
+
+    @Environment(\.deeplink)
+    var deeplink
 
     @State var stopCodeDeeplink = ""
     @State var showDeeplink = false
 
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.code)
-    ]) var favoriteStops: FetchedResults<FavoriteStop>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.code)])
+    var favoriteStops: FetchedResults<FavoriteStop>
 
     var body: some View {
         NavigationView {
@@ -45,8 +47,8 @@ struct FavoritesView: View {
                 if strCode.isEmpty {
                     return
                 } else {
-                    self.stopCodeDeeplink = strCode
-                    self.showDeeplink = true
+                    stopCodeDeeplink = strCode
+                    showDeeplink = true
                 }
             }
         }

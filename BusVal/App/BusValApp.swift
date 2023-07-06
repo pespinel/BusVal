@@ -14,10 +14,14 @@ import WidgetKit
 
 @main
 struct BusValApp: App {
-    @AppStorage("firstRun") var firstRun = true
-    @AppStorage("uid") var uid = String()
+    @AppStorage("firstRun")
+    var firstRun = true
 
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @AppStorage("uid")
+    var uid = String()
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self)
+    var appDelegate
 
     @State var deeplink: Deeplinker.Deeplink?
 
@@ -51,7 +55,7 @@ struct BusValApp: App {
                     guard let user = authResult?.user else {
                         return
                     }
-                    self.uid = user.uid
+                    uid = user.uid
                 }
             }
         }

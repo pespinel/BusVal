@@ -31,7 +31,8 @@ struct StopDetailsView: View {
 
     var stop: String
 
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext)
+    var context
 
     @State var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     @State var showBanner = false
@@ -55,7 +56,7 @@ struct StopDetailsView: View {
                 }
             }
         }
-        .banner(data: self.$bannerData, show: self.$showBanner)
+        .banner(data: $bannerData, show: $showBanner)
         .navigationBarTitle("Parada \(stop)", displayMode: .inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -64,13 +65,13 @@ struct StopDetailsView: View {
             }
         }
         .onAppear {
-            self.stopDetailsStore.fetch(stop: stop)
-            self.stopTimesStore.fetch(stop: stop)
-            self.timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+            stopDetailsStore.fetch(stop: stop)
+            stopTimesStore.fetch(stop: stop)
+            timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
             registerScreen(view: "StopDetailsView[\(stop)]")
         }
         .onDisappear {
-            self.timer.upstream.connect().cancel()
+            timer.upstream.connect().cancel()
         }
     }
 }
@@ -122,7 +123,6 @@ extension StopDetailsView {
             }
     }
 
-    // swiftlint:disable number_separator
     private var stopMap: some View {
         VStack {
             let region = MKCoordinateRegion(

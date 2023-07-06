@@ -29,8 +29,8 @@ struct LineDetailsView: View {
             lineDetailsList
         }
         .onAppear {
-            self.lineDetailsStore.fetch(line: line)
-            self.lineScheduleStore.fetch(line: line)
+            lineDetailsStore.fetch(line: line)
+            lineScheduleStore.fetch(line: line)
             registerScreen(view: "LineDetailsView")
         }
         .navigationBarTitle("Línea \(line)")

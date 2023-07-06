@@ -23,11 +23,11 @@ struct OnboardingScreen: Screen {
         XCTAssertTrue(view.exists)
     }
 
-    func checkOnboardingCarousel(image: String, title: String, description: String? = nil) -> OnboardingScreen {
+    func checkOnboardingCarousel(image: String, title: String, description: String? = nil) -> Self {
         checkImage(image: image)
         checkTitle(title: title)
         checkDescription(description: description)
-        return OnboardingScreen(app: app)
+        return Self(app: app)
     }
 
     func forwardOnboarding(index: Int) {

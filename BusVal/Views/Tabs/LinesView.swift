@@ -15,7 +15,8 @@ import SWXMLHash
 struct LinesView: View {
     // MARK: Internal
 
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
 
     @ObservedObject var linesStore: LinesStore
 
@@ -24,7 +25,7 @@ struct LinesView: View {
             VStack {
                 picker
                 Spacer()
-                if self.linesStore.error == nil {
+                if linesStore.error == nil {
                     linesList
                 } else {
                     Text("Error al obtener las líneas")
@@ -45,11 +46,11 @@ struct LinesView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            self.linesStore.fetch()
+            linesStore.fetch()
             registerScreen(view: "LinesView")
         }
         #if DEBUG
-            .sheet(isPresented: $showDeveloperSettings) {
+        .sheet(isPresented: $showDeveloperSettings) {
                 DeveloperSettingsView()
             }
         #endif
@@ -68,7 +69,7 @@ extension LinesView {
     private var linesList: some View {
         SkeletonList(
             with: self.linesStore.lines.filter {
-                $0.type == Constants.Lines.Segments.names[selectedSegment]
+                $0.type == Constants.Segments.names[selectedSegment]
             },
             quantity: 20
         ) { loading, line in
@@ -100,8 +101,8 @@ extension LinesView {
 
     private var picker: some View {
         Picker(selection: $selectedSegment, label: Text("Tipo de línea")) {
-            ForEach(0 ..< Constants.Lines.Segments.images.count, id: \.self) { index in
-                Image(systemName: Constants.Lines.Segments.images[index])
+            ForEach(0 ..< Constants.Segments.images.count, id: \.self) { index in
+                Image(systemName: Constants.Segments.images[index])
             }
         }
         .pickerStyle(SegmentedPickerStyle())

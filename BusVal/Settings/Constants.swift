@@ -1,5 +1,3 @@
-// swiftlint:disable nesting number_separator
-
 //
 // Constants.swift
 // BusVal
@@ -27,20 +25,18 @@ struct Constants {
         static let names = ["Líneas", "Paradas"]
     }
 
-    enum Lines {
-        enum Segments {
-            static let names = ["#", "B", "P", "M", "F", "C", "H", "U"]
-            static let images = [
-                "number.square.fill",
-                "b.square.fill",
-                "p.square.fill",
-                "m.square.fill",
-                "f.square.fill",
-                "c.square.fill",
-                "h.square.fill",
-                "u.square.fill"
-            ]
-        }
+    enum Segments {
+        static let names = ["#", "B", "P", "M", "F", "C", "H", "U"]
+        static let images = [
+            "number.square.fill",
+            "b.square.fill",
+            "p.square.fill",
+            "m.square.fill",
+            "f.square.fill",
+            "c.square.fill",
+            "h.square.fill",
+            "u.square.fill"
+        ]
     }
 
     enum LineDetailsTabs {

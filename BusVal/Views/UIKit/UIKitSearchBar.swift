@@ -26,18 +26,18 @@ struct UIKitSearchBar: UIViewRepresentable {
 
     @Binding var text: String
 
-    func makeCoordinator() -> UIKitSearchBar.Coordinator {
+    func makeCoordinator() -> Self.Coordinator {
         Coordinator(text: $text)
     }
 
-    func makeUIView(context: UIViewRepresentableContext<UIKitSearchBar>) -> UISearchBar {
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         searchBar.searchBarStyle = .minimal
         return searchBar
     }
 
-    func updateUIView(_ uiView: UISearchBar, context _: UIViewRepresentableContext<UIKitSearchBar>) {
+    func updateUIView(_ uiView: UISearchBar, context _: UIViewRepresentableContext<Self>) {
         uiView.text = text
     }
 }

@@ -66,12 +66,12 @@ struct BannerModifier: ViewModifier {
                 .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                 .onTapGesture {
                     withAnimation {
-                        self.show = false
+                        show = false
                     }
                 }.onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
-                            self.show = false
+                            show = false
                         }
                     }
                 }

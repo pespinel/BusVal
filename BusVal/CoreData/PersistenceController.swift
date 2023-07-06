@@ -24,10 +24,10 @@ struct PersistenceController {
 
     // MARK: Internal
 
-    static let shared = PersistenceController()
+    static let shared = Self()
 
     static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
+        let result = Self(inMemory: true)
         let viewContext = result.container.viewContext
         let stop = FavoriteStop()
         stop.code = "698"

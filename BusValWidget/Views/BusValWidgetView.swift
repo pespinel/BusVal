@@ -25,8 +25,7 @@ struct BusValWidgetView: View {
 
     var entry: Provider.Entry
 
-    @ViewBuilder
-    var body: some View {
+    @ViewBuilder var body: some View {
         if favoriteStops.isEmpty {
             emptyView
         } else {

@@ -15,3 +15,5 @@ extension UIWindow {
         }
     }
 }
+
+// swiftlint:enable override_in_extension

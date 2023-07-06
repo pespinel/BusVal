@@ -69,7 +69,7 @@ final class LineHelper {
         }
     }
 
-    // swiftlint:disable cyclomatic_complexity function_body_length
+    // swiftlint:disable cyclomatic_complexity
     private func getAlphabeticLineColor(line: String) -> UIColor {
         switch line {
         case "1":
@@ -116,4 +116,5 @@ final class LineHelper {
             return UIColor(.accentColor)
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }

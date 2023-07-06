@@ -12,7 +12,8 @@ import SWXMLHash
 // MARK: - SearchView
 
 struct SearchView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
 
     @ObservedObject var linesStore: LinesStore
     @ObservedObject var stopsStore: StopsStore
@@ -41,8 +42,8 @@ struct SearchView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            self.linesStore.fetch()
-            self.stopsStore.fetch()
+            linesStore.fetch()
+            stopsStore.fetch()
             registerScreen(view: "SearchView")
         }
     }

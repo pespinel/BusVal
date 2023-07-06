@@ -1522,56 +1522,56 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.2;
+				kind = exactVersion;
+				version = 5.6.2;
 			};
 		};
 		6E5C73FB27859E240077ADAA /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.9;
+				kind = exactVersion;
+				version = 1.0.9;
 			};
 		};
 		6E5C73FE27859E710077ADAA /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/drmohundro/SWXMLHash";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				kind = exactVersion;
+				version = 7.0.0;
 			};
 		};
 		6E5C740127859E950077ADAA /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				kind = exactVersion;
+				version = 4.0.0;
 			};
 		};
 		6E5C740727859F140077ADAA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.3;
+				kind = exactVersion;
+				version = 2.4.3;
 			};
 		};
 		6E94134E278CE8FD005D939C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.1.0;
+				kind = exactVersion;
+				version = 10.1.0;
 			};
 		};
 		6E941369278D8C75005D939C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.4.1;
+				kind = exactVersion;
+				version = 7.6.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

@@ -13,15 +13,17 @@ import UIKit
 // MARK: - MainView
 
 struct MainView: View {
-    #if DEBUG
-        @State var showDeveloperSettings = false
-    #endif
+    @AppStorage("cardID")
+    var cardID = ""
 
-    @AppStorage("cardID") var cardID = ""
+    @Environment(\.deeplink)
+    var deeplink
 
     @State var selectedTab = 0
 
-    @Environment(\.deeplink) var deeplink
+    #if DEBUG
+        @State var showDeveloperSettings = false
+    #endif
 
     @ObservedObject var linesStore = LinesStore()
     @ObservedObject var newsStore = NewsStore()
@@ -48,21 +50,21 @@ struct MainView: View {
         }
         .tint(.accentColor)
         .onChange(of: deeplink, perform: { _ in
-            self.selectedTab = 4
+            selectedTab = 4
         })
         .onAppear {
             let apparence = UITabBarAppearance()
             apparence.configureWithOpaqueBackground()
             UITabBar.appearance().scrollEdgeAppearance = apparence
-            self.linesStore.fetch()
-            self.stopsStore.fetch()
-            self.newsStore.fetch()
+            linesStore.fetch()
+            stopsStore.fetch()
+            newsStore.fetch()
             if !cardID.isEmpty {
-                self.cardDetailsStore.fetch(card: cardID)
+                cardDetailsStore.fetch(card: cardID)
             }
         }
         #if DEBUG
-            .sheet(isPresented: $showDeveloperSettings) {
+        .sheet(isPresented: $showDeveloperSettings) {
                 DeveloperSettingsView()
             }
             .onShake {

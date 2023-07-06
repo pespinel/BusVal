@@ -11,7 +11,7 @@ import SwiftSoup
 import SwiftUI
 import SWXMLHash
 
-// swiftlint:disable type_body_length
+// swiftlint:disable type_body_length file_length
 struct Wrapper {
     // MARK: ENDPOINTS
 
@@ -93,7 +93,7 @@ struct Wrapper {
         case networkError(error: Error)
     }
 
-    static let shared = Wrapper()
+    static let shared = Self()
 
     // MARK: NEWS METHODS
 
@@ -397,3 +397,5 @@ struct Wrapper {
             }
     }
 }
+
+// swiftlint:enable type_body_length file_length

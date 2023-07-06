@@ -10,7 +10,8 @@ import SwiftUI
 // MARK: - OnboardingView
 
 struct OnboardingView: View {
-    @AppStorage("firstRun") var firstRun = true
+    @AppStorage("firstRun")
+    var firstRun = true
 
     @State var state = 0
 

@@ -11,11 +11,13 @@ import SwiftUI
 // MARK: - CardView
 
 struct CardView: View {
-    @AppStorage("cardID") var cardID = ""
+    @AppStorage("cardID")
+    var cardID = ""
 
     @ObservedObject var cardDetailsStore: CardDetailsStore
 
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme)
+    var colorScheme
 
     @State var showAddCardSheet = false
     @State var inputText = ""
@@ -44,8 +46,8 @@ struct CardView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        self.cardDetailsStore.clean()
-                        self.cardDetailsStore.fetch(card: cardID)
+                        cardDetailsStore.clean()
+                        cardDetailsStore.fetch(card: cardID)
                     } label: {
                         Image(systemSymbol: .arrowClockwise).accessibility(identifier: "refreshCardView")
                     }.disabled(cardID.isEmpty)
