@@ -1523,7 +1523,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = exactVersion;
-				version = 5.6.2;
+				version = 5.7.0;
 			};
 		};
 		6E5C73FB27859E240077ADAA /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
@@ -1547,7 +1547,7 @@
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
 			requirement = {
 				kind = exactVersion;
-				version = 4.0.0;
+				version = 4.1.1;
 			};
 		};
 		6E5C740727859F140077ADAA /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
@@ -1555,7 +1555,7 @@
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
 			requirement = {
 				kind = exactVersion;
-				version = 2.4.3;
+				version = 2.6.1;
 			};
 		};
 		6E94134E278CE8FD005D939C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -1563,7 +1563,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = exactVersion;
-				version = 10.1.0;
+				version = 10.11.0;
 			};
 		};
 		6E941369278D8C75005D939C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -1571,7 +1571,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = exactVersion;
-				version = 7.6.2;
+				version = 7.8.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

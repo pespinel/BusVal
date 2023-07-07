@@ -77,8 +77,7 @@ extension BusValWidgetView {
                                     .font(.caption)
                                     .lineLimit(1)
                             }
-                            Spacer()
-                        }
+                        }.padding(.bottom, 8)
                     }
                 }
             }
@@ -112,8 +111,7 @@ extension BusValWidgetView {
                                     .font(.caption)
                                     .lineLimit(1)
                             }
-                            Spacer()
-                        }
+                        }.padding(.bottom, 15)
                     }
                 }
             }
