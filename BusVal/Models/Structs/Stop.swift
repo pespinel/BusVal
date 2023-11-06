@@ -1,5 +1,5 @@
 //
-//  BusStop.swift
+//  Stop.swift
 //  BusVal
 //
 //  Created by Pablo on 06/03/2021.

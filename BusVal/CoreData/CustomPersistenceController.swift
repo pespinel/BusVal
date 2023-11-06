@@ -11,7 +11,7 @@ import UIKit
 class CustomPersistenceController: NSPersistentCloudKitContainer {
     override class func defaultDirectoryURL() -> URL {
         var storeURL = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: "group.com.pespinel.BusVal"
+            forSecurityApplicationGroupIdentifier: "group.com.busval"
         )
         storeURL = storeURL?.appendingPathComponent("com.pespinel.sqlite")
         return storeURL!

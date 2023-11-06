@@ -1,5 +1,5 @@
 //
-//  LineImageHelper.swift
+//  LineHelper.swift
 //  BusVal
 //
 //  Created by Pablo on 27/12/21.

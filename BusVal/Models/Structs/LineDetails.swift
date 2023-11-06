@@ -1,5 +1,5 @@
 //
-//  BusLineDetails.swift
+//  LineDetails.swift
 //  BusVal
 //
 //  Created by Pablo on 07/03/2021.

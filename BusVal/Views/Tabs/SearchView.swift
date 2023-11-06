@@ -1,5 +1,5 @@
 //
-//  Searchview.swift
+//  SearchView.swift
 //  BusVal
 //
 //  Created by Pablo on 03/03/2021.

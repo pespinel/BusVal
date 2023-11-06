@@ -1,5 +1,5 @@
 //
-//  BusLine.swift
+//  Line.swift
 //  BusVal
 //
 //  Created by Pablo on 01/03/2020.

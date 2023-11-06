@@ -1,5 +1,5 @@
 //
-//  LineDetailsContainer.swift
+//  LineDetailsStore.swift
 //  BusVal
 //
 //  Created by Pablo on 27/12/21.

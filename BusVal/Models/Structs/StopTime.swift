@@ -1,5 +1,5 @@
 //
-//  BusStopTime.swift
+//  StopTime.swift
 //  BusVal
 //
 //  Created by Pablo on 21/05/2021.
