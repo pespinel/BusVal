@@ -9,13 +9,14 @@ import MapKit
 import SFSafeSymbols
 import SwiftUI
 
-struct Constants {
+enum Constants {
     enum Tabs {
-        static let names = ["Líneas", "Noticias", "Buscar", "Tarjeta", "Favoritos"]
+        static let names = ["Líneas", "Noticias", "Buscar", "Mapa", "Tarjeta", "Favoritos"]
         static let icons = [
             UIImage(systemSymbol: .bus),
             UIImage(systemSymbol: .newspaper),
             UIImage(systemSymbol: .docTextMagnifyingglass),
+            UIImage(systemSymbol: .map),
             UIImage(systemSymbol: .creditcard),
             UIImage(systemSymbol: .staroflife)
         ]

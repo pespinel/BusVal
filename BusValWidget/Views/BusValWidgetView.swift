@@ -27,15 +27,17 @@ struct BusValWidgetView: View {
 
     @ViewBuilder var body: some View {
         if favoriteStops.isEmpty {
-            emptyView
+            emptyView.containerBackground(.black, for: .widget)
         } else {
             switch entry.family {
             case .systemSmall:
-                smallView.widgetURL(URL(string: "busval://www.auvasa.es/details"))
-            case .systemMedium:
                 smallView
+                    .widgetURL(URL(string: "busval://www.auvasa.es/details"))
+                    .containerBackground(.black, for: .widget)
+            case .systemMedium:
+                smallView.containerBackground(.black, for: .widget)
             case .systemExtraLarge, .systemLarge:
-                largeView
+                largeView.containerBackground(.black, for: .widget)
             case .accessoryCircular:
                 fatalError("Widget family is not supported")
             case .accessoryRectangular:

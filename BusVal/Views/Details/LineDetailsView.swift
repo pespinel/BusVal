@@ -89,16 +89,19 @@ extension LineDetailsView {
                 span: Constants.Location.span
             )
             Map(
-                coordinateRegion: .constant(region),
-                showsUserLocation: false,
-                userTrackingMode: .constant(.none),
-                annotationItems: lineDetailsStore.checkpoints
-            ) { item in
-                MapAnnotation(coordinate: item.coordinate) {
-                    MapAnnotationView(code: item.stopCode!)
+                initialPosition: .region(region)
+            ) {
+                ForEach(lineDetailsStore.checkpoints) { item in
+                    Annotation(
+                        item.title ?? "",
+                        coordinate: item.coordinate
+                    ) {
+                        MapAnnotationView(code: item.stopCode ?? "")
+                    }
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
+            .mapStyle(.standard(elevation: .realistic))
             .navigationBarTitle("Paradas", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

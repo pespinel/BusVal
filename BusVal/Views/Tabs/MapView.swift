@@ -19,29 +19,25 @@ struct MapView: View {
 
     var body: some View {
         NavigationView {
-            ZStack(alignment: .bottom) {
-                Map(
-                    coordinateRegion: .constant(locationHelper.region),
-                    showsUserLocation: true,
-                    userTrackingMode: .constant(.follow),
-                    annotationItems: stopsStore.checkpoints
-                ) { item in
-                    MapAnnotation(coordinate: item.coordinate) {
+            Map(
+                initialPosition: .region(locationHelper.region)
+            ) {
+                ForEach(stopsStore.checkpoints) { item in
+                    Annotation(
+                        item.title ?? "",
+                        coordinate: item.coordinate
+                    ) {
                         MapAnnotationView(code: item.stop!.code)
                     }
-                }.edgesIgnoringSafeArea(.all)
-                HStack {
-                    Spacer()
-                    LocationButton {
-                        locationHelper.updateLocation()
-                    }
-                    .cornerRadius(10.0)
-                    .labelStyle(.iconOnly)
-                    .foregroundColor(.white)
-                }.padding()
+                }
             }
-            .navigationBarTitle("Mapa", displayMode: .large)
-            .navigationBarHidden(true)
+            .mapControls {
+                MapScaleView()
+                MapCompass()
+                MapUserLocationButton()
+                MapPitchToggle()
+            }
+            .navigationBarTitle("Mapa", displayMode: .inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {

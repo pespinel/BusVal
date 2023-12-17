@@ -41,17 +41,20 @@ struct MainView: View {
             SearchView(linesStore: linesStore, stopsStore: stopsStore)
                 .accessibility(identifier: "searchTab")
                 .tabItem(Constants.Tabs.names[2], image: Constants.Tabs.icons[2])
+            MapView(stopsStore: stopsStore)
+                .accessibility(identifier: "mapTab")
+                .tabItem(Constants.Tabs.names[3], image: Constants.Tabs.icons[3])
             CardView(cardDetailsStore: cardDetailsStore)
                 .accessibility(identifier: "cardTab")
-                .tabItem(Constants.Tabs.names[3], image: Constants.Tabs.icons[3])
+                .tabItem(Constants.Tabs.names[4], image: Constants.Tabs.icons[4])
             FavoritesView()
                 .accessibility(identifier: "favoritesTab")
-                .tabItem(Constants.Tabs.names[4], image: Constants.Tabs.icons[4])
+                .tabItem(Constants.Tabs.names[5], image: Constants.Tabs.icons[5])
         }
         .tint(.accentColor)
-        .onChange(of: deeplink, perform: { _ in
+        .onChange(of: deeplink) {
             selectedTab = 4
-        })
+        }
         .onAppear {
             let apparence = UITabBarAppearance()
             apparence.configureWithOpaqueBackground()

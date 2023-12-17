@@ -133,12 +133,16 @@ extension StopDetailsView {
                 span: Constants.Location.zoomedSpan
             )
             Map(
-                coordinateRegion: .constant(region),
-                showsUserLocation: false,
-                userTrackingMode: .constant(.none),
-                annotationItems: self.stopDetailsStore.checkpoints
-            ) { item in
-                MapMarker(coordinate: item.coordinate)
+                initialPosition: .region(region)
+            ) {
+                ForEach(stopDetailsStore.checkpoints) { item in
+                    Annotation(
+                        item.title ?? "",
+                        coordinate: item.coordinate
+                    ) {
+                        MapAnnotationView(code: item.stopCode ?? "")
+                    }
+                }
             }.frame(
                 minWidth: UIScreen.main.bounds.width,
                 maxWidth: UIScreen.main.bounds.width,

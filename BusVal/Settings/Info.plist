@@ -27,5 +27,15 @@
 	<array>
 		<string>fetch</string>
 	</array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>BusVal necesita acceder a tu ubicación para mostrarte las paradas cercanas.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>BusVal necesita acceder a tu ubicación para mostrarte las paradas cercanas.</string>
+    <key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>BusVal necesita acceder a tu ubicación para mostrarte las paradas cercanas.</string>
+    <key>NSLocationUsageDescription</key>
+    <string>BusVal necesita acceder a tu ubicación para mostrarte las paradas cercanas.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>BusVal necesita acceder a tu ubicación para mostrarte las paradas cercanas.</string>
 </dict>
 </plist>

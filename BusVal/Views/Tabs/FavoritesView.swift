@@ -32,12 +32,13 @@ struct FavoritesView: View {
                 } else {
                     favoritesList
                 }
-                NavigationLink(destination: StopDetailsView(stop: stopCodeDeeplink), isActive: $showDeeplink) {
-                    EmptyView()
-                }
+                EmptyView()
+                    .navigationDestination(isPresented: $showDeeplink) {
+                        StopDetailsView(stop: stopCodeDeeplink)
+                    }
             }
             .navigationBarTitle("Favoritos", displayMode: .large)
-            .onChange(of: deeplink) { _ in
+            .onChange(of: deeplink) {
                 guard let deeplink = deeplink else {
                     return
                 }
