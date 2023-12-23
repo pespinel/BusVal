@@ -15,12 +15,10 @@ final class LocationHelper: NSObject, ObservableObject, CLLocationManagerDelegat
     @Published var region = MKCoordinateRegion(center: Constants.Location.start, span: Constants.Location.zoomedSpan)
 
     func checkLocationStatus() {
-        DispatchQueue.main.async {
+        DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager = CLLocationManager()
                 self.locationManager?.delegate = self
-            } else {
-                print("Location disabled")
             }
         }
     }
